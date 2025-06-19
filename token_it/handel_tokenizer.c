@@ -1,4 +1,5 @@
 #include "../include/minishell.h"
+#include "../include/parse.h"
 
 t_token *to_tokens(char *line)
 {
@@ -15,12 +16,16 @@ void	ft_fill_tokens(t_token **list_of_token, char *line)
 	{
 		while(*line == ' ' || *line == '\t')
 			line++;
-		if(*line == '>' ||  *line == '<' || *line == '|' ||
-			*line == '&' ||  *line == '(' || *line == ')')
+		if((*line == '>' ||  *line  == '<' || *line == '|') || *line == '&' || *line == '\'' || *line == '\"')
 		{
-			check_token_type(list_of_token, &line);
-			line++;
+			if (check_line_err(&line) && *line != '&')
+				check_token_type(list_of_token, &line);
+			else
+				return (ft_line_err());
 		}
+		else
+			check_token_type(list_of_token, &line);
+
 	}
 }
 
@@ -28,7 +33,7 @@ void	check_token_type(t_token **list_of_t, char **token_value)
 {
 	if (!ft_strncmp(*token_value, "|", 1))
 		add_token_type(list_of_t, token_value, PIPE_T);
-	if (!ft_strncmp(*token_value, "<<", 2))
+	else if (!ft_strncmp(*token_value, "<<", 2))
 		add_token_type(list_of_t, token_value, HERE_DOC_T);
 	else if (!ft_strncmp(*token_value, ">>", 2))
 		add_token_type(list_of_t, token_value, REDIR_APPEND_T);
@@ -36,6 +41,8 @@ void	check_token_type(t_token **list_of_t, char **token_value)
 		add_token_type(list_of_t, token_value, REDIR_IN_T);
 	else if (!ft_strncmp(*token_value, ">", 1))
 		add_token_type(list_of_t, token_value, REDIR_OUT_T);
+	else
+		add_token_type(list_of_t, token_value, SCMD_T);
 }
 
 void	add_token_type(t_token **t_list, char **cur_token, t_token_types t_type)
@@ -50,6 +57,11 @@ void	add_token_type(t_token **t_list, char **cur_token, t_token_types t_type)
 	token_list_add(t_list, new_token);
 	if (t_type == REDIR_APPEND_T || t_type == HERE_DOC_T)
 		*cur_token +=2;
+	else if (t_type == SCMD_T)
+	{
+		while (**cur_token != ' ' && **cur_token)
+			*cur_token +=1;
+	}
 	else
 		*cur_token +=1;
 	return ;

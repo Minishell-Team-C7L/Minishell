@@ -20,6 +20,6 @@ int main(int ac, char **av)
             share_data.token = share_data.token->next;
         }
 
-        share_data.abs = to_parse(share_data.token);
+        //share_data.abs = to_parse(share_data.token);
     }
 }
