@@ -30,7 +30,6 @@ t_node *ft_tree(t_token *curr_token)
     //left = before_pip(curr_token);
     while (curr_token)
     {
-
         if (ft_currtoken_pip(curr_token->next))
         {
             ft_next_token(curr_token);

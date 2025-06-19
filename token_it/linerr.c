@@ -8,7 +8,6 @@ int check_after_op(char *line_err, int nm_op)
 		line_err++;
 		nm_op--;
 	}
-	nm_op = 0;
 	while (*line_err)
 	{
 		if (*line_err == ' ' || *line_err == '\t')
@@ -26,7 +25,7 @@ int op_calcule(char *line_err, char *operator)
 
 	line_op = line_err;
 	nm_op = 0;
-	if (!line_op[-1] && (line_op[0] == '|' || (line_op[0] == '<' && line_op[1] == '<')))
+	if (!line_op[-1] && (*operator == '|' || (*operator == '<' && line_op[1] == '<')))
 		return 0;
 	while(*line_err != ' ' && *line_err)
 	{
@@ -34,7 +33,8 @@ int op_calcule(char *line_err, char *operator)
 			nm_op++;
 		++line_err;
 	}
-	if ((!line_err[nm_op - 1] && !check_after_op(line_op, nm_op)))
+	if (!line_err[nm_op - 1] && *operator != '\'' && *operator != '\"'
+		&& !check_after_op(line_op, nm_op))
 		return 0;
 	if (*operator == '|' && nm_op > 1)
 		return 0; // err
