@@ -1,32 +1,38 @@
 #include "../include/minishell.h"
 #include "../include/parse.h"
+#include <stdio.h>
 
 t_token *to_tokens(char *line)
 {
 	t_token *list_of_tokens;
-
-	ft_fill_tokens(&list_of_tokens , line);
-	free(line);
+	int err;
+	line = ft_rm_whitespaces(line);
+	err = ft_fill_tokens(&list_of_tokens , line);
+	// free(line);
 	return(list_of_tokens);
 }
 
-void	ft_fill_tokens(t_token **list_of_token, char *line)
+int	ft_fill_tokens(t_token **list_of_token, char *line)
 {
 	while (*line)
 	{
-		while(*line == ' ' || *line == '\t')
+		while(*line  > 0 && *line <= 32)
 			line++;
-		if((*line == '>' ||  *line  == '<' || *line == '|') || *line == '&' || *line == '\'' || *line == '\"')
+		if((*line == '>' ||  *line  == '<' || *line == '|') ||
+			*line == '&' || *line == '\'' || *line == '\"')
 		{
+			if (!*++line)
+				(ft_line_err(list_of_token));
+			line--;
 			if (check_line_err(&line) && *line != '&')
 				check_token_type(list_of_token, &line);
 			else
-				return (ft_line_err());
+				return (ft_line_err(list_of_token));// khasni nakhroj mn wra ma nfreeyi
 		}
 		else
 			check_token_type(list_of_token, &line);
-
 	}
+	return 0;
 }
 
 void	check_token_type(t_token **list_of_t, char **token_value)
@@ -42,7 +48,7 @@ void	check_token_type(t_token **list_of_t, char **token_value)
 	else if (!ft_strncmp(*token_value, ">", 1))
 		add_token_type(list_of_t, token_value, REDIR_OUT_T);
 	else
-		add_token_type(list_of_t, token_value, SCMD_T);
+		add_token_type(list_of_t, token_value, WORD_T);
 }
 
 void	add_token_type(t_token **t_list, char **cur_token, t_token_types t_type)
@@ -57,10 +63,18 @@ void	add_token_type(t_token **t_list, char **cur_token, t_token_types t_type)
 	token_list_add(t_list, new_token);
 	if (t_type == REDIR_APPEND_T || t_type == HERE_DOC_T)
 		*cur_token +=2;
-	else if (t_type == SCMD_T)
+	else if (t_type == WORD_T)
 	{
-		while (**cur_token != ' ' && **cur_token)
+		if (**cur_token == '\'' || **cur_token == '\"')
+		{
 			*cur_token +=1;
+			while (**cur_token != *new_token->val) // imkn ndirha f func bo7adha
+				*cur_token +=1;
+			*cur_token +=1;
+		}
+		else
+			while (**cur_token != ' ' && **cur_token)
+				*cur_token +=1;
 	}
 	else
 		*cur_token +=1;

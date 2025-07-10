@@ -1,31 +1,35 @@
 #include "../include/minishell.h"
 #include "../include/parse.h"
 
-int check_after_op(char *line_err, int nm_op)
+int check_after_op(char *line_err, int line_index)
 {
-	while (nm_op > 0)
+	while (line_index > 0)
 	{
 		line_err++;
-		nm_op--;
+		line_index--;
 	}
 	while (*line_err)
 	{
 		if (*line_err == ' ' || *line_err == '\t')
 			line_err++;
 		else
-			nm_op++;
+		{
+			line_index++;
+			line_err++;
+		}
 	}
-	return (nm_op);
+	return (line_index);
 }
 
 int op_calcule(char *line_err, char *operator)
 {
 	int nm_op;
+	// int line_index;
 	char *line_op;
 
 	line_op = line_err;
 	nm_op = 0;
-	if (!line_op[-1] && (*operator == '|' || (*operator == '<' && line_op[1] == '<')))
+	if (!line_op[-1] && *operator == '|')
 		return 0;
 	while(*line_err != ' ' && *line_err)
 	{
@@ -33,21 +37,50 @@ int op_calcule(char *line_err, char *operator)
 			nm_op++;
 		++line_err;
 	}
-	if (!line_err[nm_op - 1] && *operator != '\'' && *operator != '\"'
-		&& !check_after_op(line_op, nm_op))
+	if (!line_op[-1] && !check_after_op(line_op, nm_op))
 		return 0;
-	if (*operator == '|' && nm_op > 1)
-		return 0; // err
-	else if ((*operator == '<' || *operator == '>') && nm_op > 2)
+	if (*operator == '|' && (nm_op > 1))
 		return 0;
-	else if (*operator == '\'' || *operator == '\"')
-		return (nm_op);
+	else if ((*operator == '<' && nm_op > 3)
+		|| (*operator == '>' && nm_op > 2) || (!line_op[-1]
+			&& *operator == '<' && nm_op >= 2))
+		return 0;
 	else
 		return 1;
 }
-void ft_line_err()
+int ft_line_err(t_token **lst_of_t_err)
 {
+	// t_token *nexts;
+	// t_token *cur_node;
+	(void)lst_of_t_err;
 	ft_putstr_fd("minishell: syntax error\n", 2);
+	// cur_node = *lst_of_t_err;
+	// if (!cur_node)
+	// 	return 2;
+	// while (cur_node)
+	// {
+	// 	free(cur_node->val);
+	// 	nexts = cur_node->next;
+	// 	free (cur_node);
+	// 	cur_node = nexts;
+	// }
+	// *lst_of_t_err = NULL;
+	return (0);
+}
+
+static int quotes_op_calcule(char *line_err, char *quotes_op)
+{
+	int nm_q;
+
+	nm_q = 1;
+	line_err++;
+	while (*line_err)
+	{
+		if (*line_err == *quotes_op)
+			nm_q++;
+		line_err++;
+	}
+	return (nm_q);
 }
 
 int check_line_err(char **line_err)
@@ -55,9 +88,9 @@ int check_line_err(char **line_err)
 	int nm_q;
 
 	if (**line_err == '"')
-		nm_q = op_calcule(*line_err, "\"");
+		nm_q = quotes_op_calcule(*line_err, "\""); // hendel qutes with other way
 	if (**line_err == '\'')
-		nm_q = op_calcule(*line_err, "\'");
+		nm_q = quotes_op_calcule(*line_err, "\'");
 	if (**line_err == '|')
 		return op_calcule(*line_err, "|");
 	else if (**line_err == '<')
@@ -69,4 +102,3 @@ int check_line_err(char **line_err)
 	else
 		return 1;
 }
-
