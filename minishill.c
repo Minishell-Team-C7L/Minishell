@@ -115,15 +115,14 @@ int main(int ac, char **av)
 	while (1337)
 	{
 	// share_data.line = ft_strdup("ls | l");
-		share_data.line =
-		readline("minishell-$ ");
+		share_data.line = readline("minishell-$ ");
 		if (!share_data.line)
 			continue;
 		//if (!share_data.line);   //
 			// if line == NULL cleanup
 		// if line != NULL add to history
 		add_history(share_data.line);
-			 share_data.token = to_tokens(share_data.line); // return pointer to token structs that have my tokens
+		share_data.token = to_tokens(&share_data); // return pointer to token structs that have my tokens
 
 		// while (share_data.token)
 		// {
@@ -132,8 +131,10 @@ int main(int ac, char **av)
 		// 	share_data.token = share_data.token->next;
 		// }
 
-		if (share_data.token)
-			to_parse(&share_data);
+        share_data.abs = to_parse(&share_data);
+		// if (share_data.token)
+        // else
+        //     continue;
 		// free(share_data.line); // free this line give me sigabort
 
     // Print AST if you have a visualizer

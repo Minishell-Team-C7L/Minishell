@@ -27,6 +27,7 @@ typedef struct s_token
     struct s_token        *prev;
     struct s_token        *next;
 }    t_token;
+
 typedef enum e_node_type
 {
 	PIPE_N,
@@ -35,16 +36,32 @@ typedef enum e_node_type
 
 typedef enum e_parseerr_type
 {
-	MEMO_E = 1
+	MEMO_E = 1,
+    SYN_E
 }	t_parseerr_type;
 
+typedef enum e_red_type
+{
+	IN_RED,
+	OUT_RED,
+	HEREDOC_RED,
+	APPEND_RED
+}	t_red_type;
+
+typedef struct s_red_node
+{
+	t_red_type			type;        // The redirection type
+	char				*val;      // The filename or delimiter
+	struct s_red_node	*next;       // Linked list for multiple redirections
+}	t_red_node
 
 typedef struct s_node
 {
-	char				*args;
+	char				*args;// arr of strings
 	struct s_node		*left;
 	struct s_node		*right;
 	t_node_type			type;
+    t_red_node          *red_l;
 	t_token				*left_cmd_toknes;
 }	t_node;
 
@@ -59,7 +76,7 @@ typedef struct s_data // statrt minishell
     char     *line;
     t_token *token;
     t_node    *abs;
-    // t_token *cur_token;
+    t_token *cur_tokens;
 	t_parserr err_prs;
 }    t_data;
 
@@ -71,15 +88,22 @@ int    	ft_fill_tokens(t_token **list_of_tokens, char *line);
 void    check_token_type(t_token **list_of_tokens, char* *line_to_t);
 void    add_token_type(t_token **t_list, char **line_ptr, t_token_types t_type);
 void    token_list_add(t_token **list, t_token *new_token);
-void	to_parse(t_data *data);
 int 	ft_check_quotes(char *line);
-t_node *before_pip(t_token **cur_token, t_data **cur_data);
-t_node 	*msh_head_combine(t_data *cur_data,t_node *left, t_node *right);
-t_node 	*msh_new_node(t_node_type type);
-void 	msh_next_token(t_token **curr_token);
+t_node *msh_head_combine(t_data *cur_data ,t_node *left, t_node *right);
 t_node 	*msh_tree(t_data *data);
-int	msh_join_args(char **args, t_token *cur_token, t_data *cur_data);
+int	msh_join_args(char **args, t_data *cur_data);
 char *msh_join_args_sp(const char *token_val, const char *arg, char sp);
+t_node *msh_new_node(t_node_type n_type, t_token_types t_type);
+bool msh_red_list(t_data *cur_data, t_red_node **red_list);
+t_red_type msh_red_type(t_token_types type);
+void msh_combine_rediractions(t_red_node *n_red, t_red_node **red_list);
+void msh_clear_cmd(t_node *cmd_node);
+void    msh_red_list_clear(t_red_node **red_list);
+t_node *before_pip(t_data *cur_data);
+t_data *to_parse(t_data *data);
+void msh_next_token(t_data *cur_data);
+int msh_currtoken_pip(t_token **curr_token);
+
 
 #endif
 
