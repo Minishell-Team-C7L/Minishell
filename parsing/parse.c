@@ -2,13 +2,13 @@
 #include "../include/parse.h"
 
 
-int msh_currtoken_pip(t_token **curr_token)
+int msh_currtoken_pip(t_token *curr_token)
 {
     t_token_types curr_type;
 
-    if (!(*curr_token))
+    if (!curr_token)
         return(0);
-    curr_type = (*curr_token)->type;
+    curr_type = (*curr_token).type;
     if (curr_type == PIPE_T)
         return (1);
     return (0);
@@ -17,7 +17,7 @@ int msh_currtoken_pip(t_token **curr_token)
 
 void msh_next_token(t_data *cur_data)
 {
-    cur_data->cur_tokens = cur_token->cur_tokens->next;
+    cur_data->cur_tokens = cur_data->cur_tokens->next;
 }
 
 t_node *msh_tree(t_data *data)
@@ -30,34 +30,34 @@ t_node *msh_tree(t_data *data)
     left = before_pip(data);// must be change the start whit the curr_token wvry time i have thenew pip
 	if (!left)
 		return NULL;
-	while (msh_currtoken_pip(data))
+	while (msh_currtoken_pip(data->cur_tokens))
 	{
 		msh_next_token(data);
 		if (!data->cur_tokens)
-			return (data->err_prs->perr_type = SYN_E,left);// set err
+			return (data->err_prs.perr_type = SYN_E,left);// set err
 		right = msh_tree(data);
 		if (!right)
 			return (left);
 		left = msh_head_combine(data,left, right);
 		if (!left)
 		{
-			msh_clear_tree(&left);
-			msh_clear_tree(&right);
+			// msh_clear_tree(&left);
+			// msh_clear_tree(&right);
 			return (NULL);
 		}
 	}
 	return (left);
 }
 
-t_data *to_parse(t_data *data)
+t_node *to_parse(t_data *data)
 {
 	t_node *cur_abs;
 
 	data -> cur_tokens = data->token;
-	ast = msh_tree(data);
-	if (data->cur_token)
-		return (ast);
-	return(ast);
+	cur_abs = msh_tree(data);
+	if (data->cur_tokens)
+		return (cur_abs);
+	return(cur_abs);
 	 // see if you have to append somthing her
 }
 
@@ -65,7 +65,7 @@ t_node *before_pip(t_data *cur_data)
 {
 	t_node		*cmd_b_pip;
 	t_red_node	*red_list;
-	t_red_node 	*last_red;
+	// t_red_node 	*last_red;
 
 	cmd_b_pip = msh_new_node(CMD_N);
 	if (!cmd_b_pip)
@@ -80,15 +80,15 @@ t_node *before_pip(t_data *cur_data)
 		return(msh_clear_cmd(cmd_b_pip), NULL);
 	if (red_list)
 	{
-		if (cur_data->red_l)
+		if (cmd_b_pip->red_l)
 		{
-			last_red = node->red_l;
-			while (last->next)
-				last_red = last->next;
-			last->next = red_list;
+			t_red_node *last_red = cmd_b_pip->red_l;
+			while (last_red->next)
+				last_red = last_red->next;
+			last_red->next = red_list;
 		}
 		else
-			node->re_l = red_list;
+			cmd_b_pip->red_l = red_list;
 	}
 	return (cmd_b_pip);
 }

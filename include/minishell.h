@@ -7,6 +7,7 @@
 # include "../libft/libft.h"
 # include "parse.h"
 # include <libc.h>
+# include <stdbool.h>
 
 typedef enum e_token_types
 {
@@ -50,10 +51,17 @@ typedef enum e_red_type
 
 typedef struct s_red_node
 {
-	t_red_type			type;        // The redirection type
 	char				*val;      // The filename or delimiter
+	t_red_type			type;        // The redirection type
 	struct s_red_node	*next;       // Linked list for multiple redirections
-}	t_red_node
+}	t_red_node;
+
+// typedef struct s_io_node
+// {
+// 	t_io_type			type;
+// 	char				*value;
+// 	struct s_io_node	*next;
+// }	t_io_node;
 
 typedef struct s_node
 {
@@ -92,18 +100,19 @@ int 	ft_check_quotes(char *line);
 t_node *msh_head_combine(t_data *cur_data ,t_node *left, t_node *right);
 t_node 	*msh_tree(t_data *data);
 int	msh_join_args(char **args, t_data *cur_data);
-char *msh_join_args_sp(const char *token_val, const char *arg, char sp);
-t_node *msh_new_node(t_node_type n_type, t_token_types t_type);
+char *msh_join_args_sp(const char *token_val, const char *arg, char *sp);
+t_node *msh_new_node(t_node_type n_type);
 bool msh_red_list(t_data *cur_data, t_red_node **red_list);
 t_red_type msh_red_type(t_token_types type);
 void msh_combine_rediractions(t_red_node *n_red, t_red_node **red_list);
 void msh_clear_cmd(t_node *cmd_node);
 void    msh_red_list_clear(t_red_node **red_list);
 t_node *before_pip(t_data *cur_data);
-t_data *to_parse(t_data *data);
+t_node *to_parse(t_data *data);
 void msh_next_token(t_data *cur_data);
-int msh_currtoken_pip(t_token **curr_token);
-
+int msh_currtoken_pip(t_token *curr_token);
+t_red_node *msh_new_red_node(t_token_types t_type);
+int	msh_is_red(t_token_types t_type);
 
 #endif
 
