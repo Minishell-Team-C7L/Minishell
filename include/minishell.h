@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include "parse.h"
-# include <libc.h>
+// # include <libc.h>
 # include <stdbool.h>
 
 typedef enum e_token_types

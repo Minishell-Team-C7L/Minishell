@@ -35,17 +35,19 @@ void msh_clear_cmd(t_node *cmd_node)
 
 void    msh_red_list_clear(t_red_node **red_list)
 {
-    t_red_node *next_node;
     t_red_node *cur_node;
+    t_red_node *next_node;
 
+    next_node = NULL;
     if (!*red_list)
         return ;
     cur_node = *red_list;
     while (cur_node)
     {
-        free(cur_node->val);
+        // free(cur_node->val);
         next_node = cur_node->next;
         free(cur_node);
+        cur_node = NULL;
         cur_node = cur_node->next;
     }
     *red_list = NULL;

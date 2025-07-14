@@ -4,8 +4,8 @@
 
 t_token *to_tokens(char *line)
 {
-	t_token *list_of_tokens;
 	int err;
+	t_token *list_of_tokens;
 	line = ft_rm_whitespaces(line);
 	err = ft_fill_tokens(&list_of_tokens , line);
 	// free(line);
