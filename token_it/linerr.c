@@ -83,6 +83,14 @@ static int quotes_op_calcule(char *line_err, char *quotes_op)
 	return (nm_q);
 }
 
+int	check_line_errors(char **line)
+{
+	if (**line == '\'' || **line == '\"')
+		return (quotes_op_calcule(*line, *line) % 2 == 0);
+	else
+		return (op_calcule(*line, *line));
+}
+
 int check_line_err(char **line_err)
 {
 	int nm_q;
