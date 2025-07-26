@@ -6,13 +6,13 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 09:49:58 by aessaber          #+#    #+#             */
-/*   Updated: 2025/05/21 19:53:20 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/18 10:21:25 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_ft.h"
 
-int	ft_lstlen(t_list *lst)
+int	ft_lstlen(const t_list *lst)
 {
 	int	len;
 

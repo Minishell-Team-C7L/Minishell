@@ -6,59 +6,76 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:04 by aessaber          #+#    #+#             */
-/*   Updated: 2025/05/26 23:31:18 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/26 05:03:31 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_builtins.h"
 
-typedef struct s_cd //msh_builtins.h
-{
-	char	*old_pwd;
-	char	*new_pwd;
-}			t_cd;
+static int	cd_change_dir(t_cd *cd, t_env **env, t_gc **gc);
+static int	cd_get_path(t_cd *cd, const char **arg, t_env **env);
 
-int	msh_cd(t_list *av, t_env **env)
+int	msh_cd(const char **arg, t_env **env, t_gc **gc)
 {
-	t_cd	cd;
+	t_cd		cd;
 
-	if (!av || !av->str || !av->str[0])
-		return (cd_home(&cd, env));
-	cd.old_pwd = getcwd(NULL, 0);
-	if (!cd.old_pwd)
+	if (!arg || !*arg || !env || !gc || !*gc)
+		return (dbg_nullarg(__func__), EXIT_FAILURE);
+	cd.oldpwd = gc_getcwd(gc);
+	if (!cd.oldpwd)
 		return (msh_perror("cd"), EXIT_FAILURE);
-	// code for cd <arg>
-	return (free(cd.old_pwd), EXIT_FAILURE);
-	if (msh_cmd_is_one())// todo
-		return (cd_execute(av, cd.old_pwd));// todo
-	return (cd_error());// todo
+	cd.type = CD_ARG;
+	if (cd_get_path(&cd, arg, env) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (cd.type == CD_EMPTY)
+		return (EXIT_SUCCESS);
+	if (cd_change_dir(&cd, env, gc) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (cd.type == CD_OLDPWD)
+		ft_putstr_nl(cd.pwd);
+	return (EXIT_SUCCESS);
 }
 
-int	cd_home(t_cd *cd, t_env **env)
+static int	cd_change_dir(t_cd *cd, t_env **env, t_gc **gc)
 {
-	t_env	*env_node_home;
-
-	cd->old_pwd = getcwd(NULL, 0);
-	if (!cd->old_pwd)
-		return (msh_perror("cd"), EXIT_FAILURE);
-	env_node_home = env_get_node(env, "HOME");
-	if (!env_node_home || !env_node_home->value)
+	if (chdir(cd->path) == -1)
 	{
-		ft_puterr("msh: cd: HOME not set\n");
-		return (free(cd->old_pwd), EXIT_FAILURE);
+		msh_perror("cd");
+		return (EXIT_FAILURE);
 	}
-	if (chdir(env_node_home->value) == -1)
-		return (msh_perror("cd"), free(cd->old_pwd), EXIT_FAILURE);
-	cd->new_pwd = getcwd(NULL, 0);
-	if (!cd->new_pwd)
-		return (msh_perror("cd"), free(cd->old_pwd), EXIT_FAILURE);
-	if (env_set_node_value(env, "OLDPWD", cd->old_pwd) == EXIT_FAILURE
-		|| env_set_node_value(env, "PWD", cd->new_pwd) == EXIT_FAILURE)
-		return (free(cd->old_pwd), free(cd->new_pwd), EXIT_FAILURE);
-	return (free(cd->old_pwd), free(cd->new_pwd), EXIT_SUCCESS);
+	cd->pwd = gc_getcwd(gc);
+	if (!cd->pwd)
+	{
+		msh_perror("cd");
+		return (EXIT_FAILURE);
+	}
+	msh_null_guard(env_node_set(env, "OLDPWD", cd->oldpwd), env, gc);
+	msh_null_guard(env_node_set(env, "PWD", cd->pwd), env, gc);
+	return (EXIT_SUCCESS);
 }
 
-int	cd_execute(t_list *av, char *pwd)
+static int	cd_get_path(t_cd *cd, const char **arg, t_env **env)
 {
-	char	*arg;
+	if (!arg[1])
+	{
+		cd->type = CD_HOME;
+		cd->env_home = env_get_node(env, "HOME");
+		if (!cd->env_home || !cd->env_home->value)
+			return (ft_puterr("msh: cd: HOME not set\n"), EXIT_FAILURE);
+		cd->path = cd->env_home->value;
+		return (EXIT_SUCCESS);
+	}
+	if (ft_strcmp(arg[1], "-") == 0)
+	{
+		cd->type = CD_OLDPWD;
+		cd->env_oldpwd = env_get_node(env, "OLDPWD");
+		if (!cd->env_oldpwd || !cd->env_oldpwd->value)
+			return (ft_puterr("msh: cd: OLDPWD not set\n"), EXIT_FAILURE);
+		cd->path = cd->env_oldpwd->value;
+		return (EXIT_SUCCESS);
+	}
+	if (!arg[1][0])
+		cd->type = CD_EMPTY;
+	cd->path = (char *)arg[1];
+	return (EXIT_SUCCESS);
 }

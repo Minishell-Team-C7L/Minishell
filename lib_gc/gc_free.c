@@ -6,33 +6,26 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:20:14 by aessaber          #+#    #+#             */
-/*   Updated: 2025/06/02 17:05:48 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/26 05:01:17 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_gc.h"
 
-void	gc_free(t_gc *gc_node)
+void	gc_free(t_gc **gc)
 {
-	t_gc	*gc_temp;
+	t_alloc	*alloc_current;
+	t_alloc	*alloc_next;
 
-	while (gc_node)
+	if (!gc || !*gc)
+		return ;
+	alloc_current = (*gc)->head;
+	while (alloc_current)
 	{
-		gc_temp = gc_node;
-		gc_node = gc_node->next;
-		free(gc_temp->ptr);
-		free(gc_temp);
+		alloc_next = alloc_current->next;
+		ft_free((void **)&alloc_current->ptr);
+		ft_free((void **)&alloc_current);
+		alloc_current = alloc_next;
 	}
-}
-
-void	msh_malloc(void **ptr, size_t size, t_gc **gc_head)
-{
-	*ptr = gc_malloc(size, gc_head);
-
-	if (!*ptr)
-	{
-		gc_free(*gc_head);
-		perror("msh");
-		exit(2);
-	}
+	ft_free((void **)gc);
 }

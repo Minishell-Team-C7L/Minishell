@@ -1,44 +1,237 @@
-NAME = minishell
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g $(shell pkg-config --cflags readline)
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
+#    Updated: 2025/07/26 21:25:34 by lhchiban         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCDIR = .
-PARSING_DIR = parsing
-TOKEN_DIR = token_it
+# Resources:
+#------------------------------------------------------------------------------#
 
-SRCS = $(PARSING_DIR)/parse.c parsing/parse_utlis.c parsing/parse_utlis2.c \
-       $(TOKEN_DIR)/handel_tokenizer.c $(TOKEN_DIR)/linerr.c $(TOKEN_DIR)/linemod.c \
-       minishill.c
+## Output:
+NAME		=	minishell
 
-OBJS = $(SRCS:.c=.o)
+## Directories:
+D_OBJS		=	objs_and_deps
+D_ROOT		=	.
+D_FT		=	lib_ft
+D_DBG		=	lib_dbg
+D_ENV		=	lib_env
+D_GC		=	lib_gc
+D_MSH		=	lib_msh
+D_BUILTINS	=	msh_builtins
+D_EXECUTE	=	msh_execute
+D_EXPAND	=	msh_expand
+D_PARSE		=	msh_parse
+D_TOKEN		=	msh_token
 
-TEST_SRCS = test_parsing.c
-TEST_OBJS = $(TEST_SRCS:.c=.o)
+## Headers:
+H_MAIN		=	msh_main.h
+H_FT		=	$(D_FT)/lib_ft.h
+H_DBG		=	$(D_DBG)/lib_dbg.h
+H_ENV		=	$(D_ENV)/lib_env.h
+H_GC		=	$(D_GC)/lib_gc.h
+H_MSH		=	$(D_MSH)/lib_msh.h
+H_BUILTINS	=	$(D_BUILTINS)/msh_builtins.h
+H_EXECUTE	=	$(D_EXECUTE)/msh_execute.h
+H_EXPAND	=	$(D_EXPAND)/msh_expand.h
+H_PARSE		=	$(D_PARSE)/msh_parse.h
+H_TOKEN		=	$(D_TOKEN)/msh_token.h
 
-all: $(LIBFT) $(NAME)
+H_ALL		=	$(H_MAIN)			\
+				$(H_FT)				\
+				$(H_DBG)			\
+				$(H_ENV)			\
+				$(H_GC)				\
+				$(H_MSH)			\
+				$(H_BUILTINS)		\
+				$(H_EXECUTE)		\
+				$(H_EXPAND)			\
+				$(H_PARSE)			\
+				$(H_TOKEN)
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+## C Files:
+F_MAIN		=	msh_main.c
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) -lft $(shell pkg-config --libs readline)
+F_FT		=	ft_atoi.c				\
+				ft_calloc.c				\
+				ft_free.c				\
+				ft_isalnum.c			\
+				ft_isalpha.c			\
+				ft_isdigit.c			\
+				ft_itoa.c				\
+				ft_lstlen.c				\
+				ft_memcpy.c				\
+				ft_memset.c				\
+				ft_putchar_err.c		\
+				ft_putchar_fd.c			\
+				ft_putchar.c			\
+				ft_puterr.c				\
+				ft_putnbr_fd.c			\
+				ft_putstr_fd.c			\
+				ft_putstr_nl.c			\
+				ft_putstr.c				\
+				ft_str_is_mono.c		\
+				ft_str_is_num.c			\
+				ft_strchr.c				\
+				ft_strcmp.c				\
+				ft_strcpy.c				\
+				ft_strdup.c				\
+				ft_strjoin.c			\
+				ft_strlcpy.c			\
+				ft_strlen.c				\
+				ft_strncmp.c			\
+				ft_substr.c				\
+				ft_wordcount.c
 
-test: $(TEST_OBJS) $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o test_parsing $(TEST_OBJS) $(OBJS) -L$(LIBFT_DIR)
+F_DBG		=	dbg_nullarg.c
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+F_ENV		=	env_get_node.c			\
+				env_get_node_prev.c		\
+				env_initiate.c			\
+				env_list_free.c			\
+				env_node_add_back.c		\
+				env_node_alloc.c		\
+				env_node_del.c			\
+				env_node_fill.c			\
+				env_node_free.c			\
+				env_node_set.c			\
+				env_node_update.c		\
+				env_sort.c
+
+F_GC		=	gc_env_dup.c			\
+				gc_free.c				\
+				gc_getcwd.c				\
+				gc_malloc.c				\
+				gc_split.c				\
+				gc_strdup.c				\
+				gc_strjoin.c			\
+				gc_substr.c
+
+F_MSH		=	msh_env_sort.c			\
+				msh_env_to_array.c		\
+				msh_env_val_parse.c		\
+				msh_env_var_parse.c		\
+				msh_id_err.c			\
+				msh_null_guard.c		\
+				msh_path_get_cmd.c		\
+				msh_perror.c			\
+				msh_quit.c
+
+F_BUILTINS	=	msh_cd.c				\
+				msh_echo.c				\
+				msh_env.c				\
+				msh_exit.c				\
+				msh_export.c			\
+				msh_pwd.c				\
+				msh_unset.c
+
+F_EXECUTE	=	msh_execute_cmd.c		\
+
+F_EXPAND	=	msh_expand_heredoc.c	\
+				msh_expand_split_args.c	\
+				msh_expand_utils.c		\
+				msh_expand.c			\
+				msh_tree_init.c
+
+F_PARSE		=	msh_creat_and_clean.c	\
+				msh_parse_utils_1.c		\
+				msh_parse_utils_2.c		\
+				msh_parse.c				\
+
+F_TOKEN		=	msh_linemod.c			\
+				msh_linerr.c			\
+				msh_token_handel.c
+
+# Compilation:
+#------------------------------------------------------------------------------#
+
+## Shell Commands:
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror	\
+				-MMD
+RM			=	rm -rf
+
+## Source Directories (VPATH):
+VPATH		=	$(D_FT)			\
+				$(D_DBG)		\
+				$(D_ENV)		\
+				$(D_GC)			\
+				$(D_MSH)		\
+				$(D_BUILTINS)	\
+				$(D_EXECUTE)	\
+				$(D_EXPAND)		\
+				$(D_PARSE)		\
+				$(D_TOKEN)
+
+## Includes:
+INCLUDES	=	-I $(D_ROOT)		\
+				-I $(D_FT)			\
+				-I $(D_DBG)			\
+				-I $(D_ENV)			\
+				-I $(D_GC)			\
+				-I $(D_MSH)			\
+				-I $(D_BUILTINS)	\
+				-I $(D_EXECUTE)		\
+				-I $(D_EXPAND)		\
+				-I $(D_PARSE)		\
+				-I $(D_TOKEN)
+
+## Sources & Objects:
+S_FT		=	$(addprefix $(D_FT)/, $(F_FT))
+S_DBG		=	$(addprefix $(D_DBG)/, $(F_DBG))
+S_ENV		=	$(addprefix $(D_ENV)/, $(F_ENV))
+S_GC		=	$(addprefix $(D_GC)/, $(F_GC))
+S_MSH		=	$(addprefix $(D_MSH)/, $(F_MSH))
+S_BUILTINS	=	$(addprefix $(D_BUILTINS)/, $(F_BUILTINS))
+S_EXECUTE	=	$(addprefix $(D_EXECUTE)/, $(F_EXECUTE))
+S_EXPAND	=	$(addprefix $(D_EXPAND)/, $(F_EXPAND))
+S_PARSE		=	$(addprefix $(D_PARSE)/, $(F_PARSE))
+S_TOKEN		=	$(addprefix $(D_TOKEN)/, $(F_TOKEN))
+
+SRCS		=	$(F_MAIN)		\
+				$(S_FT)			\
+				$(S_DBG)		\
+				$(S_ENV)		\
+				$(S_GC)			\
+				$(S_MSH)		\
+				$(S_BUILTINS)	\
+				$(S_EXECUTE)	\
+				$(S_EXPAND)		\
+				$(S_PARSE)		\
+				$(S_TOKEN)
+
+OBJS_NAMES	=	$(notdir $(SRCS:.c=.o))
+OBJS		=	$(addprefix $(D_OBJS)/, $(OBJS_NAMES))
+DEPS		=	$(OBJS:.o=.d)
+
+# Rules:
+#------------------------------------------------------------------------------#
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline
+
+$(D_OBJS):
+	@mkdir -p $(D_OBJS)
+
+$(D_OBJS)/%.o: %.c | $(D_OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	$(RM) $(D_OBJS)
 
 fclean: clean
-	rm -f $(NAME) test_parsing
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
+
+-include $(DEPS)

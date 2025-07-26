@@ -6,13 +6,13 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:58:31 by aessaber          #+#    #+#             */
-/*   Updated: 2025/05/21 20:31:50 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/17 20:20:36 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_msh.h"
 
-void	msh_perror(char *cmd_name)
+void	msh_perror(const char *cmd_name)
 {
 	ft_puterr("msh: ");
 	perror(cmd_name);

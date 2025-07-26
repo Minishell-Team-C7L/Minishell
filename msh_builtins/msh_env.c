@@ -6,8 +6,26 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:19 by aessaber          #+#    #+#             */
-/*   Updated: 2025/05/06 06:16:20 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/17 16:02:51 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lib_gc.h"
+
+int	msh_env(t_env *env)
+{
+	t_env	*env_node;
+
+	env_node = env;
+	while (env_node)
+	{
+		if (env_node->value)
+		{
+			ft_putstr(env_node->variable);
+			ft_putchar('=');
+			ft_putstr_nl(env_node->value);
+		}
+		env_node = env_node->next;
+	}
+	return (EXIT_SUCCESS);
+}

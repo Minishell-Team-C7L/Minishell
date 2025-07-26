@@ -6,37 +6,53 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:01 by aessaber          #+#    #+#             */
-/*   Updated: 2025/05/17 20:07:36 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/17 15:54:44 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_builtins.h"
 
-int	msh_echo(t_list *av)
+static void	echo_parse_flag_n(const char **arg, t_echo *echo);
+static void	echo_print_args(const char **arg, int row);
+
+int	msh_echo(const char **arg)
 {
 	t_echo	echo;
 
-	if (!av || !av->str)
+	if (!arg || !*arg)
+		return (dbg_nullarg(__func__), EXIT_FAILURE);
+	if (!arg[1])
 		return (ft_putchar('\n'), EXIT_SUCCESS);
+	echo.arg = 1;
 	echo.flag_n = false;
-	while (av && av->str
-		&& !ft_strncmp(av->str, "-n", 2)
-		&& ft_str_is_mono(av->str, 'n', 1))
-	{
-		echo.flag_n = true;
-		av = av->next;
-	}
-	echo.is_not_first = false;
-	while (av)
-	{
-		if (echo.is_not_first)
-			ft_putchar(' ');
-		if (av->str)
-			ft_putstr(av->str);
-		echo.is_not_first = true;
-		av = av->next;
-	}
+	echo_parse_flag_n(arg, &echo);
+	echo_print_args(arg, echo.arg);
 	if (!echo.flag_n)
 		ft_putchar('\n');
 	return (EXIT_SUCCESS);
+}
+
+static void	echo_parse_flag_n(const char **arg, t_echo *echo)
+{
+	while (arg[echo->arg] && !ft_strncmp(arg[echo->arg], "-n", 2)
+		&& ft_str_is_mono(arg[echo->arg], 'n', 1))
+	{
+		echo->flag_n = true;
+		echo->arg++;
+	}
+}
+
+static void	echo_print_args(const char **arg, int row)
+{
+	bool	arg_is_not_first;
+
+	arg_is_not_first = false;
+	while (arg[row])
+	{
+		if (arg_is_not_first)
+			ft_putchar(' ');
+		ft_putstr(arg[row]);
+		arg_is_not_first = true;
+		row++;
+	}
 }
