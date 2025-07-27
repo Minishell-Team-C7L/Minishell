@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/07/26 21:25:34 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/07/27 04:44:06 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,31 +29,6 @@ D_EXECUTE	=	msh_execute
 D_EXPAND	=	msh_expand
 D_PARSE		=	msh_parse
 D_TOKEN		=	msh_token
-
-## Headers:
-H_MAIN		=	msh_main.h
-H_FT		=	$(D_FT)/lib_ft.h
-H_DBG		=	$(D_DBG)/lib_dbg.h
-H_ENV		=	$(D_ENV)/lib_env.h
-H_GC		=	$(D_GC)/lib_gc.h
-H_MSH		=	$(D_MSH)/lib_msh.h
-H_BUILTINS	=	$(D_BUILTINS)/msh_builtins.h
-H_EXECUTE	=	$(D_EXECUTE)/msh_execute.h
-H_EXPAND	=	$(D_EXPAND)/msh_expand.h
-H_PARSE		=	$(D_PARSE)/msh_parse.h
-H_TOKEN		=	$(D_TOKEN)/msh_token.h
-
-H_ALL		=	$(H_MAIN)			\
-				$(H_FT)				\
-				$(H_DBG)			\
-				$(H_ENV)			\
-				$(H_GC)				\
-				$(H_MSH)			\
-				$(H_BUILTINS)		\
-				$(H_EXECUTE)		\
-				$(H_EXPAND)			\
-				$(H_PARSE)			\
-				$(H_TOKEN)
 
 ## C Files:
 F_MAIN		=	msh_main.c
@@ -139,8 +114,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand.c			\
 				msh_tree_init.c
 
-F_PARSE		=	msh_creat_and_clean.c	\
-				msh_parse_utils_1.c		\
+F_PARSE		=	msh_parse_utils_1.c		\
 				msh_parse_utils_2.c		\
 				msh_parse.c				\
 
@@ -158,28 +132,28 @@ CFLAGS		=	-Wall -Wextra -Werror	\
 RM			=	rm -rf
 
 ## Source Directories (VPATH):
-VPATH		=	$(D_FT)			\
-				$(D_DBG)		\
-				$(D_ENV)		\
-				$(D_GC)			\
-				$(D_MSH)		\
-				$(D_BUILTINS)	\
-				$(D_EXECUTE)	\
-				$(D_EXPAND)		\
-				$(D_PARSE)		\
+VPATH		=	$(D_FT)					\
+				$(D_DBG)				\
+				$(D_ENV)				\
+				$(D_GC)					\
+				$(D_MSH)				\
+				$(D_BUILTINS)			\
+				$(D_EXECUTE)			\
+				$(D_EXPAND)				\
+				$(D_PARSE)				\
 				$(D_TOKEN)
 
 ## Includes:
-INCLUDES	=	-I $(D_ROOT)		\
-				-I $(D_FT)			\
-				-I $(D_DBG)			\
-				-I $(D_ENV)			\
-				-I $(D_GC)			\
-				-I $(D_MSH)			\
-				-I $(D_BUILTINS)	\
-				-I $(D_EXECUTE)		\
-				-I $(D_EXPAND)		\
-				-I $(D_PARSE)		\
+INCLUDES	=	-I $(D_ROOT)			\
+				-I $(D_FT)				\
+				-I $(D_DBG)				\
+				-I $(D_ENV)				\
+				-I $(D_GC)				\
+				-I $(D_MSH)				\
+				-I $(D_BUILTINS)		\
+				-I $(D_EXECUTE)			\
+				-I $(D_EXPAND)			\
+				-I $(D_PARSE)			\
 				-I $(D_TOKEN)
 
 ## Sources & Objects:
@@ -194,16 +168,16 @@ S_EXPAND	=	$(addprefix $(D_EXPAND)/, $(F_EXPAND))
 S_PARSE		=	$(addprefix $(D_PARSE)/, $(F_PARSE))
 S_TOKEN		=	$(addprefix $(D_TOKEN)/, $(F_TOKEN))
 
-SRCS		=	$(F_MAIN)		\
-				$(S_FT)			\
-				$(S_DBG)		\
-				$(S_ENV)		\
-				$(S_GC)			\
-				$(S_MSH)		\
-				$(S_BUILTINS)	\
-				$(S_EXECUTE)	\
-				$(S_EXPAND)		\
-				$(S_PARSE)		\
+SRCS		=	$(F_MAIN)				\
+				$(S_FT)					\
+				$(S_DBG)				\
+				$(S_ENV)				\
+				$(S_GC)					\
+				$(S_MSH)				\
+				$(S_BUILTINS)			\
+				$(S_EXECUTE)			\
+				$(S_EXPAND)				\
+				$(S_PARSE)				\
 				$(S_TOKEN)
 
 OBJS_NAMES	=	$(notdir $(SRCS:.c=.o))
