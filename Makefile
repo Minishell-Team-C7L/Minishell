@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/07/27 04:44:06 by aessaber         ###   ########.fr        #
+#    Updated: 2025/07/27 04:54:30 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ F_BUILTINS	=	msh_cd.c				\
 				msh_pwd.c				\
 				msh_unset.c
 
-F_EXECUTE	=	msh_execute_cmd.c		\
+F_EXECUTE	=	msh_execute_cmd.c
 
 F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_split_args.c	\
@@ -114,9 +114,10 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand.c			\
 				msh_tree_init.c
 
-F_PARSE		=	msh_parse_utils_1.c		\
+F_PARSE		=	msh_create_and_clean	\
+				msh_parse_utils_1.c		\
 				msh_parse_utils_2.c		\
-				msh_parse.c				\
+				msh_parse.c
 
 F_TOKEN		=	msh_linemod.c			\
 				msh_linerr.c			\
