@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:04 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 05:03:31 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/30 10:51:26 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	msh_cd(const char **arg, t_env **env, t_gc **gc)
 	t_cd		cd;
 
 	if (!arg || !*arg || !env || !gc || !*gc)
-		return (dbg_nullarg(__func__), EXIT_FAILURE);
+		return (dbg_nullarg(__func__));
 	cd.oldpwd = gc_getcwd(gc);
 	if (!cd.oldpwd)
-		return (msh_perror("cd"), EXIT_FAILURE);
+		return (msh_perror("cd"));
 	cd.type = CD_ARG;
 	if (cd_get_path(&cd, arg, env) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -39,16 +39,10 @@ int	msh_cd(const char **arg, t_env **env, t_gc **gc)
 static int	cd_change_dir(t_cd *cd, t_env **env, t_gc **gc)
 {
 	if (chdir(cd->path) == -1)
-	{
-		msh_perror("cd");
-		return (EXIT_FAILURE);
-	}
+		return (msh_perror("cd"));
 	cd->pwd = gc_getcwd(gc);
 	if (!cd->pwd)
-	{
-		msh_perror("cd");
-		return (EXIT_FAILURE);
-	}
+		return (msh_perror("cd"));
 	msh_null_guard(env_node_set(env, "OLDPWD", cd->oldpwd), env, gc);
 	msh_null_guard(env_node_set(env, "PWD", cd->pwd), env, gc);
 	return (EXIT_SUCCESS);

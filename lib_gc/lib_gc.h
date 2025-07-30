@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:07:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 04:32:29 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/28 21:45:15 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_gc
 t_env	*gc_env_dup(t_env **env, t_gc **gc);
 void	gc_free(t_gc **gc);
 void	*gc_getcwd(t_gc **gc);
+t_gc	*gc_initiate(void);
 void	*gc_malloc(size_t size, t_gc **gc);
 char	**gc_split(const char *str, char delimiter, t_gc **gc);
 char	*gc_strdup(const char *s1, t_gc **gc);

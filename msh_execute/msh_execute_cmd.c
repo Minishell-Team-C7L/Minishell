@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_execute_cmd.c                           :+:      :+:    :+:   */
+/*   msh_execute_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/23 20:14:43 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/30 10:21:12 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	msh_execute_cmd(
 		return (static_execute_builtin(arg, status, env, gc));
 	pid = fork();
 	if (pid == FORK_FAILURE)
-		return (msh_perror("fork"), EXIT_FAILURE);
+		return (msh_perror("fork"));
 	if (pid == FORK_SUCCESS)
 		static_execute_child(arg, status, env, gc);
 	if (waitpid(pid, &exit_status, 0) == -1)
-		return (msh_perror("waitpid"), EXIT_FAILURE);
+		return (msh_perror("waitpid"));
 	if (WIFEXITED(exit_status))
 		return (WEXITSTATUS(exit_status));
 	return (EXIT_FAILURE);
@@ -59,7 +59,7 @@ static int	static_execute_builtin(
 	const char **arg, int status, t_env **env, t_gc **gc)
 {
 	if (!arg || !arg[0] || !env || !gc || !*gc)
-		return (dbg_nullarg(__func__), EXIT_FAILURE);
+		return (dbg_nullarg(__func__));
 	if (ft_strcmp(arg[0], "cd") == 0)
 		return (msh_cd(arg, env, gc));
 	else if (ft_strcmp(arg[0], "echo") == 0)
@@ -104,6 +104,6 @@ static int	static_execute_external(const char **arg, t_env **env, t_gc **gc)
 	}
 	envp = msh_env_to_array(env, gc);
 	if (execve(path_cmd, (char *const *)arg, envp) == -1)
-		return (msh_perror(arg[0]), 126);
+		return (msh_perror(arg[0]));
 	return (EXIT_FAILURE);
 }

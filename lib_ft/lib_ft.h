@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 09:51:26 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 06:40:28 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/30 08:42:30 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 //	For: write(), STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO
 # include <limits.h>
 //	For: LONG_MAX
+# include <fcntl.h>
+//	For: open(), O_RDONLY, O_WRONLY, O_CREAT, O_TRUNC, O_APPEND
 
 typedef struct s_list
 {

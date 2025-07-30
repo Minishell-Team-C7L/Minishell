@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:01 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/17 15:54:44 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/30 10:51:36 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	msh_echo(const char **arg)
 	t_echo	echo;
 
 	if (!arg || !*arg)
-		return (dbg_nullarg(__func__), EXIT_FAILURE);
+		return (dbg_nullarg(__func__));
 	if (!arg[1])
 		return (ft_putchar('\n'), EXIT_SUCCESS);
 	echo.arg = 1;

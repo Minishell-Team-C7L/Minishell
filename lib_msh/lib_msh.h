@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 04:47:14 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/30 10:02:39 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	*msh_env_var_parse(const char *variable, t_env **env, t_gc **gc);
 void	msh_id_err(const char *arg, const char *cmd);
 void	*msh_null_guard(void *ptr, t_env **env, t_gc **gc);
 char	*msh_path_get_cmd(const char *cmd, t_env **env, t_gc **gc);
-void	msh_perror(const char *cmd_name);
+int		msh_perror(const char *cmd_name);
 void	msh_quit(int status, t_env **env, t_gc **gc);
 
 #endif

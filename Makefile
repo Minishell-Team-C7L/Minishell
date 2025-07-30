@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/07/27 04:54:30 by aessaber         ###   ########.fr        #
+#    Updated: 2025/07/28 21:51:40 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ F_ENV		=	env_get_node.c			\
 F_GC		=	gc_env_dup.c			\
 				gc_free.c				\
 				gc_getcwd.c				\
+				gc_initiate.c			\
 				gc_malloc.c				\
 				gc_split.c				\
 				gc_strdup.c				\
@@ -114,7 +115,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand.c			\
 				msh_tree_init.c
 
-F_PARSE		=	msh_create_and_clean	\
+F_PARSE		=	msh_create_and_clean.c	\
 				msh_parse_utils_1.c		\
 				msh_parse_utils_2.c		\
 				msh_parse.c
