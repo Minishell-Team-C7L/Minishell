@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/30 06:46:08 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:46:26 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int ac, char **av, char **envp)
 		// if (share_data.err_prs.perr_type
 		// msh_handel_parse_error(share_data.err_prs.perr_type, share_data.line); // TODO: handle parse error
 		msh_tree_init(share_data.abs, &share_data);
-		printf("%d\n", msh_execute_cmd((const char **)share_data.abs->node_args, share_data.exit_status, &env, &gc));
+		printf("%d\n", msh_execute_cmd(share_data.abs, share_data.exit_status, &env, &gc));
 	}
 	return (0);
 }

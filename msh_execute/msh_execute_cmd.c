@@ -6,12 +6,11 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/30 10:21:12 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:13:14 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_execute.h"
-// unfinished
 
 #define FORK_FAILURE -1
 #define FORK_SUCCESS 0
@@ -20,22 +19,24 @@ static bool	static_is_builtin_parent(const char *cmd);
 static int	static_execute_builtin(
 				const char **arg, int status, t_env **env, t_gc **gc);
 static void	static_execute_child(
-				const char **arg, int status, t_env **env, t_gc **gc);
+				t_node *node, int status, t_env **env, t_gc **gc);
 static int	static_execute_external(const char **arg, t_env **env, t_gc **gc);
 
-int	msh_execute_cmd(
-	const char **arg, int status, t_env **env, t_gc **gc)
+int	msh_execute_cmd(t_node *node, int status, t_env **env, t_gc **gc)
 {
 	pid_t	pid;
 	int		exit_status;
 
-	if (static_is_builtin_parent(arg[0]))
-		return (static_execute_builtin(arg, status, env, gc));
+	if (!node || !node->args || !node->args[0] || !env || !gc || !*gc)
+		return (dbg_nullarg(__func__), EXIT_SUCCESS);
+	if (static_is_builtin_parent(node->args[0]))
+		return (static_execute_builtin(
+				(const char **)node->args, status, env, gc));
 	pid = fork();
 	if (pid == FORK_FAILURE)
 		return (msh_perror("fork"));
 	if (pid == FORK_SUCCESS)
-		static_execute_child(arg, status, env, gc);
+		static_execute_child(node, status, env, gc);
 	if (waitpid(pid, &exit_status, 0) == -1)
 		return (msh_perror("waitpid"));
 	if (WIFEXITED(exit_status))
@@ -78,14 +79,15 @@ static int	static_execute_builtin(
 }
 
 static void	static_execute_child(
-	const char **arg, int status, t_env **env, t_gc **gc)
+	t_node *node, int status, t_env **env, t_gc **gc)
 {
 	int		exit_status;
 
-	exit_status = static_execute_builtin(arg, status, env, gc);
+	msh_redir_handle(node->red_l);
+	exit_status = static_execute_builtin(node->args, status, env, gc);
 	if (exit_status != CMD_NOT_FOUND)
 		msh_quit(exit_status, env, gc);
-	exit_status = static_execute_external(arg, env, gc);
+	exit_status = static_execute_external(node->args, env, gc);
 	msh_quit(exit_status, env, gc);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:08:43 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 04:53:22 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:40:30 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # define CMD_NOT_FOUND 127
 
-int	msh_execute_cmd(
-		const char **arg, int status, t_env **env, t_gc **gc);
+int	msh_execute_cmd(t_node *node, int status, t_env **env, t_gc **gc);
 
 #endif
