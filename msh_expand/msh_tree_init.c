@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/30 05:45:49 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/01 09:03:12 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	static_set_up_exp_args(t_node *tree_node, t_data *data)
 	int	j;
 
 	if (tree_node->args)
-		tree_node->node_args = msh_handel_expand(tree_node->args, data);
+		tree_node->arg = msh_handel_expand(tree_node->args, data);
 	j = 0;
-	while (tree_node->node_args[j++]);
+	while (tree_node->arg[j++]);
 		// printf("%s\n", tree_node->node_args[j++]);
 }
 

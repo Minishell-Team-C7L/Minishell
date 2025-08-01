@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/30 10:02:39 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/01 08:18:10 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_node
 	t_red_node		*red_l;
 	t_token			*left_cmd_toknes;
 	char			*args;//		Single string containing all arguments
-	char			**node_args;
+	char			**arg;
 }	t_node;
 
 typedef struct s_parserr

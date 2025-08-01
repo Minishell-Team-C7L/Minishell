@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/07/28 21:51:40 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/01 09:03:58 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,8 @@ F_BUILTINS	=	msh_cd.c				\
 				msh_pwd.c				\
 				msh_unset.c
 
-F_EXECUTE	=	msh_execute_cmd.c
+F_EXECUTE	=	msh_execute_cmd.c		\
+				msh_redir_handle.c
 
 F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_split_args.c	\
