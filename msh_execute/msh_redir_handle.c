@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 07:14:36 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/01 15:24:04 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/01 17:10:11 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	msh_redir_handle(const t_red_node *redir_list)
 	const t_red_node	*current;
 	int					fd;
 
-	printf("val: %s\n", redir_list->val);
 	current = redir_list;
 	while (current)
 	{

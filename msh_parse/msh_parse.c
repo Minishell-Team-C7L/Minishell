@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/25 19:49:22 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/01 17:11:48 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ t_node	*before_pip(t_data *cur_data)
 	t_red_node	*red_list;
 	t_red_node	*last_red;
 
-	if (msh_red_list(cur_data, &red_list))
-		;
-	else
+	if (!msh_red_list(cur_data, &red_list))
 		return (NULL);
 	cmd_b_pip = msh_build_cmd_with_args(cur_data);
 	if (!cmd_b_pip)
