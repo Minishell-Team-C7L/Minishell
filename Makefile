@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/01 09:03:58 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/02 10:36:08 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ D_ENV		=	lib_env
 D_GC		=	lib_gc
 D_MSH		=	lib_msh
 D_BUILTINS	=	msh_builtins
-D_EXECUTE	=	msh_execute
+D_EXECUTION	=	msh_execution
 D_EXPAND	=	msh_expand
 D_PARSE		=	msh_parse
 D_TOKEN		=	msh_token
@@ -107,7 +107,7 @@ F_BUILTINS	=	msh_cd.c				\
 				msh_pwd.c				\
 				msh_unset.c
 
-F_EXECUTE	=	msh_execute_cmd.c		\
+F_EXECUTION	=	msh_execute_cmd.c		\
 				msh_redir_handle.c
 
 F_EXPAND	=	msh_expand_heredoc.c	\
@@ -141,7 +141,7 @@ VPATH		=	$(D_FT)					\
 				$(D_GC)					\
 				$(D_MSH)				\
 				$(D_BUILTINS)			\
-				$(D_EXECUTE)			\
+				$(D_EXECUTION)			\
 				$(D_EXPAND)				\
 				$(D_PARSE)				\
 				$(D_TOKEN)
@@ -154,7 +154,7 @@ INCLUDES	=	-I $(D_ROOT)			\
 				-I $(D_GC)				\
 				-I $(D_MSH)				\
 				-I $(D_BUILTINS)		\
-				-I $(D_EXECUTE)			\
+				-I $(D_EXECUTION)			\
 				-I $(D_EXPAND)			\
 				-I $(D_PARSE)			\
 				-I $(D_TOKEN)
@@ -166,7 +166,7 @@ S_ENV		=	$(addprefix $(D_ENV)/, $(F_ENV))
 S_GC		=	$(addprefix $(D_GC)/, $(F_GC))
 S_MSH		=	$(addprefix $(D_MSH)/, $(F_MSH))
 S_BUILTINS	=	$(addprefix $(D_BUILTINS)/, $(F_BUILTINS))
-S_EXECUTE	=	$(addprefix $(D_EXECUTE)/, $(F_EXECUTE))
+S_EXECUTION	=	$(addprefix $(D_EXECUTION)/, $(F_EXECUTION))
 S_EXPAND	=	$(addprefix $(D_EXPAND)/, $(F_EXPAND))
 S_PARSE		=	$(addprefix $(D_PARSE)/, $(F_PARSE))
 S_TOKEN		=	$(addprefix $(D_TOKEN)/, $(F_TOKEN))
@@ -178,7 +178,7 @@ SRCS		=	$(F_MAIN)				\
 				$(S_GC)					\
 				$(S_MSH)				\
 				$(S_BUILTINS)			\
-				$(S_EXECUTE)			\
+				$(S_EXECUTION)			\
 				$(S_EXPAND)				\
 				$(S_PARSE)				\
 				$(S_TOKEN)

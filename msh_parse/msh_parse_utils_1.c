@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/01 17:09:44 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/02 08:48:27 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
 	t_red_node	*red_node;
 
 	*red_list = NULL;
-	if (cur_data->cur_tokens && cur_data->cur_tokens->type == WORD_T)
-		msh_next_token(cur_data);
+	// if (cur_data->cur_tokens && cur_data->cur_tokens->type == WORD_T)
+	// 	msh_next_token(cur_data);
 	while (cur_data->cur_tokens && msh_is_red(cur_data->cur_tokens->type))
 	{
 		red_node = msh_new_red_node(cur_data->cur_tokens->type);

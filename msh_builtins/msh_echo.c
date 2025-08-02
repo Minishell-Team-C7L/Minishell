@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:01 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/30 10:51:36 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/02 11:23:07 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ int	msh_echo(const char **arg)
 		return (dbg_nullarg(__func__));
 	if (!arg[1])
 		return (ft_putchar('\n'), EXIT_SUCCESS);
-	echo.arg = 1;
-	echo.flag_n = false;
 	echo_parse_flag_n(arg, &echo);
-	echo_print_args(arg, echo.arg);
-	if (!echo.flag_n)
+	echo_print_args(arg, echo.row);
+	if (!echo.flag_n_found)
 		ft_putchar('\n');
 	return (EXIT_SUCCESS);
 }
 
 static void	echo_parse_flag_n(const char **arg, t_echo *echo)
 {
-	while (arg[echo->arg] && !ft_strncmp(arg[echo->arg], "-n", 2)
-		&& ft_str_is_mono(arg[echo->arg], 'n', 1))
+	echo->row = 1;
+	echo->flag_n_found = false;
+	while (arg[echo->row] && !ft_strncmp(arg[echo->row], "-n", 2)
+		&& ft_str_is_mono(arg[echo->row], 'n', 1))
 	{
-		echo->flag_n = true;
-		echo->arg++;
+		echo->flag_n_found = true;
+		echo->row++;
 	}
 }
 

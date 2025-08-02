@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/01 08:18:10 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:39:22 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 // For: errno
 # include <stdio.h>
 // For: perror()
+# include <readline/readline.h>
+// For: readline()
+# include <readline/history.h>
+// For: add_history()
 
 # include "lib_ft.h"
 # include "lib_dbg.h"
