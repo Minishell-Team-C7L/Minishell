@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:08:43 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/02 09:50:33 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/03 19:10:22 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include "lib_gc.h"
 # include "lib_msh.h"
 # include "msh_builtins.h"
-
-# define CMD_NOT_FOUND 127
 
 int		msh_execute_cmd(t_node *node, int status, t_env **env, t_gc **gc);
 void	msh_redir_handle(const t_red_node *redir_list);

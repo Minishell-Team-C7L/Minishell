@@ -6,27 +6,39 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/02 10:39:22 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/03 18:53:15 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIB_MSH_H
 # define LIB_MSH_H
 
-# include <errno.h>
 // For: errno
-# include <stdio.h>
-// For: perror()
-# include <readline/readline.h>
-// For: readline()
-# include <readline/history.h>
-// For: add_history()
+# include <errno.h>
 
+// For: perror()
+# include <stdio.h>
+
+// For: readline()
+# include <readline/readline.h>
+
+// For: add_history()
+# include <readline/history.h>
+
+// For: stat(), S_ISDIR()
+# include <sys/stat.h>
+
+// Dependencies:
 # include "lib_ft.h"
 # include "lib_dbg.h"
 # include "lib_env.h"
 # include "lib_gc.h"
 
+// Macros:
+# define FORK_FAILURE -1
+# define FORK_SUCCESS 0
+
+// Enums and Structs:
 typedef enum e_token_types
 {
 	WORD_T = 1,
