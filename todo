@@ -1,27 +1,23 @@
 # Parsing:
 
 - Initiate arg even if theres no args.
-current implementation:
-`````````````````````````````````````````````
-msh$ 
-DBG: msh_execute_cmd: missing argument(s).
-`````````````````````````````````````````````
+> current implementation:
+> msh$ 
+> DBG: msh_execute_cmd: missing argument(s).
 
 # Execution:
 
 - Handle single dot cmd.
-current implementation:
-`````````````````````````````````````````````
-msh$ .
-msh: .: command not found
-`````````````````````````````````````````````
+> current implementation:
+> msh$ .
+> msh: .: command not found
+
 - Handle return status.
-current implementation:
-`````````````````````````````````````````````
-msh$ bfbfb/
-msh: bfbfb/: No such file or directory
-126
-msh$ hghg
-msh: hghg: command not found
-126
-`````````````````````````````````````````````
+> current implementation:
+> msh$ bfbfb/
+> msh: bfbfb/: No such file or directory
+> 126
+&
+> msh$ hghg
+> msh: hghg: command not found
+> 126
