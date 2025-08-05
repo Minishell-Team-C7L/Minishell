@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/03 10:59:33 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/05 19:38:28 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	msh_init_data(t_data *share_data)
 {
 	ft_memset(share_data, 0, sizeof(t_data));
+	share_data->env = env_initiate(share_data->envps);
+	share_data->gc = gc_initiate();
 	// Initialize stdin/stdout/stderr if necessary
 	// Get terminal attributes if needed
 }
@@ -22,15 +24,11 @@ static void	msh_init_data(t_data *share_data)
 int	main(int ac, char **av, char **envp)
 {
 	t_data	share_data;
-	t_env	*env;
-	t_gc	*gc;
 
 	(void)ac;
 	(void)av;
 	msh_init_data(&share_data);
 	share_data.envps = envp;
-	env = env_initiate(share_data.envps);
-	gc = gc_initiate();
 	while (true)
 	{
 		share_data.line = readline("msh$ ");
@@ -42,7 +40,7 @@ int	main(int ac, char **av, char **envp)
 		// if (share_data.err_prs.perr_type
 		// msh_handel_parse_error(share_data.err_prs.perr_type, share_data.line); // TODO: handle parse error
 		msh_tree_init(share_data.abs, &share_data);
-		printf("%d\n", msh_execute_cmd(share_data.abs, share_data.exit_status, &env, &gc));
+		printf("%d\n", msh_execute(share_data.abs, &share_data));
 	}
 	return (0);
 }

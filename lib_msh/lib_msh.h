@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/04 15:33:02 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/05 19:32:31 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ typedef struct s_data//				start minishell
 	int			exit_status;
 	char		**envps;//			Environment variables
 	int			heredoc_intersignal;
+	t_env		*env;//			Environment variables linked list
+	t_gc		*gc;//				Garbage collector
 }	t_data;
 
 t_env	*msh_env_sort(t_env **env, t_gc **gc);
