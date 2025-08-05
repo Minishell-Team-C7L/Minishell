@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/03 19:10:12 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:35:53 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	static_execute_builtin(
 		return (msh_pwd(gc));
 	else if (ft_strcmp(arg[0], "unset") == 0)
 		return (msh_unset(arg, env));
-	return (126);
+	return (127);
 }
 
 static void	static_execute_child(
@@ -83,7 +83,7 @@ static void	static_execute_child(
 	msh_redir_handle(node->red_l);
 	exit_status = static_execute_builtin(
 			(const char **)node->arg, status, env, gc);
-	if (exit_status != 126)
+	if (exit_status != 127)
 		msh_quit(exit_status, env, gc);
 	exit_status = static_execute_external((const char **)node->arg, env, gc);
 	msh_quit(exit_status, env, gc);
@@ -91,26 +91,17 @@ static void	static_execute_child(
 
 static int	static_execute_external(const char **arg, t_env **env, t_gc **gc)
 {
-	char		*path_cmd;
-	char		**envp;
-	struct stat	stat_file;
+	char	*cmd_path;
+	int		exit_status;
+	char	**envp;
 
-	path_cmd = msh_path_get_cmd(arg[0], env, gc);
-	if (!path_cmd)
-	{
-		if (errno == EACCES || errno == EISDIR)
-			return (126);
-		return (126);
-	}
-	if (stat(path_cmd, &stat_file) == 0 && S_ISDIR(stat_file.st_mode))
-	{
-		ft_puterr("msh: ");
-		ft_puterr(arg[0]);
-		ft_puterr(": command not found\n");
-		return (126);
-	}
+	if (!ft_strcmp(arg[0], ".") || !ft_strcmp(arg[0], ".."))
+		return (msh_puterr(arg[0], "command not found"), 127);
+	exit_status = msh_path_get_cmd(arg[0], &cmd_path, env, gc);
+	if (exit_status)
+		return (exit_status);
 	envp = msh_env_to_array(env, gc);
-	if (execve(path_cmd, (char *const *)arg, envp) == -1)
-		return (msh_perror(arg[0]), 126);
+	if (execve(cmd_path, (char *const *)arg, envp) == -1)
+		return (msh_perror(arg[0]));
 	return (EXIT_FAILURE);
 }

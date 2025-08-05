@@ -1,19 +1,20 @@
 # Parsing:
 
-- Initiate arg even if theres no args.
-> current implementation:
+> [Pending] Initiate arg even if theres no args:
+> Implementation issue:
 > msh$ 
 > DBG: msh_execute_cmd: missing argument(s).
 
 # Execution:
 
-- Handle single dot cmd.
-> current implementation:
+> [Solved] Handle single dot cmd:
+> Implementation issue:
 > msh$ .
 > msh: .: command not found
+> 126
 
-- Handle return status.
-> current implementation:
+> [Solved] Handle return status:
+> Implementation issue:
 > msh$ bfbfb/
 > msh: bfbfb/: No such file or directory
 > 126
@@ -21,3 +22,6 @@
 > msh$ hghg
 > msh: hghg: command not found
 > 126
+
+> [Pending] Handle Pipes:
+> 

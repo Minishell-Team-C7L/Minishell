@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/02 10:36:08 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/04 16:42:18 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ F_MSH		=	msh_env_sort.c			\
 				msh_null_guard.c		\
 				msh_path_get_cmd.c		\
 				msh_perror.c			\
+				msh_puterr.c			\
 				msh_quit.c
 
 F_BUILTINS	=	msh_cd.c				\
