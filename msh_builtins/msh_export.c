@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:30 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 05:03:47 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/30 10:52:11 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	msh_export(const char **arg, t_env **env, t_gc **gc)
 	uint8_t	exit_status;
 
 	if (!arg || !*arg || !env || !gc || !*gc)
-		return (dbg_nullarg(__func__), EXIT_FAILURE);
+		return (dbg_nullarg(__func__));
 	row = 1;
 	exit_status = EXIT_SUCCESS;
 	if (!arg[row])

@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:03:25 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 06:55:00 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/02 11:22:31 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct s_cd
 
 typedef struct s_echo
 {
-	int		arg;
-	bool	flag_n;
+	int		row;
+	bool	flag_n_found;
 }	t_echo;
 
 int	msh_cd(const char **arg, t_env **env, t_gc **gc);

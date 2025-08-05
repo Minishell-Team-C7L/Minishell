@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_pwd.c                                          :+:      :+:    :+:   */
+/*   msh_execute.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 21:42:33 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/30 10:13:31 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
+/*   Updated: 2025/08/05 19:35:23 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_builtins.h"
+#include "msh_execution.h"
 
-int	msh_pwd(t_gc **gc)
+int	msh_execute(t_node *ast_head, t_data *data)
 {
-	char	*pwd;
-
-	if (!gc || !*gc)
-		return (dbg_nullarg(__func__));
-	pwd = gc_getcwd(gc);
-	if (!pwd)
-		return (msh_perror("pwd"));
-	ft_putstr_nl(pwd);
+	if (!ast_head)
+		return (data->exit_status);
+	// if (msh_handle_heredocs(ast_head) != EXIT_SUCCESS)
+	// 	return (EXIT_FAILURE);
+	if (ast_head->type == CMD_N)
+		return (msh_execute_cmd(
+				ast_head, data->exit_status, &data->env, &data->gc));
+	else if (ast_head->type == PIPE_N)
+		return (msh_execute_pipe(ast_head, data));
 	return (EXIT_SUCCESS);
 }

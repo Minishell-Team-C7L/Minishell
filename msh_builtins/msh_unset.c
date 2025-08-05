@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:36 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/19 16:26:38 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/07/30 10:52:24 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	msh_unset(const char **arg, t_env **env)
 	uint8_t	exit_status;
 
 	if (!arg || !*arg || !env)
-		return (dbg_nullarg(__func__), EXIT_FAILURE);
+		return (dbg_nullarg(__func__));
 	row = 1;
 	exit_status = EXIT_SUCCESS;
 	while (arg[row])

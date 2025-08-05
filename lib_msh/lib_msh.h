@@ -6,23 +6,39 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 04:47:14 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/05 19:32:31 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIB_MSH_H
 # define LIB_MSH_H
 
-# include <errno.h>
 // For: errno
-# include <stdio.h>
-// For: perror()
+# include <errno.h>
 
+// For: perror()
+# include <stdio.h>
+
+// For: readline()
+# include <readline/readline.h>
+
+// For: add_history()
+# include <readline/history.h>
+
+// For: stat(), S_ISDIR()
+# include <sys/stat.h>
+
+// Dependencies:
 # include "lib_ft.h"
 # include "lib_dbg.h"
 # include "lib_env.h"
 # include "lib_gc.h"
 
+// Macros:
+# define FORK_FAILURE -1
+# define FORK_SUCCESS 0
+
+// Enums and Structs:
 typedef enum e_token_types
 {
 	WORD_T = 1,
@@ -78,7 +94,7 @@ typedef struct s_node
 	t_red_node		*red_l;
 	t_token			*left_cmd_toknes;
 	char			*args;//		Single string containing all arguments
-	char			**node_args;
+	char			**arg;
 }	t_node;
 
 typedef struct s_parserr
@@ -96,6 +112,8 @@ typedef struct s_data//				start minishell
 	int			exit_status;
 	char		**envps;//			Environment variables
 	int			heredoc_intersignal;
+	t_env		*env;//			Environment variables linked list
+	t_gc		*gc;//				Garbage collector
 }	t_data;
 
 t_env	*msh_env_sort(t_env **env, t_gc **gc);
@@ -104,8 +122,10 @@ char	*msh_env_val_parse(const char *value, t_env **env, t_gc **gc);
 char	*msh_env_var_parse(const char *variable, t_env **env, t_gc **gc);
 void	msh_id_err(const char *arg, const char *cmd);
 void	*msh_null_guard(void *ptr, t_env **env, t_gc **gc);
-char	*msh_path_get_cmd(const char *cmd, t_env **env, t_gc **gc);
-void	msh_perror(const char *cmd_name);
+int		msh_path_get_cmd(
+			const char *cmd, char **cmd_path, t_env **env, t_gc **gc);
+void	msh_puterr(const char *cmd_name, const char *msg);
+int		msh_perror(const char *cmd_name);
 void	msh_quit(int status, t_env **env, t_gc **gc);
 
 #endif
