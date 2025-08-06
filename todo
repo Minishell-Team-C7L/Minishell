@@ -2,12 +2,14 @@
 
 # Parsing:
 
-> [Pending] Initiate arg even if theres no args:
-> Implementation issue:
-> msh$ 
-> DBG: msh_execute_cmd: missing argument(s).
+> [i think its sloved!]
 
-> [Pending] Pipes are not functional.
+> [Pending] Initiate arg even if theres no args: √
+> Implementation issue: √
+> msh$ √
+> DBG: msh_execute_cmd: missing argument(s). √
+
+> [Pending] Pipes are not functional. ???
 
 # Execution:
 

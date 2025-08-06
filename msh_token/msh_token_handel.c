@@ -3,183 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_handel.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 06:18:24 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/06 06:45:24 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_token.h"
 
-t_token	*to_tokens(char *line)
+t_token	*to_tokens(char *line, t_data *data)
 {
-	t_token	*list_of_tokens;
+	t_token	*final_token_l;
 
-	list_of_tokens = NULL;
-	line = ft_rm_whitespaces(line);
-	ft_fill_tokens(&list_of_tokens, line);
-	// free(line);
-	return (list_of_tokens);
+	final_token_l = NULL;
+	final_token_l = ft_fill_tokens(line, data);
+	free(line);
+	line = NULL;
+	return (final_token_l);
 }
 
-static int	is_special_char(char c)
+t_token	*ft_fill_tokens(char *line, t_data *data)
 {
-	return (c == '>'
-		|| c == '<'
-		|| c == '|'
-		|| c == '&'
-		|| c == '\''
-		|| c == '\"');
-}
+	t_token	*list_of_t;
+	int		err;
 
-static void	skip_whitespace(char **line)
-{
-	while (**line > 0 && **line <= 32)
-		(*line)++;
-}
-
-int	ft_fill_tokens(t_token **list_of_token, char *line)
-{
+	list_of_t = NULL;
+	err = 0;
 	while (*line)
 	{
+		if (0 != err)
+			return (free_token_list(&list_of_t), NULL);
 		skip_whitespace(&line);
 		if (is_special_char(*line))
-		{
-			if (!*++line)
-				return (ft_line_err(list_of_token));
-			line--;
-			if (check_line_err(&line) && *line != '&')
-				check_token_type(list_of_token, &line);
-			else
-				return (ft_line_err(list_of_token));
-		}
+			err = (1 && !msh_check_stoken_type(&list_of_t, &line));
 		else
-			check_token_type(list_of_token, &line);
+			err = (1 && !msh_check_ntoken_type(&list_of_t, &line, data));
 	}
-	return (0);
+	return (list_of_t);
 }
 
-void	check_token_type(t_token **list_of_t, char **token_value)
+int	msh_check_ntoken_type(t_token **list_of_t, char **token_value, t_data *data)
+{
+	t_token *token;
+	char 	*tmp;
+	char 	*val;
+	size_t	j;
+
+	j = 0;
+	tmp = *token_value;
+	while (tmp[j] && tmp[j] != '\n'
+		&& tmp[j] != ' ' && !msh_is_operator((tmp + j)))
+	{
+		if (!msh_is_quote(tmp[j]))
+			j++;
+		else
+			if (!msh_skip_quates(&j, tmp))
+				return (msh_quates_err(data), 0);
+	}
+	val = ft_substr(tmp, 0, j);
+	if (!val)
+		return (0);
+	token = (t_token *)ft_calloc(1, sizeof(t_token));
+	if (!token)
+		return (free(val), 0);
+	token->type = WORD_T;
+	token->val = val;
+	return(*token_value += j, token_list_add(list_of_t, token), 1);
+}
+
+int	msh_check_stoken_type(t_token **list_of_t, char **token_value)
 {
 	if (!ft_strncmp(*token_value, "|", 1))
-		add_token_type(list_of_t, token_value, PIPE_T);
+		return (1 && add_token_type(list_of_t, token_value, PIPE_T));
 	else if (!ft_strncmp(*token_value, "<<", 2))
-		add_token_type(list_of_t, token_value, HERE_DOC_T);
+		return (1 && add_token_type(list_of_t, token_value, HERE_DOC_T));
 	else if (!ft_strncmp(*token_value, ">>", 2))
-		add_token_type(list_of_t, token_value, REDIR_APPEND_T);
+		return (1 && add_token_type(list_of_t, token_value, REDIR_APPEND_T));
 	else if (!ft_strncmp(*token_value, "<", 1))
-		add_token_type(list_of_t, token_value, REDIR_IN_T);
-	else if (!ft_strncmp(*token_value, ">", 1))
-		add_token_type(list_of_t, token_value, REDIR_OUT_T);
+		return (1 && add_token_type(list_of_t, token_value, REDIR_IN_T));
 	else
-		add_token_type(list_of_t, token_value, WORD_T);
+		return (1 && add_token_type(list_of_t, token_value, REDIR_OUT_T));
 }
 
-static int	handle_quoted_word(char **cur_token, char **start)
-{
-	char	quote;
-	int		len;
-
-	quote = **cur_token;
-	(*cur_token)++;
-	*start = *cur_token;
-	while (**cur_token && **cur_token != quote)
-		(*cur_token)++;
-	len = *cur_token - *start;
-	if (**cur_token == quote)
-		(*cur_token)++;
-	return (len);
-}
-
-static int	handle_regular_word(char **cur_token, char *start)
-{
-	while (**cur_token
-		&& **cur_token != ' '
-		&& **cur_token > 32
-		&& **cur_token != '|'
-		&& **cur_token != '<'
-		&& **cur_token != '>')
-		(*cur_token)++;
-	return (*cur_token - start);
-}
-
-static int	get_token_length(
-	char **cur_token, char **start, t_token_types t_type)
-{
-	*start = *cur_token;
-	if (t_type == REDIR_APPEND_T || t_type == HERE_DOC_T)
-	{
-		(*cur_token) += 2;
-		return (2);
-	}
-	else if (t_type == WORD_T)
-	{
-		if (**cur_token == '\'' || **cur_token == '\"')
-			return (handle_quoted_word(cur_token, start));
-		else
-			return (handle_regular_word(cur_token, *start));
-	}
-	else
-	{
-		(*cur_token)++;
-		return (1);
-	}
-}
-
-void	add_token_type(t_token **t_list, char **cur_token, t_token_types t_type)
+int	add_token_type(t_token **t_list, char **cur_token, t_token_types t_type)
 {
 	t_token	*new_token;
-	char	*start;
-	int		len;
 
 	new_token = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (!new_token)
-		return ;
+		return (0);
 	new_token->type = t_type;
-	len = get_token_length(cur_token, &start, t_type);
-	new_token->val = ft_calloc(len + 1, sizeof(char));
-	if (!new_token->val)
-	{
-		free(new_token);
-		return ;
-	}
-	ft_memcpy(new_token->val, start, len);
-	new_token->val[len] = '\0';
+	new_token->val = NULL;
 	token_list_add(t_list, new_token);
-}
-
-void	free_token_list(t_token **token_list)
-{
-	t_token	*current;
-	t_token	*next;
-
-	if (!token_list || !*token_list)
-		return ;
-	current = *token_list;
-	while (current)
-	{
-		next = current->next;
-		if (current->val)
-			free(current->val);
-		free(current);
-		current = next;
-	}
-	*token_list = NULL;
-}
-
-void	token_list_add(t_token **list, t_token *new_token)
-{
-	t_token	*curr_list;
-
-	if (!*list)
-	{
-		*list = new_token;
-		return ;
-	}
-	curr_list = *list;
-	while (curr_list && curr_list->next)
-		curr_list = curr_list->next;
-	curr_list->next = new_token;
-	new_token->prev = curr_list;
+	if (t_type == HERE_DOC_T || t_type == REDIR_APPEND_T)
+		(*cur_token)++;
+	(*cur_token)++;
+	return (1);
 }

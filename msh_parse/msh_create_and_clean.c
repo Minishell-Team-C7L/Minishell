@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_creat_and_clean.c                              :+:      :+:    :+:   */
+/*   msh_create_and_clean.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 11:04:24 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/07/26 11:11:38 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/06 06:35:51 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ t_node	*msh_new_cmd_node(void)
 	return (new_node);
 }
 
-t_red_node	*msh_new_red_node(t_token_types t_type)
+t_red_node	*msh_new_red_node(char *value, t_token_types t_type)
 {
 	t_red_node	*red_n_node;
 
 	red_n_node = (t_red_node *)ft_calloc(1, sizeof(t_red_node));
 	if (!red_n_node)
 		return (NULL);
-	red_n_node->val = ft_strdup(NULL);
-	red_n_node->type = msh_red_type(t_type);
-	if (!red_n_node->type)
+	red_n_node->val = ft_strdup(value);
+	if (!red_n_node->val)
 		return (free(red_n_node), NULL);
+	red_n_node->type = msh_red_type(t_type);
 	return (red_n_node);
 }
 
@@ -57,10 +57,18 @@ void	msh_free_cmd_args(t_node *cmd_node)
 	cmd_node->args = NULL;
 }
 
-void	msh_free_args_string(char **args)
+void	msh_clear_tree_rec(t_node *tree)
 {
-	if (!args || !*args)
+	if (!tree)
 		return ;
-	free(*args);
-	*args = NULL;
+	if (tree->type == CMD_N)
+		msh_clear_cmd(tree);
+	else
+	{
+		if (tree -> left)
+			msh_clear_tree_rec(tree -> left);
+		if (tree -> right)
+			msh_clear_tree_rec(tree -> right);
+	}
+	free(tree);
 }

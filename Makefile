@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
+#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/05 19:30:22 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/06 07:06:51 by lhchiban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ D_TOKEN		=	msh_token
 F_MAIN		=	msh_main.c
 
 F_FT		=	ft_atoi.c				\
+				ft_bzero.c				\
 				ft_calloc.c				\
 				ft_free.c				\
 				ft_isalnum.c			\
@@ -124,8 +125,8 @@ F_PARSE		=	msh_create_and_clean.c	\
 				msh_parse_utils_2.c		\
 				msh_parse.c
 
-F_TOKEN		=	msh_linemod.c			\
-				msh_linerr.c			\
+F_TOKEN		=	msh_linemod.c						\
+				msh_add_and_free_token.c			\
 				msh_token_handel.c
 
 # Compilation:

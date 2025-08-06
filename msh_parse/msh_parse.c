@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/01 17:11:48 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/06 06:35:27 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_node	*msh_tree(t_data *data)
 	t_node	*left;
 	t_node	*right;
 
-	if (!data->cur_tokens)
+	if (!data->cur_tokens || data->err_prs.perr_type)
 		return (NULL);
 	left = before_pip(data);
 	if (!left)
@@ -43,15 +43,15 @@ t_node	*msh_tree(t_data *data)
 	{
 		msh_next_token(data);
 		if (!data->cur_tokens)
-			return (data->err_prs.perr_type = SYN_E, left); // set err
+			return (data->err_prs.perr_type = SYN_E, left);
 		right = msh_tree(data);
 		if (!right)
 			return (left);
 		left = msh_head_combine(data, left, right);
 		if (!left)
 		{
-			// msh_clear_tree(&left);
-			// msh_clear_tree(&right);
+			msh_clear_tree(data, &left);
+			msh_clear_tree(data, &right);
 			return (NULL);
 		}
 	}
@@ -60,40 +60,38 @@ t_node	*msh_tree(t_data *data)
 
 t_node	*to_parse(t_data *data)
 {
-	t_node	*cur_abs;
+	t_node	*cur_ast;
 
 	data->cur_tokens = data->token;
-	cur_abs = msh_tree(data);
+	cur_ast = msh_tree(data);
 	if (data->cur_tokens)
-		return (cur_abs);
-	return (cur_abs);
+		return (data->err_prs.perr_type = SYN_E, cur_ast);
+	return (cur_ast);
 }
 
 t_node	*before_pip(t_data *cur_data)
 {
-	t_node		*cmd_b_pip;
-	t_red_node	*red_list;
-	t_red_node	*last_red;
-
-	if (!msh_red_list(cur_data, &red_list))
-		return (NULL);
-	cmd_b_pip = msh_build_cmd_with_args(cur_data);
-	if (!cmd_b_pip)
-		return (msh_red_list_clear(&red_list), NULL);
-	cmd_b_pip->red_l = red_list;
-	if (!msh_red_list(cur_data, &red_list))
-		return (msh_clear_cmd(cmd_b_pip), NULL);
-	if (red_list)
-	{
-		if (cmd_b_pip->red_l)
+	t_node		*cmd_node;
+	if (msh_currtoken_pip(cur_data->cur_tokens))
+		cur_data->err_prs.perr_type = SYN_E;
+	if (cur_data->err_prs.perr_type)
+        return (NULL);
+    cmd_node = msh_new_node(CMD_N);
+    if (!cmd_node)
+        return (cur_data->err_prs.perr_type = MEMO_E, NULL);
+	while (cur_data->cur_tokens &&
+        cur_data->cur_tokens->type != PIPE_T)
+    {
+        if (cur_data->cur_tokens->type == WORD_T)
 		{
-			last_red = cmd_b_pip->red_l;
-			while (last_red->next)
-				last_red = last_red->next;
-			last_red->next = red_list;
+			if (!msh_build_cmd_with_args(cur_data, &(cmd_node->args)))
+				return (cur_data->err_prs.perr_type = MEMO_E, msh_clear_cmd(cmd_node), NULL);
 		}
-		else
-			cmd_b_pip->red_l = red_list;
-	}
-	return (cmd_b_pip);
+        else if (msh_is_red(cur_data->cur_tokens->type))
+		{
+            if (!msh_red_list(cur_data, &(cmd_node->red_l)))
+				return (free(cmd_node->args), free(cmd_node), NULL);
+		}
+    }
+    return (cmd_node);
 }

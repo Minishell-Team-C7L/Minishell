@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_parse_utlis2.c                                 :+:      :+:    :+:   */
+/*   msh_parse_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:32 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/25 19:45:35 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/06 06:53:04 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	msh_clear_cmd(t_node *cmd_node)
 		return ;
 	msh_red_list_clear(&(cmd_node->red_l));
 	msh_free_cmd_args(cmd_node);
-	free(cmd_node);
+	ft_free ((void **)&cmd_node->arg);
 }
 
 void	msh_red_list_clear(t_red_node **red_list)

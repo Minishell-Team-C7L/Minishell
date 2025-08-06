@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 17:08:44 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 06:40:08 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/06 07:01:10 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,20 @@
 # include "lib_gc.h"
 # include "lib_msh.h"
 
-t_token	*to_tokens(char *line);
-int		ft_fill_tokens(t_token **list_of_token, char *line);
-void	check_token_type(t_token **list_of_t, char **token_value);
-void	add_token_type(
-			t_token **t_list, char **cur_token, t_token_types t_type);
+t_token	*to_tokens(char *line, t_data *data);
+t_token	*ft_fill_tokens(char *line, t_data *data);
+int		msh_check_stoken_type(t_token **list_of_t, char **token_value);
+int		msh_check_ntoken_type(t_token **list_of_t, char **token_value, t_data *data);
+int		add_token_type(t_token **t_list, char **cur_token, t_token_types t_type);
 void	free_token_list(t_token **token_list);
 void	token_list_add(t_token **list, t_token *new_token);
 
-char	*ft_rm_whitespaces(char *line);
-int		ft_check_quotes(char *line);
+void	msh_quates_err(t_data *data);
+int		msh_is_quote(char c);
+int		msh_skip_quates(size_t *i, char *line);
+int		msh_is_operator(char *op);
 
-int		check_after_op(char *line_err, int line_index);
-int		op_calcule(char *line_err, char *operator);
-int		ft_line_err(t_token **lst_of_t_err);
-int		check_line_errors(char **line);
-int		check_line_err(char **line_err);
+void	skip_whitespace(char **line);
+int		is_special_char(char c);
 
 #endif
