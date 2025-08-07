@@ -2,24 +2,18 @@
 
 # Parsing:
 
-> [x] Current "no args" implementaiton changes `exit_status` to 0, it should not change it.
-
-> [x] Current "$?" implementaiton prints `msh: 0: command not found` with `0` never changing, it should print the `exit_status` instead of `0`.
-
-> [√] Initiate arg even if theres no args:
-> Implementation issue:
-> msh$
-> DBG: msh_execute_cmd: missing argument(s).
+> handel expand without key and with key for value = "" or val = nothing
+> add "" for expand arg
 
 # Execution:
 
-> [√] Handle single dot cmd:
+> [Solved!] Handle single dot cmd:
 > Implementation issue:
 > msh$ .
 > msh: .: command not found
 > 126
 
-> [√] Handle return status:
+> [Solved!] Handle return status:
 > Implementation issue:
 > msh$ bfbfb/
 > msh: bfbfb/: No such file or directory
@@ -29,8 +23,6 @@
 > msh: hghg: command not found
 > 126
 
-> [√] Pipes are not functional.
-
 # Undefined:
 
-> [x] exiting should return last status, currently returns 0.
+> [Pending] exiting should return last status, currently returns 0.

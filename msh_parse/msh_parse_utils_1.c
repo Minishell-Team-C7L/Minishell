@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/07 07:43:44 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/07 09:15:28 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static  char	*msh_strjoin_sp(char *s1, char *s2)
 int	msh_build_cmd_with_args(t_data *cur_data, char **args)
 {
 	char	*free_args;
-
+   
 	if (cur_data->err_prs.perr_type)
 		return (0);
 	if (!*args)

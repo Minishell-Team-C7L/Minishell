@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 08:34:14 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/07 11:50:05 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data)
 	while (f_expand[++i])
 		f_expand[i] = msh_rm_quates(f_expand[i]);
 	return (f_expand);
-
 }
 
 // static bool msh_check_signals(int signal_state)

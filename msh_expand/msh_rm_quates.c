@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 08:47:13 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/07 09:09:40 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/07 23:34:38 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,18 @@ void	msh_skip_qts(char *res, size_t *i, char *s, size_t *j)
 	while (s[*i] != quotes)
 		res[(*j)++] = s[(*i)++];
 	(*i)++;
+}
+
+void	msh_free_arr(char **free_arr)
+{
+	size_t	count;
+
+	if (!free_arr)
+		return ;
+	count = 0;
+	while (free_arr[count])
+	{
+		free(free_arr[count++]);
+	}
+	free(free_arr);
 }
