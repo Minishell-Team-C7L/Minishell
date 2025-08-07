@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:30 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 10:37:48 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 10:53:12 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	export_print(t_env **env, t_gc **gc)
 			{
 				ft_putstr("=\"");
 				ft_putstr(env_node->value);
-				ft_putchar('"');
+				ft_putchar('\"');
 			}
 			ft_putchar('\n');
 		}
