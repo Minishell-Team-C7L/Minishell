@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 11:22:56 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 11:55:24 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int ac, char **av, char **envp)
 			add_history(data.line);
 		else
 			msh_handel_exit(&data, 1);
-		data.token = to_tokens(data.line, &data);
+		data.token = to_tokens(&data);
 		if (!data.token)
 			continue ;
 		data.abs = to_parse(&data);
