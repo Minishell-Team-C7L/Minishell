@@ -6,20 +6,21 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/06 06:45:24 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/06 09:32:54 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_token.h"
 
-t_token	*to_tokens(char *line, t_data *data)
+t_token	*to_tokens(t_data *data)
 {
 	t_token	*final_token_l;
+	char	*f_line;
 
-	final_token_l = NULL;
-	final_token_l = ft_fill_tokens(line, data);
-	free(line);
-	line = NULL;
+	f_line = data->line;
+	final_token_l = ft_fill_tokens(f_line, data);
+	free(f_line);
+	data->line = NULL;
 	return (final_token_l);
 }
 

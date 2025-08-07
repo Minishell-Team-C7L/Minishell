@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 17:08:44 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/06 07:01:10 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/06 09:33:35 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "lib_gc.h"
 # include "lib_msh.h"
 
-t_token	*to_tokens(char *line, t_data *data);
+t_token	*to_tokens(t_data *data);
 t_token	*ft_fill_tokens(char *line, t_data *data);
 int		msh_check_stoken_type(t_token **list_of_t, char **token_value);
 int		msh_check_ntoken_type(t_token **list_of_t, char **token_value, t_data *data);

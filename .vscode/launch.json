@@ -2,13 +2,24 @@
 	"version": "0.2.0",
 	"configurations": [
 	  {
-		"name": "Debug Minishell (LLDB Mac)",
-		"type": "lldb",
+		"name": "minishell",
+		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/minishell",
 		"args": [],
+		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}",
-		"terminal": "external"
+		"environment": [],
+		"externalConsole": false,
+		"MIMode": "lldb",
+		"miDebuggerPath": "/usr/bin/lldb",  // adjust path if needed
+		"setupCommands": [
+		  {
+			"description": "Enable pretty-printing for lldb",
+			"text": "command script import lldb.macosx.heap",
+			"ignoreFailures": true
+		  }
+		]
 	  }
 	]
   }
