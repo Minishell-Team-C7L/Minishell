@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/06 07:06:51 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/07 09:09:54 by lhchiban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,6 +118,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_split_args.c	\
 				msh_expand_utils.c		\
 				msh_expand.c			\
+				msh_rm_quates.c			\
 				msh_tree_init.c
 
 F_PARSE		=	msh_create_and_clean.c	\

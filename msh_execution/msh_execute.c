@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/05 19:35:23 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 05:03:18 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_execution.h"
+#include "msh_main.h"
 
 int	msh_execute(t_node *ast_head, t_data *data)
 {

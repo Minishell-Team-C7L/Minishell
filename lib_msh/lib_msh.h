@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_msh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/05 19:32:31 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 04:22:18 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@
 typedef enum e_token_types
 {
 	WORD_T = 1,
-	PIPE_T,//			|
-	REDIR_IN_T,//		<
-	REDIR_OUT_T,//		>
-	REDIR_APPEND_T,//	>>
-	HERE_DOC_T,//		<<
-	ENV_V_T,//			$
-	BCMD_T,//			exit echo cd ...
+	PIPE_T,
+	REDIR_IN_T,
+	REDIR_OUT_T,
+	REDIR_APPEND_T,
+	HERE_DOC_T,
 }	t_token_types;
 
 typedef struct s_token
@@ -81,9 +79,9 @@ typedef enum e_red_type
 
 typedef struct s_red_node
 {
-	char				*val;//		The filename or delimiter
-	t_red_type			type;//		The redirection type
-	struct s_red_node	*next;//	Linked list for multiple redirections
+	char				*val;
+	t_red_type			type;
+	struct s_red_node	*next;
 }	t_red_node;
 
 typedef struct s_node
@@ -92,8 +90,7 @@ typedef struct s_node
 	struct s_node	*right;
 	t_node_type		type;
 	t_red_node		*red_l;
-	t_token			*left_cmd_toknes;
-	char			*args;//		Single string containing all arguments
+	char			*args;
 	char			**arg;
 }	t_node;
 
@@ -102,7 +99,7 @@ typedef struct s_parserr
 	t_parseerr_type	perr_type;
 }	t_parserr;
 
-typedef struct s_data//				start minishell
+typedef struct s_data
 {
 	char		*line;
 	t_token		*token;
@@ -110,10 +107,10 @@ typedef struct s_data//				start minishell
 	t_token		*cur_tokens;
 	t_parserr	err_prs;
 	int			exit_status;
-	char		**envps;//			Environment variables
+	char		**envps;
 	int			heredoc_intersignal;
-	t_env		*env;//			Environment variables linked list
-	t_gc		*gc;//				Garbage collector
+	t_env		*env;
+	t_gc		*gc;
 }	t_data;
 
 t_env	*msh_env_sort(t_env **env, t_gc **gc);

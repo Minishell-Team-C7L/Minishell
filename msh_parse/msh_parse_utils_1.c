@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/06 06:36:00 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/07 07:43:44 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_node	*msh_head_combine(t_data *cur_data, t_node *left, t_node *right)
 	return (head_node);
 }
 
-static  char	*msh_strjoin_sp(char const *s1, char const *s2)
+static  char	*msh_strjoin_sp(char *s1, char *s2)
 {
 	size_t	total_l;
 	char	* joinw;
@@ -60,14 +60,16 @@ int	msh_build_cmd_with_args(t_data *cur_data, char **args)
 {
 	char	*free_args;
 
+	if (cur_data->err_prs.perr_type)
+		return (0);
 	if (!*args)
 		*args = ft_strdup("");
-	if (cur_data->err_prs.perr_type || !*args)
-		return (free(*args), 0);
+	if (!*args)
+		return (0);
 	while (cur_data->cur_tokens && cur_data->cur_tokens->type == WORD_T)
     {
 		free_args = *args;
-		*args = msh_strjoin_sp(cur_data->cur_tokens->val, *args);
+		*args = msh_strjoin_sp(*args, cur_data->cur_tokens->val);
 		if (!*args)
 			return (free(free_args), 0);
 		free(free_args);

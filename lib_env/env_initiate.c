@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_initiate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:09:54 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 04:57:30 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 05:56:50 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_env.h"
+#include "msh_main.h"
 
 static bool	static_str_to_env_node(t_env **env_list, const char *str_envp);
 static char	*static_get_variable(const char *str_envp);
@@ -18,6 +19,7 @@ static char	*static_get_value(const char *str_envp);
 
 t_env	*env_initiate(char **ary_envp)
 {
+
 	t_env	*env_list;
 	size_t	row;
 

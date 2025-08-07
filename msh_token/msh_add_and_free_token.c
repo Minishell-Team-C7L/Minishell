@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:48:50 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/06 06:40:03 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/07 05:25:52 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,20 @@ void	token_list_add(t_token **list, t_token *new_token)
 
 void	free_token_list(t_token **token_list)
 {
-	t_token	*current;
+	t_token	*curr_node;
 	t_token	*next;
 
-	if (!token_list || !*token_list)
+	curr_node = *token_list;
+	if (!curr_node)
 		return ;
-	current = *token_list;
-	while (current)
+	if (!curr_node)
+		return ;
+	while (curr_node)
 	{
-		next = current->next;
-		if (current->val)
-			free(current->val);
-		free(current);
-		current = next;
+		free(curr_node->val);
+		next = curr_node->next;
+		free(curr_node);
+		curr_node = next;
 	}
 	*token_list = NULL;
 }

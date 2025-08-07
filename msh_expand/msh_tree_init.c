@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tree_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/01 09:03:12 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 08:34:14 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_expand.h"
 
-static void	static_set_up_exp_args(t_node *tree_node, t_data *data);
+static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data);
 
 void	msh_tree_init(t_node *tree_node, t_data *data)
 {
@@ -24,18 +24,33 @@ void	msh_tree_init(t_node *tree_node, t_data *data)
 		msh_tree_init(tree_node->right, data);
 	}
 	else
-		static_set_up_exp_args(tree_node, data);
+	{
+		if (tree_node->args)
+			tree_node->arg = static_set_up_exp_args(tree_node->args, tree_node, data);
+	}
 }
 
-static void	static_set_up_exp_args(t_node *tree_node, t_data *data)
+static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data)
 {
-	int	j;
+	size_t	i;
+	char **f_expand;
 
-	if (tree_node->args)
-		tree_node->arg = msh_handel_expand(tree_node->args, data);
-	j = 0;
-	while (tree_node->arg[j++]);
-		// printf("%s\n", tree_node->node_args[j++]);
+	(void)tree_node;
+	str = msh_handel_expand(str, data);
+	if (!str)
+		return (NULL);
+	str = msh_skip_emtystr(str);
+	if (!str)
+		return (NULL);
+	f_expand = msh_expand_split_args(str);
+	free(str);
+	if (!f_expand)
+		return (NULL);
+	i = -1;
+	while (f_expand[++i])
+		f_expand[i] = msh_rm_quates(f_expand[i]);
+	return (f_expand);
+
 }
 
 // static bool msh_check_signals(int signal_state)

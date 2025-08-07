@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/06 12:48:46 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 11:22:56 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static void	msh_handel_parse_error(t_data *data)
 	t_parseerr_type		perr_type;
 
 	perr_type = data->err_prs.perr_type;
-	if (perr_type && perr_type == SYN_E)
+	if (perr_type == SYN_E)
 	{
 		ft_putstr_fd("minishell: syntax error\n", 2);
 		data->exit_status = 258;
 		msh_clear_tree(data, &data->abs);
 		ft_bzero(&data->err_prs, sizeof(t_parserr));
 	}
-	else if (perr_type && perr_type == MEMO_E)
+	else if (perr_type == MEMO_E)
 	{
 		msh_clear_tree(data, &data->abs);
 		ft_bzero(&data->err_prs, sizeof(t_parserr));
@@ -52,7 +52,7 @@ static void	msh_handel_parse_error(t_data *data)
 static void	msh_handel_exit(t_data *mn_data,  int i)
 {
 	msh_clear_tree(mn_data, &mn_data->abs);
-	// rl_clear_history();
+	// clear_history();
 	env_list_free(&mn_data->env);
 	if (i == 1)
 	{
@@ -60,6 +60,8 @@ static void	msh_handel_exit(t_data *mn_data,  int i)
 		exit(mn_data->exit_status);
 	}
 }
+
+
 
 int	main(int ac, char **av, char **envp)
 {

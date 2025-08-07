@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_split_args.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/25 16:01:31 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 05:43:02 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ char	**msh_expand_split_args(char const *arg)
 	free_arg = args;
 	args = msh_args_allocat(arg, args);
 	if (!args || !j)
-		return (NULL);
-		// return (ft_free(free_arg), NULL);
+		return (ft_free((void **)&free_arg), NULL);
 	return (msh_fill(args, arg));
 }
 
