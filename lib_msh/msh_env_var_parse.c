@@ -27,6 +27,7 @@ char	*msh_env_var_parse(const char *variable, t_env **env, t_gc **gc)
 		len = (size_t)(var_end - variable);
 	else
 		len = ft_strlen(variable);
-	env_variable = (char *)msh_null_guard(gc_strdup(variable, gc), env, gc);
+	env_variable = (char *)msh_null_guard(
+			gc_substr(variable, 0, len, gc), env, gc);
 	return (env_variable);
 }
