@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 14:41:17 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:53:57 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static  void	msh_handel_parse_error(t_data *data)
 	}
 }
 
-static void	msh_handel_exit(t_data *data,  int i)
+static void	msh_handel_exit(t_data *data, int i)
 {
 	msh_clear_tree(data, &data->abs);
 	// clear_history();
@@ -55,7 +55,7 @@ static void	msh_handel_exit(t_data *data,  int i)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_data	share_data;
+	t_data	data;
 
 	((void)ac, (void)av);
 	msh_init_data(&data, envp);
@@ -71,10 +71,13 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		data.abs = to_parse(&data);
 		if (data.err_prs.perr_type)
+		{
 			msh_handel_parse_error(&data);
+			continue ;
+		}
 		msh_tree_init(&data, &data.abs);
 		msh_execute(data.abs, &data);
 		msh_clear_tree(&data, &data.abs);
 	}
-	return (msh_handel_exit(&share_data, 0), share_data.exit_status);
+	return (msh_handel_exit(&data, 0), data.exit_status);
 }
