@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 14:49:41 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:50:01 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ int	main(int ac, char **av, char **envp)
 		msh_execute(data.abs, &data);
 		msh_clear_tree(&data, &data.abs);
 	}
-	return (msh_handel_exit(&share_data, 0), share_data.exit_status);
+	return (msh_handel_exit(&data, 0), data.exit_status);
 }
