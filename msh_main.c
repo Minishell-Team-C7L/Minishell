@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 14:50:01 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:53:57 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static  void	msh_handel_parse_error(t_data *data)
 	}
 }
 
-static void	msh_handel_exit(t_data *data,  int i)
+static void	msh_handel_exit(t_data *data, int i)
 {
 	msh_clear_tree(data, &data->abs);
 	// clear_history();
