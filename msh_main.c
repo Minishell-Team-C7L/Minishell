@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 23:51:13 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:41:17 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static  void	msh_handel_parse_error(t_data *data)
 	perr_type = data->err_prs.perr_type;
 	if (perr_type == SYN_E)
 	{
-		ft_putstr_fd("minishell: syntax error\n", 2);
+		ft_putstr_fd("msh: syntax error\n", 2);
 		data->exit_status = 258;
 		msh_clear_tree(data, &data->abs);
 		ft_bzero(&data->err_prs, sizeof(t_parserr));
@@ -41,45 +41,40 @@ static  void	msh_handel_parse_error(t_data *data)
 	}
 }
 
-static void	msh_handel_exit(t_data *mn_data,  int i)
+static void	msh_handel_exit(t_data *data,  int i)
 {
-	msh_clear_tree(mn_data, &mn_data->abs);
+	msh_clear_tree(data, &data->abs);
 	// clear_history();
-	env_list_free(&mn_data->env);
+	env_list_free(&data->env);
 	if (i == 1)
 	{
 		ft_putstr_fd("exit\n", 2);
-		exit(mn_data->exit_status);
+		exit(data->exit_status);
 	}
 }
-
-
 
 int	main(int ac, char **av, char **envp)
 {
 	t_data	share_data;
 
 	((void)ac, (void)av);
-	msh_init_data(&share_data, envp);
+	msh_init_data(&data, envp);
 	while (true)
 	{
-		share_data.line = readline("msh$ ");
-		if (share_data.line)
-			add_history(share_data.line);
+		data.line = readline("msh$ ");
+		if (data.line)
+			add_history(data.line);
 		else
-			msh_handel_exit(&share_data, 1);
-		share_data.token = to_tokens(&share_data);
-		if (!share_data.token)
-			continue;
-		share_data.abs = to_parse(&share_data);
-		if (share_data.err_prs.perr_type)
-		{
-			msh_handel_parse_error(&share_data);
-			continue;
-		}
-		msh_tree_init(share_data.abs, &share_data);
-		msh_execute(share_data.abs, &share_data);
-		msh_clear_tree(&share_data, &share_data.abs);
+			msh_handel_exit(&data, 1);
+		data.token = to_tokens(&data);
+		if (!data.token)
+			continue ;
+		data.abs = to_parse(&data);
+		if (data.err_prs.perr_type)
+			msh_handel_parse_error(&data);
+		msh_tree_init(&data, &data.abs);
+		msh_execute(data.abs, &data);
+		msh_clear_tree(&data, &data.abs);
 	}
 	return (msh_handel_exit(&share_data, 0), share_data.exit_status);
 }
