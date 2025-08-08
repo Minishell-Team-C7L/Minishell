@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:30 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 10:53:12 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/07 16:00:37 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int	export_print(t_env **env, t_gc **gc)
 		}
 		env_node = env_node->next;
 	}
-	env_list_free(&env_sorted);
 	return (EXIT_SUCCESS);
 }
 
