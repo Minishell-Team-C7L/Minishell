@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 16:08:45 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/08 22:13:19 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	msh_init_data(t_data *data, char **envps)
 	// Get terminal attributes if needed
 }
 
-static  void	msh_handel_parse_error(t_data *data)
+static void	msh_handel_parse_error(t_data *data)
 {
 	t_parseerr_type		perr_type;
 
@@ -75,7 +75,7 @@ int	main(int ac, char **av, char **envp)
 			msh_handel_parse_error(&data);
 			continue ;
 		}
-		msh_tree_init(&data, &data.abs);
+		msh_tree_init(&data, data.abs);
 		msh_execute(data.abs, &data);
 		msh_clear_tree(&data, &data.abs);
 	}
