@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 14:48:30 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:49:41 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	msh_handel_exit(t_data *data,  int i)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_data	share_data;
+	t_data	data;
 
 	((void)ac, (void)av);
 	msh_init_data(&data, envp);
