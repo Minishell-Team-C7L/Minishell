@@ -6,11 +6,12 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:32 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 05:42:29 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/07 23:41:21 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
+#include "msh_expand.h"
 
 t_red_type	msh_red_type(t_token_types type)
 {
@@ -44,7 +45,7 @@ void	msh_clear_cmd(t_node *cmd_node)
 		return ;
 	msh_red_list_clear(&(cmd_node->red_l));
 	msh_free_cmd_args(cmd_node);
-	ft_free ((void **)&cmd_node->arg);
+	msh_free_arr(cmd_node->arg);
 }
 
 void	msh_red_list_clear(t_red_node **red_list)

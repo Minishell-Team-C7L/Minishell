@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:09 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 09:07:35 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/07 23:27:15 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char *msh_skip_emtystr(char *args)
 		(args[1] == '\'' && args[0] == '\'')) && !args[2])
 		return (args);
 	i = 0;
-	j = 0;
+	j = i;
 	temp = ft_calloc(ft_strlen(args) + 1, sizeof(char));
 	while (args[i])
 	{
@@ -52,7 +52,9 @@ char *msh_skip_emtystr(char *args)
 	free(args);
 	j = 1 + ft_strlen(temp);
 	res = ft_calloc(j, sizeof(char));
-	return (ft_strlcpy(res, temp, j), free(temp), res);
+	ft_strlcpy(res, temp, j);
+	free(temp);
+	return (res);
 }
 
 char	*msh_strjoin_and_free(char *str_1, char *str_2)

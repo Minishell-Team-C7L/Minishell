@@ -50,7 +50,6 @@ static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data)
 	while (f_expand[++i])
 		f_expand[i] = msh_rm_quates(f_expand[i]);
 	return (f_expand);
-
 }
 
 // static bool msh_check_signals(int signal_state)
