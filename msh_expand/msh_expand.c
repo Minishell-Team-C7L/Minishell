@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:17:27 by spi               #+#    #+#             */
-/*   Updated: 2025/08/07 08:16:09 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/07 23:54:08 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ char	*msh_handel_expand(char *args, t_data *data)
 	while (args[i])
 	{
 		if (args[i] == '$')
-			after_expand = ft_strjoin(after_expand, msh_dollar_expand(&i, args, data));
+			after_expand = msh_strjoin_and_free(after_expand, msh_dollar_expand(&i, args, data));
 		else if (args[i] == '"')
-			after_expand = ft_strjoin(after_expand, msh_double_quote_expand(&i, args, data));
+			after_expand = msh_strjoin_and_free(after_expand, msh_double_quote_expand(&i, args, data));
 		else if (args[i] == '\'')
-			after_expand = ft_strjoin(after_expand, msh_single_quote_expand(&i, args));
+			after_expand = msh_strjoin_and_free(after_expand, msh_single_quote_expand(&i, args));
 		else
-			after_expand = ft_strjoin(after_expand, msh_no_expand(&i, args));
+			after_expand = msh_strjoin_and_free(after_expand, msh_no_expand(&i, args));
 	}
 	if (!after_expand)
 		return (NULL);

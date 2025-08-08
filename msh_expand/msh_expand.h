@@ -30,5 +30,6 @@ char	*msh_strjoin_and_free(char *str_1, char *str_2);
 void	msh_skip_qts(char *res, size_t *i, char *s, size_t *j);
 size_t	msh_withoutq_len(char *str);
 char	*msh_rm_quates(char *s);
+void	msh_free_arr(char **free_arr);
 
 #endif

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/08 14:48:30 by aessaber         ###   ########.fr       */
@@ -12,25 +12,17 @@
 
 #include "msh_main.h"
 
-static void	msh_init_data(t_data *data, char **envp)
+static void	msh_init_data(t_data *share_data, char **envps)
 {
-	ft_memset(data, 0, sizeof(t_data));
-	data->gc = gc_initiate();
-	if (!data->gc)
-		exit(dbg_nullarg("gc_initiate"));
-	data->env = env_initiate(envp);
-	if (!data->env)
-	{
-		gc_free(&data->gc);
-		exit(dbg_nullarg("env_initiate"));
-	}
-	data->exit_status = 0;
-	// Initialize signal handlers here.
+	ft_memset(share_data, 0, sizeof(t_data));
+	share_data->envps = envps;
+	share_data->env = env_initiate(share_data->envps);
+	share_data->gc = gc_initiate();
 	// Initialize stdin/stdout/stderr if necessary
 	// Get terminal attributes if needed
 }
 
-static void	msh_handel_parse_error(t_data *data)
+static  void	msh_handel_parse_error(t_data *data)
 {
 	t_parseerr_type		perr_type;
 
@@ -63,7 +55,7 @@ static void	msh_handel_exit(t_data *data,  int i)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_data	data;
+	t_data	share_data;
 
 	((void)ac, (void)av);
 	msh_init_data(&data, envp);
@@ -87,5 +79,5 @@ int	main(int ac, char **av, char **envp)
 		msh_execute(data.abs, &data);
 		msh_clear_tree(&data, &data.abs);
 	}
-	return (msh_handel_exit(&data, 0), data.exit_status);
+	return (msh_handel_exit(&share_data, 0), share_data.exit_status);
 }
