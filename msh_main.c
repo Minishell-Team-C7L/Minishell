@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 14:41:17 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:48:30 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		data.abs = to_parse(&data);
 		if (data.err_prs.perr_type)
+		{
 			msh_handel_parse_error(&data);
+			continue ;
+		}
 		msh_tree_init(&data, &data.abs);
 		msh_execute(data.abs, &data);
 		msh_clear_tree(&data, &data.abs);
