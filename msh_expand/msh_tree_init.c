@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tree_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 08:34:14 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:42:20 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data);
 
-void	msh_tree_init(t_node *tree_node, t_data *data)
+void	msh_tree_init(t_data *data, t_node *tree_node)
 {
 	if (!tree_node)
 		return ;
 	if (tree_node->type == PIPE_N)
 	{
-		msh_tree_init(tree_node->left, data);
-		msh_tree_init(tree_node->right, data);
+		msh_tree_init(data, tree_node->left);
+		msh_tree_init(data, tree_node->right);
 	}
 	else
 	{
