@@ -6,18 +6,18 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 14:53:57 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/08 16:08:45 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_main.h"
 
-static void	msh_init_data(t_data *share_data, char **envps)
+static void	msh_init_data(t_data *data, char **envps)
 {
-	ft_memset(share_data, 0, sizeof(t_data));
-	share_data->envps = envps;
-	share_data->env = env_initiate(share_data->envps);
-	share_data->gc = gc_initiate();
+	ft_memset(data, 0, sizeof(t_data));
+	data->envps = envps;
+	data->env = env_initiate(data->envps);
+	data->gc = gc_initiate();
 	// Initialize stdin/stdout/stderr if necessary
 	// Get terminal attributes if needed
 }
