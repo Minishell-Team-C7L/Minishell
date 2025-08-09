@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 07:14:36 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/03 10:27:16 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/09 01:31:08 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	msh_redir_handle(const t_red_node *redir_list)
 	while (current)
 	{
 		fd = static_open_file(current);
-		if (current->type == IN_RED || current->type == HEREDOC_RED)
+		if (current->type == IN_RED || current->type == HEREDOC_RED)//later
 		{
 			if (dup2(fd, STDIN_FILENO) == -1)
 				exit(msh_perror("dup2"));
@@ -50,7 +50,7 @@ static int	static_open_file(const t_red_node *redir_node)
 	else if (redir_node->type == APPEND_RED)
 		fd = open(redir_node->val, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	else if (redir_node->type == HEREDOC_RED)
-		fd = open(redir_node->val, O_RDONLY);
+		fd = open(redir_node->val, O_RDONLY);// handle  this layer
 	if (fd == -1)
 		exit(msh_perror(redir_node->val));
 	return (fd);
