@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/07 12:57:29 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/10 03:35:44 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,7 +135,7 @@ F_TOKEN		=	msh_linemod.c				\
 
 ## Shell Commands:
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g	\
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address \
 				-MMD
 RM			=	rm -rf
 
