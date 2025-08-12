@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/09 02:14:15 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/12 03:42:45 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # include "lib_gc.h"
 
 // Macros:
-# define PROJ_NAME "msh"
+# define PROJECT_NAME "msh"
 # define FORK_FAILURE -1
 # define FORK_SUCCESS 0
 

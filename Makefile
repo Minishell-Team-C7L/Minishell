@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/10 03:35:44 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/11 21:54:12 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,8 +126,8 @@ F_PARSE		=	msh_create_and_clean.c	\
 				msh_parse_utils_2.c		\
 				msh_parse.c
 
-F_TOKEN		=	msh_linemod.c				\
-				msh_add_and_free_token.c	\
+F_TOKEN		=	msh_linemod.c			\
+				msh_add_and_free_token.c\
 				msh_token_handel.c
 
 # Compilation:
@@ -135,7 +135,7 @@ F_TOKEN		=	msh_linemod.c				\
 
 ## Shell Commands:
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address \
+CFLAGS		=	-Wall -Wextra -Werror  \
 				-MMD
 RM			=	rm -rf
 
@@ -159,7 +159,7 @@ INCLUDES	=	-I $(D_ROOT)			\
 				-I $(D_GC)				\
 				-I $(D_MSH)				\
 				-I $(D_BUILTINS)		\
-				-I $(D_EXECUTION)			\
+				-I $(D_EXECUTION)		\
 				-I $(D_EXPAND)			\
 				-I $(D_PARSE)			\
 				-I $(D_TOKEN)
