@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/10 03:03:01 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:56:34 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	msh_init_data(t_data *data, char **envps)
 	data->envps = envps;
 	data->env = env_initiate(data->envps);
 	data->gc = gc_initiate();
+	if (msh_signal() == EXIT_FAILURE)
+		msh_quit(data, EXIT_FAILURE);
 	// Initialize stdin/stdout/stderr if necessary
 	// Get terminal attributes if needed
 }
@@ -59,6 +61,7 @@ int	main(int ac, char **av, char **envp)
 
 	((void)ac, (void)av);
 	msh_init_data(&data, envp);
+	msh_signal();
 	while (true)
 	{
 		data.line = readline("msh$ ");
@@ -76,7 +79,7 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		}
 		msh_tree_init(&data, data.abs);
-		data.exit_status = msh_execute(data.abs, &data);
+		data.exit_status = msh_execute(&data, data.abs);
 		msh_clear_tree(&data, &data.abs);
 	}
 	return (msh_handel_exit(&data, 0), data.exit_status);

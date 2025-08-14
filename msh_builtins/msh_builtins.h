@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:03:25 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/02 11:22:31 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:53:17 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_echo
 int	msh_cd(const char **arg, t_env **env, t_gc **gc);
 int	msh_echo(const char **arg);
 int	msh_env(t_env *env);
-int	msh_exit(const char **arg, int status, t_env **env, t_gc **gc);
+int	msh_exit(t_data *data, int status);
 int	msh_export(const char **arg, t_env **env, t_gc **gc);
 int	msh_pwd(t_gc **gc);
 int	msh_unset(const char **arg, t_env **env);

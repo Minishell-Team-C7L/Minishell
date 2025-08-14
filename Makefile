@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/11 21:54:12 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/14 15:50:16 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,11 @@ F_FT		=	ft_atoi.c				\
 				ft_isalpha.c			\
 				ft_isdigit.c			\
 				ft_itoa.c				\
+				ft_lstadd_back.c		\
+				ft_lstclear.c			\
+				ft_lstiter.c			\
 				ft_lstlen.c				\
+				ft_lstnew.c				\
 				ft_memcpy.c				\
 				ft_memset.c				\
 				ft_putchar_err.c		\
@@ -99,7 +103,10 @@ F_MSH		=	msh_env_sort.c			\
 				msh_path_get_cmd.c		\
 				msh_perror.c			\
 				msh_puterr.c			\
-				msh_quit.c
+				msh_quit.c				\
+				msh_signal.c			\
+				msh_signal_child.c		\
+				msh_signal_off.c
 
 F_BUILTINS	=	msh_cd.c				\
 				msh_echo.c				\
@@ -112,7 +119,8 @@ F_BUILTINS	=	msh_cd.c				\
 F_EXECUTION	=	msh_execute.c			\
 				msh_execute_cmd.c		\
 				msh_execute_pipe.c		\
-				msh_redir_handle.c
+				msh_handle_heredoc.c	\
+				msh_handle_redir.c
 
 F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_split_args.c	\
@@ -133,10 +141,13 @@ F_TOKEN		=	msh_linemod.c			\
 # Compilation:
 #------------------------------------------------------------------------------#
 
-## Shell Commands:
+## Shell Commands and Flags:
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror  \
+CFLAGS		=	-Wall -Wextra -Werror	\
 				-MMD
+RL_LIB		=	$(shell brew --prefix readline)/lib
+RL_INC		=	$(shell brew --prefix readline)/include
+
 RM			=	rm -rf
 
 ## Source Directories (VPATH):
@@ -151,6 +162,9 @@ VPATH		=	$(D_FT)					\
 				$(D_PARSE)				\
 				$(D_TOKEN)
 
+## Libraries:
+LIB_RL		=	-L $(RL_LIB) -lreadline
+
 ## Includes:
 INCLUDES	=	-I $(D_ROOT)			\
 				-I $(D_FT)				\
@@ -162,7 +176,8 @@ INCLUDES	=	-I $(D_ROOT)			\
 				-I $(D_EXECUTION)		\
 				-I $(D_EXPAND)			\
 				-I $(D_PARSE)			\
-				-I $(D_TOKEN)
+				-I $(D_TOKEN)			\
+				-I $(RL_INC)
 
 ## Sources & Objects:
 S_FT		=	$(addprefix $(D_FT)/, $(F_FT))
@@ -198,7 +213,7 @@ DEPS		=	$(OBJS:.o=.d)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIB_RL)
 
 $(D_OBJS):
 	@mkdir -p $(D_OBJS)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_redir_handle.c                                 :+:      :+:    :+:   */
+/*   msh_handle_redir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 07:14:36 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/10 02:26:36 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/14 11:21:36 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	static_open_file(const t_red_node *redir_node);
 
-void	msh_redir_handle(const t_red_node *redir_list)
+void	msh_handle_redir(const t_red_node *redir_list)
 {
 	const t_red_node	*current;
 	int					fd;

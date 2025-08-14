@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/12 03:42:45 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:32:58 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 // For: stat(), S_ISDIR()
 # include <sys/stat.h>
 
+// For: sigaction()
+# include <signal.h>
+
 // Dependencies:
 # include "lib_ft.h"
 # include "lib_dbg.h"
@@ -40,6 +43,9 @@
 # define FORK_SUCCESS 0
 
 // Enums and Structs:
+
+int	g_signal;
+
 typedef enum e_token_types
 {
 	WORD_T = 1,
@@ -109,7 +115,8 @@ typedef struct s_data
 	t_parserr	err_prs;
 	int			exit_status;
 	char		**envps;
-	int			heredoc_intersignal;
+	int			heredoc_count;
+	t_list		*heredoc_files;
 	t_env		*env;
 	t_gc		*gc;
 }	t_data;
@@ -124,6 +131,9 @@ int		msh_path_get_cmd(
 			const char *cmd, char **cmd_path, t_env **env, t_gc **gc);
 void	msh_puterr(const char *cmd_name, const char *msg);
 int		msh_perror(const char *cmd_name);
-void	msh_quit(int status, t_env **env, t_gc **gc);
+void	msh_quit(t_data *data, int status);
+int		msh_signal(void);
+int		msh_signal_child(void);
+int		msh_signal_off(void);
 
 #endif

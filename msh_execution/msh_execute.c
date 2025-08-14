@@ -6,22 +6,22 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/09 01:31:55 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:55:02 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_execution.h"
 #include "msh_main.h"
 
-int	msh_execute(t_node *ast_head, t_data *data)
+int	msh_execute(t_data *data, t_node *ast_head)
 {
 	if (!ast_head)
 		return (data->exit_status);
-	// if (msh_handle_heredocs(ast_head) != EXIT_SUCCESS)
-	// 	return (EXIT_FAILURE);
+	if (msh_handle_heredocs(data, ast_head) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
 	if (ast_head->type == CMD_N)
 		return (msh_execute_cmd(
-				ast_head, data->exit_status, &data->env, &data->gc));
+				data, data->exit_status, &data->env, &data->gc));
 	else if (ast_head->type == PIPE_N)
 		return (msh_execute_pipe(ast_head, data));
 	return (EXIT_SUCCESS);
