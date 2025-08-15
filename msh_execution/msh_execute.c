@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 15:55:02 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/15 18:06:51 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	msh_execute(t_data *data, t_node *ast_head)
 	if (!ast_head)
 		return (data->exit_status);
 	if (msh_handle_heredocs(data, ast_head) != EXIT_SUCCESS)
+	{
+		data->exit_status = 1;
 		return (EXIT_FAILURE);
+	}
 	if (ast_head->type == CMD_N)
 		return (msh_execute_cmd(
 				data, data->exit_status, &data->env, &data->gc));

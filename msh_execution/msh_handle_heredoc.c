@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:26:15 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 16:03:09 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/15 18:33:14 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,30 @@ static int	static_single_heredoc(t_data *data, t_red_node *redir)
 	tmp_fd = open(tmp_filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	if (tmp_fd == -1)
 		return (msh_perror(tmp_filename));
+	g_sig = 0;
 	while (true)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, redir->val) == 0)
+		if (g_sig == SIGINT)
+		{
+			close(tmp_fd);
+			unlink(tmp_filename);
+			return (EXIT_FAILURE);
+		}
+		if (!line)
+		{
+			ft_puterr("msh: warning: here-document delimited by end-of-file (wanted `");
+			ft_puterr(redir->val);
+			ft_puterr("')\n");
 			break ;
-		ft_putstr_fd(line, tmp_fd);
-		ft_putstr_fd("\n", tmp_fd);
-		free(line);
+		}
+		if (!ft_strcmp(line, redir->val))
+		{
+			free(line);
+			break ;
+		}
+		msh_expand_heredoc(tmp_fd, line, data);
 	}
-	free(line);
 	close(tmp_fd);
 	ft_free((void **)&redir->val);
 	redir->type = IN_RED;

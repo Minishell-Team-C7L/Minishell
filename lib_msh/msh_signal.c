@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 08:32:31 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 13:04:33 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/15 11:54:05 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	msh_signal(void)
 
 static void	static_signal_ctrl_c(int sig)
 {
-	(void)sig;
+	g_sig = sig;
 	ft_putchar('\n');
 	rl_on_new_line();
 	rl_replace_line("", 0);

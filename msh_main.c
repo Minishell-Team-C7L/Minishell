@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 14:56:34 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/15 18:20:50 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,28 @@ static void	msh_handel_parse_error(t_data *data)
 static void	msh_handel_exit(t_data *data, int i)
 {
 	msh_clear_tree(data, &data->abs);
-	// clear_history();
+	rl_clear_history();
 	env_list_free(&data->env);
 	if (i == 1)
 	{
 		ft_putstr_fd("exit\n", 2);
 		exit(data->exit_status);
 	}
+}
+
+void	msh_handle_tree_herdocs(t_data *data, t_node *node)
+{
+	if (!node)
+		return ;
+	if (node->type == CMD_N)
+	{
+		if (msh_handle_heredocs(data, node) != EXIT_SUCCESS)
+			msh_handel_exit(data, 1);
+	}
+	if (node->left)
+		msh_handle_tree_herdocs(data, node->left);
+	if (node->right)
+		msh_handle_tree_herdocs(data, node->right);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -79,6 +94,7 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		}
 		msh_tree_init(&data, data.abs);
+		msh_handle_tree_herdocs(&data, data.abs);
 		data.exit_status = msh_execute(&data, data.abs);
 		msh_clear_tree(&data, &data.abs);
 	}

@@ -2,27 +2,10 @@
 
 # Parsing:
 
-> handel expand without key and with key for value = "" or val = nothing
-> add "" for expand arg
+> [x] handel expand without key and with key for value = "" or val = nothing
+> [x] `msh_exapnd_herdoc` sigfault issue.
 
 # Execution:
 
-> [Solved!] Handle single dot cmd:
-> Implementation issue:
-> msh$ .
-> msh: .: command not found
-> 126
-
-> [Solved!] Handle return status:
-> Implementation issue:
-> msh$ bfbfb/
-> msh: bfbfb/: No such file or directory
-> 126
-&
-> msh$ hghg
-> msh: hghg: command not found
-> 126
-
-# Undefined:
-
-> [Pending] exiting should return last status, currently returns 0.
+> [x] Ctrl+c in heredoc.
+> [x] Fork in heredoc.

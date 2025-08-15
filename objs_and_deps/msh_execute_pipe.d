@@ -8,4 +8,4 @@ objs_and_deps/msh_execute_pipe.o: msh_execution/msh_execute_pipe.c \
   /goinfre/aessaber/homebrew/opt/readline/include/readline/chardefs.h \
   /goinfre/aessaber/homebrew/opt/readline/include/readline/tilde.h \
   /goinfre/aessaber/homebrew/opt/readline/include/readline/history.h \
-  msh_builtins/msh_builtins.h
+  msh_builtins/msh_builtins.h msh_expand/msh_expand.h

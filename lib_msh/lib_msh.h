@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 15:32:58 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/15 13:22:24 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 // Enums and Structs:
 
-int	g_signal;
+int	g_sig;
 
 typedef enum e_token_types
 {
@@ -87,6 +87,7 @@ typedef enum e_red_type
 typedef struct s_red_node
 {
 	char				*val;
+	bool				herdoc_sign;
 	t_red_type			type;
 	struct s_red_node	*next;
 }	t_red_node;

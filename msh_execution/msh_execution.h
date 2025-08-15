@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:08:43 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 15:54:10 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:41:07 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "lib_gc.h"
 # include "lib_msh.h"
 # include "msh_builtins.h"
+# include "msh_expand.h"
 
 int		msh_execute(t_data *data, t_node *ast_head);
 int		msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc);
