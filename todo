@@ -1,0 +1,11 @@
+*A list of found issues to be fixed*
+
+# Parsing:
+
+> [x] handel expand without key and with key for value = "" or val = nothing
+
+# Execution:
+
+> [x] Fork in heredoc.
+> [x] Ctrl+c in heredoc.
+
