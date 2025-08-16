@@ -6,42 +6,42 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:28 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 18:14:53 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:10:46 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_builtins.h"
 
-static int	exit_parse(const char **arg, t_env **env, t_gc **gc);
+static int	exit_parse(t_data *data);
 
-int	msh_exit(const char **arg, int status, t_env **env, t_gc **gc)
+int	msh_exit(t_data *data, int status)
 {
-	if (!arg || !*arg || !env || !gc || !*gc)
+	if (!data || !data->abs->arg || !*data->abs->arg)
 		return (dbg_nullarg(__func__));
-	if (!arg[1])
+	if (!data->abs->arg[1])
 	{
 		ft_putnbr_fd(status, STDERR_FILENO);
 		ft_putstr_nl("exit");
-		msh_quit(status, env, gc);
+		msh_quit(data, status);
 	}
-	return (exit_parse(arg, env, gc));
+	return (exit_parse(data));
 }
 
-static int	exit_parse(const char **arg, t_env **env, t_gc **gc)
+static int	exit_parse(t_data *data)
 {
-	uint8_t	exit_status;
+	uint8_t	status;
 
-	if (!ft_str_is_num(arg[1]))
+	if (!ft_str_is_num(data->abs->arg[1]))
 	{
 		ft_puterr("msh: exit: ");
-		ft_puterr(arg[1]);
+		ft_puterr(data->abs->arg[1]);
 		ft_puterr(": numeric argument required\n");
-		msh_quit(UINT8_MAX, env, gc);
+		msh_quit(data, UINT8_MAX);
 	}
-	if (arg[2])
+	if (data->abs->arg[2])
 		return (ft_puterr("msh: exit: too many arguments\n"), EXIT_FAILURE);
-	exit_status = (uint8_t)ft_atoi(arg[1]);
+	status = (uint8_t)ft_atoi(data->abs->arg[1]);
 	ft_putstr_nl("exit");
-	msh_quit(exit_status, env, gc);
+	msh_quit(data, status);
 	return (EXIT_SUCCESS);
 }

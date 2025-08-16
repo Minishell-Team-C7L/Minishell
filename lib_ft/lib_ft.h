@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_ft.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 09:51:26 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 06:36:29 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:36:06 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 char	*ft_itoa(int n);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
 int		ft_lstlen(const t_list *lst);
+t_list	*ft_lstnew(void *content);
 void	*ft_memcpy(void *dst, const void *src, size_t len);
 void	*ft_memset(void *ptr, int c, size_t len);
 void	ft_putchar(char c);

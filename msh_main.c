@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 22:13:19 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 12:11:31 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	msh_init_data(t_data *data, char **envps)
 	data->envps = envps;
 	data->env = env_initiate(data->envps);
 	data->gc = gc_initiate();
+	if (msh_signal() == EXIT_FAILURE)
+		msh_quit(data, EXIT_FAILURE);
 	// Initialize stdin/stdout/stderr if necessary
 	// Get terminal attributes if needed
 }
@@ -44,7 +46,7 @@ static void	msh_handel_parse_error(t_data *data)
 static void	msh_handel_exit(t_data *data, int i)
 {
 	msh_clear_tree(data, &data->abs);
-	// clear_history();
+	rl_clear_history();
 	env_list_free(&data->env);
 	if (i == 1)
 	{
@@ -53,12 +55,28 @@ static void	msh_handel_exit(t_data *data, int i)
 	}
 }
 
+void	msh_handle_tree_herdocs(t_data *data, t_node *node)
+{
+	if (!node)
+		return ;
+	if (node->type == CMD_N)
+	{
+		if (msh_handle_heredocs(data, node) != EXIT_SUCCESS)
+			msh_handel_exit(data, 1);
+	}
+	if (node->left)
+		msh_handle_tree_herdocs(data, node->left);
+	if (node->right)
+		msh_handle_tree_herdocs(data, node->right);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
 	((void)ac, (void)av);
 	msh_init_data(&data, envp);
+	msh_signal();
 	while (true)
 	{
 		data.line = readline("msh$ ");
@@ -76,7 +94,8 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		}
 		msh_tree_init(&data, data.abs);
-		msh_execute(data.abs, &data);
+		msh_handle_tree_herdocs(&data, data.abs);
+		data.exit_status = msh_execute(&data, data.abs);
 		msh_clear_tree(&data, &data.abs);
 	}
 	return (msh_handel_exit(&data, 0), data.exit_status);

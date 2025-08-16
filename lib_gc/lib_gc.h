@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:07:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/28 21:45:15 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/10 04:32:03 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_gc
 	t_alloc	*head;
 }	t_gc;
 
+void	*gc_calloc(size_t count, size_t size, t_gc **gc);
 t_env	*gc_env_dup(t_env **env, t_gc **gc);
 void	gc_free(t_gc **gc);
 void	*gc_getcwd(t_gc **gc);

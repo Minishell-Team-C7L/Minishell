@@ -3,61 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/06 10:10:07 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/16 14:18:29 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_expand.h"
 
-static t_gc	**static_expand_print_heredoc(
-				t_data *data, char *read_line, size_t *j, int fd);
+static int static_expand_print_heredoc(
+				t_data *data, char *read_line, size_t j, int fd);
 
-void	msh_expand_heredoc(int fd, char *read_line, t_data *data)
+void	msh_expand_heredoc(int fd, char *read_line, t_data *data, bool sign)
 {
 	size_t	j;
-	t_gc	**gc;
 
 	j = 0;
 	while (read_line[j])
 	{
-		if (read_line[j] != '$')
+		if (read_line[j] != '$' && !sign)
 		{
 			ft_putchar_fd(read_line[j], fd);
 			j++;
 		}
 		else
-			gc = static_expand_print_heredoc(data, read_line, &j, fd);
+			j += static_expand_print_heredoc(data, read_line,j, fd);
 	}
-	gc_free(gc);
-	ft_putnbr_fd('\n', fd);
+	ft_putchar_fd('\n', fd);
 }
 
-static t_gc	**static_expand_print_heredoc(
-	t_data *data, char *read_line, size_t *j, int fd)
+static char *msh_env_get_val(t_env *env, const char *key)
 {
-	char	*temp;
-	size_t	start;
-	t_gc	**gcl;
+	t_env *env_node;
 
-	gcl = NULL;
-	start = ++(*j);
-	if (read_line[*j] == '?')
+	env_node = env;
+	while (env)
+	{
+		if (!ft_strcmp(env->variable, key))
+			return(env->value);
+		env = env->next;
+	}
+	return(NULL);
+}
+
+static int static_expand_print_heredoc(
+	t_data *data, char *read_line, size_t j, int fd)
+{
+	char	*temp_val;
+	size_t	start;
+
+	start = ++j;
+	if (read_line[j] == '?')
 	{
 		ft_putchar_fd(data->exit_status, fd);
-		(*j)++;
-		return (NULL);
+		return(2);
 	}
-	while (read_line[*j] && read_line[*j] != ' ' && read_line[*j] != '$')
-		(*j)++;
-	if (*j != start)
+	while (read_line[j] && read_line[j] != ' ' && read_line[j] != '$')
+		(j)++;
+	if (j != start)
 	{
-		temp = gc_substr(read_line, start, *j - start, gcl);
-		// temp = env_get_value(data->env, temp);
-		if (temp)
-			ft_putstr_fd(temp, fd);
+		temp_val = gc_substr(read_line, start, j - start, &data->gc);
+		temp_val = msh_env_get_val(data->env, temp_val);
+		if (temp_val)
+			ft_putstr_fd(temp_val, fd);
 	}
-	return (gcl);
+	return (j);
 }

@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:26:49 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 14:42:45 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 14:17:33 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # include "lib_gc.h"
 # include "lib_msh.h"
 
-void	msh_expand_heredoc(int fd, char *read_line, t_data *data);
+void	msh_expand_heredoc(int fd, char *read_line, t_data *data, bool sign);
 char	**msh_expand_split_args(char const *arg);
 char	*msh_handel_expand(char *args, t_data *data);
 char	*msh_dquote_extra(size_t *i, char *args);
 bool	msh_variable_is_valid(char exp_c);
 void	msh_tree_init(t_data *data, t_node *tree_node);
-char 	*msh_skip_emtystr(char *args);
+char	*msh_skip_emtystr(char *args);
 char	*msh_strjoin_and_free(char *str_1, char *str_2);
 void	msh_skip_qts(char *res, size_t *i, char *s, size_t *j);
 size_t	msh_withoutq_len(char *str);

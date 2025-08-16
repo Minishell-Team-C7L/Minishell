@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/06 06:35:27 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/16 00:46:02 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ int	msh_currtoken_pip(t_token *curr_token)
 	return (0);
 }
 
-void	msh_next_token(t_data *cur_data)
-{
-	cur_data->cur_tokens = cur_data->cur_tokens->next;
-}
-
 t_node	*msh_tree(t_data *data)
 {
 	t_node	*left;
@@ -41,7 +36,7 @@ t_node	*msh_tree(t_data *data)
 		return (NULL);
 	while (msh_currtoken_pip(data->cur_tokens))
 	{
-		msh_next_token(data);
+		data->cur_tokens = data->cur_tokens->next;
 		if (!data->cur_tokens)
 			return (data->err_prs.perr_type = SYN_E, left);
 		right = msh_tree(data);
@@ -90,8 +85,27 @@ t_node	*before_pip(t_data *cur_data)
         else if (msh_is_red(cur_data->cur_tokens->type))
 		{
             if (!msh_red_list(cur_data, &(cmd_node->red_l)))
+			{
+				while (cmd_node->red_l)
+				{
+					printf("sa%s\n", cmd_node->red_l->val);
+					cmd_node->red_l = cmd_node->red_l->next;
+				}
 				return (free(cmd_node->args), free(cmd_node), NULL);
+			}
 		}
     }
     return (cmd_node);
+}
+
+bool msh_check_heredoc(char *delimiter)
+{
+    char *sign;
+
+    sign = delimiter;
+    while (*sign && *sign != '\'' && *sign != '"')
+        sign++;
+    if (!*sign)
+        return(true);
+    return(false);
 }
