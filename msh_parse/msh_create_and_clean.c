@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_create_and_clean.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 11:04:24 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/15 13:22:10 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 01:09:12 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_red_node	*msh_new_red_node(char *value, t_token_types t_type)
 	red_n_node->val = ft_strdup(value);
 	if (!red_n_node->val)
 		return (free(red_n_node), NULL);
-	red_n_node->herdoc_sign = false;
+	red_n_node->heredoc_sign = false;
 	if (t_type == HERE_DOC_T)
-		red_n_node->herdoc_sign = true;
+		red_n_node->heredoc_sign = true;
 	red_n_node->type = msh_red_type(t_type);
 	return (red_n_node);
 }

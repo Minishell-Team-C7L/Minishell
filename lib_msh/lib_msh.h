@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/15 13:22:24 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 15:09:15 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef enum e_red_type
 typedef struct s_red_node
 {
 	char				*val;
-	bool				herdoc_sign;
+	bool				heredoc_sign;
 	t_red_type			type;
 	struct s_red_node	*next;
 }	t_red_node;
@@ -120,6 +120,7 @@ typedef struct s_data
 	t_list		*heredoc_files;
 	t_env		*env;
 	t_gc		*gc;
+	int			hd_count;
 }	t_data;
 
 t_env	*msh_env_sort(t_env **env, t_gc **gc);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_handel.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/06 09:32:54 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/16 15:36:17 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_token	*to_tokens(t_data *data)
 	data->line = NULL;
 	return (final_token_l);
 }
-
+#include <stdio.h>
 t_token	*ft_fill_tokens(char *line, t_data *data)
 {
 	t_token	*list_of_t;
@@ -37,7 +37,7 @@ t_token	*ft_fill_tokens(char *line, t_data *data)
 			return (free_token_list(&list_of_t), NULL);
 		skip_whitespace(&line);
 		if (is_special_char(*line))
-			err = (1 && !msh_check_stoken_type(&list_of_t, &line));
+			err = (1 && !msh_check_stoken_type(&list_of_t, &line, data));
 		else
 			err = (1 && !msh_check_ntoken_type(&list_of_t, &line, data));
 	}
@@ -73,12 +73,15 @@ int	msh_check_ntoken_type(t_token **list_of_t, char **token_value, t_data *data)
 	return(*token_value += j, token_list_add(list_of_t, token), 1);
 }
 
-int	msh_check_stoken_type(t_token **list_of_t, char **token_value)
+int	msh_check_stoken_type(t_token **list_of_t, char **token_value, t_data *data)
 {
 	if (!ft_strncmp(*token_value, "|", 1))
 		return (1 && add_token_type(list_of_t, token_value, PIPE_T));
 	else if (!ft_strncmp(*token_value, "<<", 2))
+	{
+		data->heredoc_count++;
 		return (1 && add_token_type(list_of_t, token_value, HERE_DOC_T));
+	}
 	else if (!ft_strncmp(*token_value, ">>", 2))
 		return (1 && add_token_type(list_of_t, token_value, REDIR_APPEND_T));
 	else if (!ft_strncmp(*token_value, "<", 1))

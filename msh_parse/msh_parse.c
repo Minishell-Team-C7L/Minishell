@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/15 17:03:56 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 00:46:02 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,14 @@ t_node	*before_pip(t_data *cur_data)
         else if (msh_is_red(cur_data->cur_tokens->type))
 		{
             if (!msh_red_list(cur_data, &(cmd_node->red_l)))
+			{
+				while (cmd_node->red_l)
+				{
+					printf("sa%s\n", cmd_node->red_l->val);
+					cmd_node->red_l = cmd_node->red_l->next;
+				}
 				return (free(cmd_node->args), free(cmd_node), NULL);
+			}
 		}
     }
     return (cmd_node);

@@ -3,9 +3,9 @@
 # Parsing:
 
 > [x] handel expand without key and with key for value = "" or val = nothing
-> [x] `msh_exapnd_herdoc` sigfault issue.
 
 # Execution:
 
-> [x] Ctrl+c in heredoc.
 > [x] Fork in heredoc.
+> [x] Ctrl+c in heredoc.
+

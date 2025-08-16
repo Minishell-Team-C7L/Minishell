@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:32 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 23:41:21 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/16 00:44:04 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	msh_clear_cmd(t_node *cmd_node)
 	if (!cmd_node)
 		return ;
 	msh_red_list_clear(&(cmd_node->red_l));
-	msh_free_cmd_args(cmd_node);
 	msh_free_arr(cmd_node->arg);
+	msh_free_cmd_args(cmd_node);
 }
 
 void	msh_red_list_clear(t_red_node **red_list)
@@ -58,9 +58,8 @@ void	msh_red_list_clear(t_red_node **red_list)
 	cur_node = *red_list;
 	while (cur_node)
 	{
+		free(cur_node->val);
 		next_node = cur_node->next;
-		if (cur_node->val)
-			free(cur_node->val);
 		free(cur_node);
 		cur_node = next_node;
 	}

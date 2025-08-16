@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/15 17:01:02 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 15:52:41 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static  char	*msh_strjoin_sp(char *s1, char *s2)
 int	msh_build_cmd_with_args(t_data *cur_data, char **args)
 {
 	char	*free_args;
-   
+
 	if (cur_data->err_prs.perr_type)
 		return (0);
 	if (!*args)
@@ -74,8 +74,8 @@ int	msh_build_cmd_with_args(t_data *cur_data, char **args)
 			return (free(free_args), 0);
 		free(free_args);
 		cur_data->cur_tokens = cur_data->cur_tokens->next;
-    }
-	return (1);;
+}
+	return (1);
 }
 
 bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
@@ -83,15 +83,20 @@ bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
 	t_red_node	*red_node;
 	t_token_types	red_type;
 
-	*red_list = NULL;
 	if (cur_data->err_prs.perr_type)
 		return (false);
 	while (cur_data->cur_tokens && msh_is_red(cur_data->cur_tokens->type))
 	{
 		red_type = cur_data->cur_tokens->type;
 		cur_data->cur_tokens = cur_data->cur_tokens->next;
+		if (cur_data->heredoc_count >= 16)
+		{
+			ft_puterr("msh: maximum here-document count exceeded\n");
+			msh_quit(cur_data, 2);
+		}
 		if (!cur_data->cur_tokens || cur_data->cur_tokens->type != WORD_T)
-			return (cur_data->err_prs.perr_type = SYN_E, false);
+			return (msh_red_list_clear(red_list),
+				cur_data->err_prs.perr_type = SYN_E, false);
 		red_node = msh_new_red_node(cur_data->cur_tokens->val, red_type);
 		if (!red_node)
 			return (cur_data->err_prs.perr_type = MEMO_E, false);

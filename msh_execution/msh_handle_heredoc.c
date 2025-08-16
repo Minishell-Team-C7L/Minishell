@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:26:15 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/15 18:33:14 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 15:55:31 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,28 @@ int	msh_handle_heredocs(t_data *data, t_node *node)
 	return (EXIT_SUCCESS);
 }
 
+static bool msh_delimiter_check(char *read_line, char *del)
+{
+	while (*read_line)
+	{
+		if (*del == '"' || *del == '\'')
+		{
+			del++;
+			continue ;
+		}
+		else if (*read_line == *del)
+		{
+			del++;
+			read_line++;
+		}
+		else
+			return (false);
+	}
+	while (*del == '"' || *del == '\'')
+		del++;
+	return (!*del);
+}
+
 static int	static_single_heredoc(t_data *data, t_red_node *redir)
 {
 	char	*line;
@@ -66,19 +88,9 @@ static int	static_single_heredoc(t_data *data, t_red_node *redir)
 			unlink(tmp_filename);
 			return (EXIT_FAILURE);
 		}
-		if (!line)
-		{
-			ft_puterr("msh: warning: here-document delimited by end-of-file (wanted `");
-			ft_puterr(redir->val);
-			ft_puterr("')\n");
+		if (!line || msh_delimiter_check(line, redir->val))
 			break ;
-		}
-		if (!ft_strcmp(line, redir->val))
-		{
-			free(line);
-			break ;
-		}
-		msh_expand_heredoc(tmp_fd, line, data);
+		msh_expand_heredoc(tmp_fd, line, data, redir->heredoc_sign);
 	}
 	close(tmp_fd);
 	ft_free((void **)&redir->val);
