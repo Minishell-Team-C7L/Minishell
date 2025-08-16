@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:11:33 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/04 17:02:58 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:36:57 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	msh_path_get_cmd(const char *cmd, char **cmd_path, t_env **env, t_gc **gc)
 	char	**ary_dir;
 
 	*cmd_path = NULL;
-	if (!cmd || !*cmd || !env || !gc || !*gc)
+	if (!cmd || !env || !gc || !*gc)
 		return (dbg_nullarg(__func__));
+	if (!*cmd)
+		return (msh_puterr(NULL, "command not found"), 127);
 	if (ft_strchr(cmd, '/'))
 		return (static_check_path_errors(cmd, cmd_path, env, gc));
 	env_path = env_get_node(env, "PATH");
@@ -44,7 +46,7 @@ static int	static_check_path_errors(
 	struct stat	stat_file;
 
 	if (stat(cmd, &stat_file) == -1)
-		return (msh_perror(cmd), 127);
+		return (msh_perror(cmd), 126);
 	if (S_ISDIR(stat_file.st_mode))
 		return (msh_puterr(cmd, "is a directory"), 126);
 	if (access(cmd, X_OK) == -1)

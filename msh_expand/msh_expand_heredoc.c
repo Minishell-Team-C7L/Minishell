@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 14:18:29 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:20:27 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static int static_expand_print_heredoc(
 	start = ++j;
 	if (read_line[j] == '?')
 	{
-		ft_putchar_fd(data->exit_status, fd);
-		return(2);
+		ft_putnbr_fd(data->exit_status, fd);
+		return (2);
 	}
 	while (read_line[j] && read_line[j] != ' ' && read_line[j] != '$')
 		(j)++;
