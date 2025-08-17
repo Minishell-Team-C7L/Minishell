@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 15:36:17 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 05:06:50 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_token	*to_tokens(t_data *data)
 	data->line = NULL;
 	return (final_token_l);
 }
-#include <stdio.h>
+
 t_token	*ft_fill_tokens(char *line, t_data *data)
 {
 	t_token	*list_of_t;
@@ -46,9 +46,9 @@ t_token	*ft_fill_tokens(char *line, t_data *data)
 
 int	msh_check_ntoken_type(t_token **list_of_t, char **token_value, t_data *data)
 {
-	t_token *token;
-	char 	*tmp;
-	char 	*val;
+	t_token	*token;
+	char	*tmp;
+	char	*val;
 	size_t	j;
 
 	j = 0;
@@ -70,7 +70,7 @@ int	msh_check_ntoken_type(t_token **list_of_t, char **token_value, t_data *data)
 		return (free(val), 0);
 	token->type = WORD_T;
 	token->val = val;
-	return(*token_value += j, token_list_add(list_of_t, token), 1);
+	return (*token_value += j, token_list_add(list_of_t, token), 1);
 }
 
 int	msh_check_stoken_type(t_token **list_of_t, char **token_value, t_data *data)

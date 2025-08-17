@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 04:31:10 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 05:04:15 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	main(int ac, char **av, char **envp)
 	while (true)
 	{
 		data.line = readline("msh$ ");
-		if (data.line)
-			add_history(data.line);
-		else
+		if (!data.line)
 			msh_handel_exit(&data, 1);
+		if (data.line[0])
+			add_history(data.line);
 		data.token = to_tokens(&data);
 		if (!data.token)
 			continue ;

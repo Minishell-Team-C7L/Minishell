@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:17:27 by spi               #+#    #+#             */
-/*   Updated: 2025/08/16 18:27:55 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 04:59:41 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,17 @@ char	*msh_handel_expand(char *args, t_data *data)
 	while (args[i])
 	{
 		if (args[i] == '$')
-			after_expand = msh_strjoin_and_free(after_expand, msh_dollar_expand(&i, args, data));
+			after_expand = msh_strjoin_and_free(after_expand,
+					msh_dollar_expand(&i, args, data));
 		else if (args[i] == '"')
-			after_expand = msh_strjoin_and_free(after_expand, msh_double_quote_expand(&i, args, data));
+			after_expand = msh_strjoin_and_free(after_expand,
+					msh_double_quote_expand(&i, args, data));
 		else if (args[i] == '\'')
-			after_expand = msh_strjoin_and_free(after_expand, msh_single_quote_expand(&i, args));
+			after_expand = msh_strjoin_and_free(after_expand,
+					msh_single_quote_expand(&i, args));
 		else
-			after_expand = msh_strjoin_and_free(after_expand, msh_no_expand(&i, args));
+			after_expand = msh_strjoin_and_free(after_expand,
+					msh_no_expand(&i, args));
 	}
 	if (!after_expand)
 		return (NULL);
@@ -44,13 +48,10 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 {
 	char	*variable;
 	char	*env_value;
-	t_env	*env_node;
 	size_t	start;
 
 	(*i)++;
-	if (args[*i] == '@' || ft_isdigit(args[*i]))
-		return ((*i)++, ft_strdup(""));
-	else if (args[*i] == '?')
+	if (args[*i] == '?')
 		return ((*i)++, ft_itoa(data->exit_status));
 	else if (!msh_variable_is_valid(args[*i]))
 		return (ft_strdup("$"));
@@ -59,13 +60,15 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 	while (msh_variable_is_valid(args[*i]))
 		(*i)++;
 	variable = ft_substr(args, start, *i - start);
-	env_node = env_get_node(&data->env, variable);
-	if (!env_node)
+	env_value = msh_env_get_val(data->env, variable);
+	if (!env_value)
+		return (free(variable), ft_strdup(""));
+	start = 0;
+	while (env_value[++start] == '\t')
 	{
-		free(variable);
-		return (ft_strdup(""));
+		if (!env_value[++start])
+			return (free(variable), ft_strdup(""));
 	}
-	env_value = env_node->value;
 	return (free(variable), ft_strdup(env_value));
 }
 

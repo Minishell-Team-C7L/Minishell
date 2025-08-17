@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/16 15:52:41 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 05:05:52 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_node	*msh_head_combine(t_data *cur_data, t_node *left, t_node *right)
 	t_node	*head_node;
 
 	if (cur_data->err_prs.perr_type)
-        return (NULL);
+		return (NULL);
 	head_node = msh_new_node(PIPE_N);
 	if (!head_node)
 		return (cur_data->err_prs.perr_type = MEMO_E, NULL);
@@ -26,10 +26,10 @@ t_node	*msh_head_combine(t_data *cur_data, t_node *left, t_node *right)
 	return (head_node);
 }
 
-static  char	*msh_strjoin_sp(char *s1, char *s2)
+static	char	*msh_strjoin_sp(char *s1, char *s2)
 {
 	size_t	total_l;
-	char	* joinw;
+	char	*joinw;
 	size_t	i;
 	size_t	j;
 
@@ -55,7 +55,6 @@ static  char	*msh_strjoin_sp(char *s1, char *s2)
 	return (joinw);
 }
 
-
 int	msh_build_cmd_with_args(t_data *cur_data, char **args)
 {
 	char	*free_args;
@@ -67,20 +66,20 @@ int	msh_build_cmd_with_args(t_data *cur_data, char **args)
 	if (!*args)
 		return (0);
 	while (cur_data->cur_tokens && cur_data->cur_tokens->type == WORD_T)
-    {
+	{
 		free_args = *args;
 		*args = msh_strjoin_sp(*args, cur_data->cur_tokens->val);
 		if (!*args)
 			return (free(free_args), 0);
 		free(free_args);
 		cur_data->cur_tokens = cur_data->cur_tokens->next;
-}
+	}
 	return (1);
 }
 
 bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
 {
-	t_red_node	*red_node;
+	t_red_node		*red_node;
 	t_token_types	red_type;
 
 	if (cur_data->err_prs.perr_type)

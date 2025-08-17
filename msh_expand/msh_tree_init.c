@@ -6,13 +6,14 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 17:07:57 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 05:02:41 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_expand.h"
 
-static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data);
+static char	**static_set_up_exp_args(char *str,
+				t_node *tree_node, t_data *data);
 
 void	msh_tree_init(t_data *data, t_node *tree_node)
 {
@@ -26,17 +27,21 @@ void	msh_tree_init(t_data *data, t_node *tree_node)
 	else
 	{
 		if (tree_node->args)
-			tree_node->arg = static_set_up_exp_args(tree_node->args, tree_node, data);
+			tree_node->arg = static_set_up_exp_args(tree_node->args,
+					tree_node, data);
 	}
 }
 
 static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data)
 {
 	size_t	i;
-	char **f_expand;
+	char	**f_expand;
 
 	(void)tree_node;
 	str = msh_handel_expand(str, data);
+	if (!str)
+		return (NULL);
+	str = msh_skip_emtystr(str);
 	if (!str)
 		return (NULL);
 	f_expand = msh_expand_split_args(str);

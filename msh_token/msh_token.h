@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 17:08:44 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 15:15:28 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 05:06:29 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@
 
 t_token	*to_tokens(t_data *data);
 t_token	*ft_fill_tokens(char *line, t_data *data);
-int		msh_check_stoken_type(t_token **list_of_t, char **token_value, t_data *data);
-int		msh_check_ntoken_type(t_token **list_of_t, char **token_value, t_data *data);
-int		add_token_type(t_token **t_list, char **cur_token, t_token_types t_type);
+int		msh_check_stoken_type(t_token **list_of_t,
+			char **token_value, t_data *data);
+int		msh_check_ntoken_type(t_token **list_of_t,
+			char **token_value, t_data *data);
+int		add_token_type(t_token **t_list,
+			char **cur_token, t_token_types t_type);
 void	free_token_list(t_token **token_list);
 void	token_list_add(t_token **list, t_token *new_token);
 
