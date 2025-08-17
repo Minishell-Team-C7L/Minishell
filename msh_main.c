@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 04:00:22 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/17 05:04:51 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	msh_handel_parse_error(t_data *data)
 	}
 }
 
-void	msh_handel_exit(t_data *data, int i)
+static void	msh_handel_exit(t_data *data, int i)
 {
 	msh_clear_tree(data, &data->abs);
 	rl_clear_history();
