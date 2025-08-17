@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:28 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 15:10:46 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 04:29:22 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	msh_exit(t_data *data, int status)
 		return (dbg_nullarg(__func__));
 	if (!data->abs->arg[1])
 	{
-		ft_putnbr_fd(status, STDERR_FILENO);
 		ft_putstr_nl("exit");
 		msh_quit(data, status);
 	}

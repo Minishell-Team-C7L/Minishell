@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 18:38:41 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 04:19:52 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 
 	if (!data || !env || !gc || !*gc)
 		return (dbg_nullarg(__func__), EXIT_SUCCESS);
+	if (!data->abs->arg)
+		return (EXIT_SUCCESS);
 	if (static_is_builtin_parent(data->abs->arg[0]))
 		return (static_execute_builtin(data, status, env, gc));
 	if (msh_signal_off() == EXIT_FAILURE)

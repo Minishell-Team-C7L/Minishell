@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 18:20:27 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 04:32:11 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	msh_expand_heredoc(int fd, char *read_line, t_data *data, bool sign)
 	j = 0;
 	while (read_line[j])
 	{
-		if (read_line[j] != '$' && !sign)
+		if (read_line[j] != '$' && sign)
 		{
 			ft_putchar_fd(read_line[j], fd);
 			j++;
