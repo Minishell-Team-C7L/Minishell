@@ -6,13 +6,15 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:26:15 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 15:55:31 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 13:13:39 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_execution.h"
 
 static int	static_single_heredoc(t_data *data, t_red_node *redir);
+static void	static_heredoc_child(
+				t_data *data, t_red_node *redir, char *tmp_filename);
 static char	*static_temp_file(t_data *data);
 static bool	static_add_to_cleanup(char *filename, t_data *data);
 
@@ -44,8 +46,10 @@ int	msh_handle_heredocs(t_data *data, t_node *node)
 	return (EXIT_SUCCESS);
 }
 
-static bool msh_delimiter_check(char *read_line, char *del)
+static bool	msh_heredoc_delimiter_check(char *read_line, char *del)
 {
+	if (!del)
+		return (false);
 	while (*read_line)
 	{
 		if (*del == '"' || *del == '\'')
@@ -63,40 +67,68 @@ static bool msh_delimiter_check(char *read_line, char *del)
 	}
 	while (*del == '"' || *del == '\'')
 		del++;
-	return (!*del);
+	return (!ft_strcmp(read_line, del));
 }
 
 static int	static_single_heredoc(t_data *data, t_red_node *redir)
 {
-	char	*line;
-	int		tmp_fd;
 	char	*tmp_filename;
+	pid_t	pid;
+	int		status;
 
 	tmp_filename = static_temp_file(data);
 	if (!tmp_filename)
 		return (msh_perror("heredoc"));
-	tmp_fd = open(tmp_filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
-	if (tmp_fd == -1)
-		return (msh_perror(tmp_filename));
-	g_sig = 0;
-	while (true)
+	pid = fork();
+	if (pid == FORK_FAILURE)
+		return (msh_perror("fork"));
+	if (pid == IS_CHILD)
 	{
-		line = readline("> ");
-		if (g_sig == SIGINT)
-		{
-			close(tmp_fd);
-			unlink(tmp_filename);
-			return (EXIT_FAILURE);
-		}
-		if (!line || msh_delimiter_check(line, redir->val))
-			break ;
-		msh_expand_heredoc(tmp_fd, line, data, redir->heredoc_sign);
+		signal(SIGINT, SIG_DFL);
+		static_heredoc_child(data, redir, tmp_filename);
 	}
-	close(tmp_fd);
+	signal(SIGINT, SIG_IGN);
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status))
+	{
+		unlink(tmp_filename);
+		ft_free((void **)&tmp_filename);
+		// data->exit_status = 130;
+		if (WTERMSIG(status) == SIGINT)
+			ft_putstr_fd("\n", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
 	ft_free((void **)&redir->val);
 	redir->type = IN_RED;
 	redir->val = tmp_filename;
 	return (EXIT_SUCCESS);
+}
+
+static void	static_heredoc_child(
+	t_data *data, t_red_node *redir, char *tmp_filename)
+{
+	char	*line;
+	int		tmp_fd;
+
+	tmp_fd = open(tmp_filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	if (tmp_fd == -1)
+		exit(msh_perror(tmp_filename));
+	while (true)
+	{
+		msh_ctrl_line_off(data);
+		line = readline("> ");
+		if (!line)
+			break ;
+		if (msh_heredoc_delimiter_check(line, redir->val))
+		{
+			free(line);
+			break ;
+		}
+		msh_expand_heredoc(tmp_fd, line, data, redir->heredoc_sign);
+		free(line);
+	}
+	close(tmp_fd);
+	exit(EXIT_SUCCESS);
 }
 
 static char	*static_temp_file(t_data *data)

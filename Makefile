@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/16 12:25:19 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/17 12:13:42 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,9 @@ F_GC		=	gc_env_dup.c			\
 				gc_strjoin.c			\
 				gc_substr.c
 
-F_MSH		=	msh_env_sort.c			\
+F_MSH		=	msh_ctrl_line_off.c		\
+				msh_ctrl_line_on.c		\
+				msh_env_sort.c			\
 				msh_env_to_array.c		\
 				msh_env_val_parse.c		\
 				msh_env_var_parse.c		\

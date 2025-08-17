@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:19:08 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 13:39:32 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,12 @@ void	msh_handle_tree_herdocs(t_data *data, t_node *node)
 	if (node->type == CMD_N)
 	{
 		if (msh_handle_heredocs(data, node) != EXIT_SUCCESS)
-			msh_handel_exit(data, 1);
+		{
+			data->hd_err = true;
+			data->exit_status = EXIT_FAILURE;
+			return ;
+		}
+			// msh_handel_exit(data, 1);
 	}
 	if (node->left)
 		msh_handle_tree_herdocs(data, node->left);
@@ -76,14 +81,21 @@ int	main(int ac, char **av, char **envp)
 
 	((void)ac, (void)av);
 	msh_init_data(&data, envp);
-	msh_signal();
 	while (true)
 	{
+		msh_signal(); //
+		msh_ctrl_line_off(&data);
 		data.line = readline("msh$ ");
+		msh_ctrl_line_on(&data);
 		if (!data.line)
 			msh_handel_exit(&data, 1);
 		if (data.line[0])
 			add_history(data.line);
+		if (g_sig == SIGINT)
+		{
+			data.exit_status = EXIT_FAILURE;
+			g_sig = 0;
+		}
 		data.token = to_tokens(&data);
 		if (!data.token)
 			continue ;
@@ -95,8 +107,14 @@ int	main(int ac, char **av, char **envp)
 		}
 		msh_tree_init(&data, data.abs);
 		msh_handle_tree_herdocs(&data, data.abs);
+		if (data.hd_err)
+		{
+			data.hd_err = false;
+			continue ;
+		}
 		data.exit_status = msh_execute(&data, data.abs);
 		msh_clear_tree(&data, &data.abs);
+		msh_ctrl_line_on(&data);
 	}
 	return (msh_handel_exit(&data, 0), data.exit_status);
 }

@@ -3,6 +3,9 @@
 # Parsing:
 
 > [x] handel expand without key and with key for value = "" or val = nothing
+> [x] check this:
+bash-3.2$ <<1<<2
+bash: syntax error near unexpected token `1' 
 
 # Execution:
 

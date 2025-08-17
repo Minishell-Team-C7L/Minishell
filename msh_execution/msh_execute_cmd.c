@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:42:23 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 12:25:05 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 		return (EXIT_SUCCESS);
 	if (static_is_builtin_parent(data->abs->arg[0]))
 		return (static_execute_builtin(data, status, env, gc));
+
 	if (msh_signal_off() == EXIT_FAILURE)
 		return (msh_perror("sigaction"));
 	pid = fork();
 	if (pid == FORK_FAILURE)
 		return (msh_perror("fork"));
-	if (pid == FORK_SUCCESS)
+	if (pid == IS_CHILD)
 		static_execute_child(data, status, env, gc);
 	if (waitpid(pid, &exit_status, 0) == -1)
 		return (msh_perror("waitpid"));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_signal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 08:32:31 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 12:05:30 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/17 07:46:28 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ static void	static_signal_ctrl_c(int sig)
 	g_sig = sig;
 	ft_putchar('\n');
 	rl_on_new_line();
-	// rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 }

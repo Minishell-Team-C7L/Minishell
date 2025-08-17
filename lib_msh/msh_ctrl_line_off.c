@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_execute.c                                      :+:      :+:    :+:   */
+/*   msh_ctrl_line_off.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 13:14:17 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/17 12:04:28 by aessaber          #+#    #+#             */
+/*   Updated: 2025/08/17 12:09:32 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_execution.h"
-#include "msh_main.h"
+#include "lib_msh.h"
 
-int	msh_execute(t_data *data, t_node *ast_head)
+void	msh_ctrl_line_off(t_data *data)
 {
-	if (!ast_head)
-		return (data->exit_status);
-	if (ast_head->type == CMD_N)
+	struct termios	new_termios;
+
+	if (tcgetattr(STDIN_FILENO, &data->original_termios) == -1)
 	{
-		data->abs = ast_head;		
-		return (msh_execute_cmd(
-				data, data->exit_status, &data->env, &data->gc));
+		msh_perror("tcgetattr");
+		msh_quit(data, EXIT_FAILURE);
 	}
-	else if (ast_head->type == PIPE_N)
-		return (msh_execute_pipe(ast_head, data));
-	return (EXIT_SUCCESS);
+	new_termios = data->original_termios;
+	new_termios.c_lflag &= ~(ECHOCTL);
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &new_termios) == -1)
+	{
+		msh_perror("tcsetattr");
+		msh_quit(data, EXIT_FAILURE);
+	}
 }
