@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 12:11:31 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/17 04:00:22 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	msh_handel_parse_error(t_data *data)
 	}
 }
 
-static void	msh_handel_exit(t_data *data, int i)
+void	msh_handel_exit(t_data *data, int i)
 {
 	msh_clear_tree(data, &data->abs);
 	rl_clear_history();
@@ -80,10 +80,10 @@ int	main(int ac, char **av, char **envp)
 	while (true)
 	{
 		data.line = readline("msh$ ");
-		if (data.line)
-			add_history(data.line);
-		else
+		if (!data.line)
 			msh_handel_exit(&data, 1);
+		if (data.line[0])
+			add_history(data.line);
 		data.token = to_tokens(&data);
 		if (!data.token)
 			continue ;

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tree_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/08 14:42:20 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 03:41:26 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_expand.h"
 
-static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data);
+static char	**static_set_up_exp_args(char *str,
+				t_node *tree_node, t_data *data);
 
 void	msh_tree_init(t_data *data, t_node *tree_node)
 {
@@ -26,14 +27,15 @@ void	msh_tree_init(t_data *data, t_node *tree_node)
 	else
 	{
 		if (tree_node->args)
-			tree_node->arg = static_set_up_exp_args(tree_node->args, tree_node, data);
+			tree_node->arg = static_set_up_exp_args(tree_node->args,
+					tree_node, data);
 	}
 }
 
 static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data)
 {
 	size_t	i;
-	char **f_expand;
+	char	**f_expand;
 
 	(void)tree_node;
 	str = msh_handel_expand(str, data);

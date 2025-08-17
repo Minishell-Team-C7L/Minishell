@@ -4,8 +4,8 @@
 	  {
 		"label": "Build with Makefile",
 		"type": "shell",
-		"command": "usr/bin/make",
-		"args": [],
+		"command": "/usr/bin/make",
+		"args": ["all"],
 		"options": {
 		  "cwd": "${workspaceFolder}"
 		},

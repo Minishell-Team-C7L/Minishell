@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_msh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 15:09:15 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 22:46:18 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_data
 	int			hd_count;
 }	t_data;
 
+void	msh_handel_exit(t_data *data, int i);
 t_env	*msh_env_sort(t_env **env, t_gc **gc);
 char	**msh_env_to_array(t_env **env, t_gc **gc);
 char	*msh_env_val_parse(const char *value, t_env **env, t_gc **gc);

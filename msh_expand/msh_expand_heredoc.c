@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 14:18:29 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 03:46:00 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_expand.h"
 
-static int static_expand_print_heredoc(
-				t_data *data, char *read_line, size_t j, int fd);
+static int	static_expand_print_heredoc(t_data *data,
+				char *read_line, size_t j, int fd);
 
 void	msh_expand_heredoc(int fd, char *read_line, t_data *data, bool sign)
 {
@@ -22,32 +22,32 @@ void	msh_expand_heredoc(int fd, char *read_line, t_data *data, bool sign)
 	j = 0;
 	while (read_line[j])
 	{
-		if (read_line[j] != '$' && !sign)
+		if (read_line[j] != '$' && sign)
 		{
 			ft_putchar_fd(read_line[j], fd);
 			j++;
 		}
 		else
-			j += static_expand_print_heredoc(data, read_line,j, fd);
+			j += static_expand_print_heredoc(data, read_line, j, fd);
 	}
 	ft_putchar_fd('\n', fd);
 }
 
-static char *msh_env_get_val(t_env *env, const char *key)
+char	*msh_env_get_val(t_env *env, const char *key)
 {
-	t_env *env_node;
+	t_env	*env_node;
 
 	env_node = env;
 	while (env)
 	{
 		if (!ft_strcmp(env->variable, key))
-			return(env->value);
+			return (env->value);
 		env = env->next;
 	}
-	return(NULL);
+	return (NULL);
 }
 
-static int static_expand_print_heredoc(
+static int	static_expand_print_heredoc(
 	t_data *data, char *read_line, size_t j, int fd)
 {
 	char	*temp_val;
@@ -57,7 +57,7 @@ static int static_expand_print_heredoc(
 	if (read_line[j] == '?')
 	{
 		ft_putchar_fd(data->exit_status, fd);
-		return(2);
+		return (2);
 	}
 	while (read_line[j] && read_line[j] != ' ' && read_line[j] != '$')
 		(j)++;

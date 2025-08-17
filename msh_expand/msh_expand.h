@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:26:49 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 14:17:33 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/16 22:52:04 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "lib_gc.h"
 # include "lib_msh.h"
 
+char	*msh_env_get_val(t_env *env, const char *key);
 void	msh_expand_heredoc(int fd, char *read_line, t_data *data, bool sign);
 char	**msh_expand_split_args(char const *arg);
 char	*msh_handel_expand(char *args, t_data *data);

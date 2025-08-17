@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 00:46:02 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/17 03:51:00 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,45 +67,40 @@ t_node	*to_parse(t_data *data)
 t_node	*before_pip(t_data *cur_data)
 {
 	t_node		*cmd_node;
+
 	if (msh_currtoken_pip(cur_data->cur_tokens))
 		cur_data->err_prs.perr_type = SYN_E;
 	if (cur_data->err_prs.perr_type)
-        return (NULL);
-    cmd_node = msh_new_node(CMD_N);
-    if (!cmd_node)
-        return (cur_data->err_prs.perr_type = MEMO_E, NULL);
-	while (cur_data->cur_tokens &&
-        cur_data->cur_tokens->type != PIPE_T)
-    {
-        if (cur_data->cur_tokens->type == WORD_T)
+		return (NULL);
+	cmd_node = msh_new_node(CMD_N);
+	if (!cmd_node)
+		return (cur_data->err_prs.perr_type = MEMO_E, NULL);
+	while (cur_data->cur_tokens
+		&& cur_data->cur_tokens->type != PIPE_T)
+	{
+		if (cur_data->cur_tokens->type == WORD_T)
 		{
 			if (!msh_build_cmd_with_args(cur_data, &(cmd_node->args)))
-				return (cur_data->err_prs.perr_type = MEMO_E, msh_clear_cmd(cmd_node), NULL);
+				return (cur_data->err_prs.perr_type = MEMO_E,
+					msh_clear_cmd(cmd_node), NULL);
 		}
-        else if (msh_is_red(cur_data->cur_tokens->type))
+		else if (msh_is_red(cur_data->cur_tokens->type))
 		{
-            if (!msh_red_list(cur_data, &(cmd_node->red_l)))
-			{
-				while (cmd_node->red_l)
-				{
-					printf("sa%s\n", cmd_node->red_l->val);
-					cmd_node->red_l = cmd_node->red_l->next;
-				}
+			if (!msh_red_list(cur_data, &(cmd_node->red_l)))
 				return (free(cmd_node->args), free(cmd_node), NULL);
-			}
 		}
-    }
-    return (cmd_node);
+	}
+	return (cmd_node);
 }
 
-bool msh_check_heredoc(char *delimiter)
+bool	msh_check_heredoc(char *delimiter)
 {
-    char *sign;
+	char	*sign;
 
-    sign = delimiter;
-    while (*sign && *sign != '\'' && *sign != '"')
-        sign++;
-    if (!*sign)
-        return(true);
-    return(false);
+	sign = delimiter;
+	while (*sign && *sign != '\'' && *sign != '"')
+		sign++;
+	if (!*sign)
+		return (true);
+	return (false);
 }
