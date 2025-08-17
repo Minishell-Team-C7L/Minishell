@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_get_node.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 15:38:41 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 12:32:06 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/17 04:56:34 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_env.h"
-#include <stdio.h>
+
 t_env	*env_get_node(t_env **env, const char *target_variable)
 {
 	t_env	*env_current;

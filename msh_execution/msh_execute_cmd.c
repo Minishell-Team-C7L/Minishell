@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 04:01:35 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/17 05:20:31 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ static int	static_execute_external(const char **arg, t_env **env, t_gc **gc)
 	int		exit_status;
 	char	**envp;
 
-	if (!ft_strcmp(arg[0], ".") || !ft_strcmp(arg[0], ".."))
+	if (!ft_strcmp(arg[0], ".")
+		|| !ft_strcmp(arg[0], ".."))
 		return (msh_puterr(arg[0], "command not found"), 127);
 	exit_status = msh_path_get_cmd(arg[0], &cmd_path, env, gc);
 	if (exit_status)
