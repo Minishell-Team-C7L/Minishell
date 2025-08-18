@@ -3,40 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   env_initiate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:09:54 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 05:56:50 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:47:07 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_env.h"
 #include "msh_main.h"
 
-static bool	static_str_to_env_node(t_env **env_list, const char *str_envp);
+static bool	static_str_to_env_node(t_env **env, const char *str_envp);
 static char	*static_get_variable(const char *str_envp);
 static char	*static_get_value(const char *str_envp);
 
 t_env	*env_initiate(char **ary_envp)
 {
-
-	t_env	*env_list;
+	t_env	*env;
 	size_t	row;
 
-	if (!ary_envp || !*ary_envp)
+	if (!ary_envp)
 		return (NULL);
-	env_list = NULL;
+	env = NULL;
 	row = 0;
 	while (ary_envp[row])
 	{
-		if (!static_str_to_env_node(&env_list, ary_envp[row]))
-			return (env_list_free(&env_list), NULL);
+		if (!static_str_to_env_node(&env, ary_envp[row]))
+			return (env_list_free(&env), NULL);
 		row++;
 	}
-	return (env_list);
+	return (env);
 }
 
-static bool	static_str_to_env_node(t_env **env_list, const char *str_envp)
+static bool	static_str_to_env_node(t_env **env, const char *str_envp)
 {
 	t_env	*new_node;
 	char	*variable;
@@ -56,7 +55,7 @@ static bool	static_str_to_env_node(t_env **env_list, const char *str_envp)
 		env_node_free(&new_node);
 		return (false);
 	}
-	env_node_add_back(env_list, new_node);
+	env_node_add_back(env, new_node);
 	return (ft_free((void **)&variable), ft_free((void **)&value), true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 09:35:40 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 05:02:33 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:07:09 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**msh_env_to_array(t_env **env, t_gc **gc)
 	char	**ary_env;
 	size_t	total_nodes;
 
-	if (!env || !*env || !gc || !*gc)
+	if (!env || !gc || !*gc)
 		return (dbg_nullarg(__func__), NULL);
 	total_nodes = static_total_env_with_value(*env);
 	ary_env = (char **)msh_null_guard(

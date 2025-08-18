@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_msh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 11:15:15 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:51:10 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct s_data
 
 void	msh_ctrl_line_off(t_data *data);
 void	msh_ctrl_line_on(t_data *data);
+void	msh_env_defaults(t_env **env, t_gc **gc);
 t_env	*msh_env_sort(t_env **env, t_gc **gc);
 char	**msh_env_to_array(t_env **env, t_gc **gc);
 char	*msh_env_val_parse(const char *value, t_env **env, t_gc **gc);

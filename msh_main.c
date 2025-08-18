@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 17:46:08 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:25:27 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	msh_init_data(t_data *data, char **envps)
 	data->envps = envps;
 	data->env = env_initiate(data->envps);
 	data->gc = gc_initiate();
+	msh_env_defaults(&data->env, &data->gc);
 	if (msh_signal() == EXIT_FAILURE)
 		msh_quit(data, EXIT_FAILURE);
 	// Initialize stdin/stdout/stderr if necessary
@@ -89,15 +90,15 @@ int	main(int ac, char **av, char **envp)
 		msh_ctrl_line_off(&data);
 		data.line = readline("msh$ ");
 		msh_ctrl_line_on(&data);
-		if (!data.line)
-			msh_handel_exit(&data, 1);
-		if (data.line[0])
-			add_history(data.line);
 		if (g_sig == SIGINT)
 		{
 			data.exit_status = EXIT_FAILURE;
 			g_sig = 0;
 		}
+		if (!data.line)
+			msh_handel_exit(&data, 1);
+		if (data.line[0])
+			add_history(data.line);
 		data.token = to_tokens(&data);
 		if (!data.token)
 			continue ;

@@ -3,24 +3,34 @@
 # Parsing:
 
 > [√] handel expand without key and with key for value = "" or val = nothing
+---
 > [√] "bash-3.2$ "
+---
 > [√] "bash: syntax error near unexpected token 1"
+---
 > [√] "bash: sla: command not found"
+---
 > [√] "bash-3.2$ cat << ls"
+---
 > [√] "> $?"
+---
 > [√] "> ls"
+---
 > [√] "127"
-
+---
 > [x] Heredoc should not expand when the dilimter is in quotes.
+---
+> [x] "exit | exit" should not print anything, should be handleded in pasring, then send me a flag through data.
+---
 
 # Execution:
 
 > [√] NULL case:
 	"bash-3.2$ <file.txt<file.txt if the file doest exist"
 	"bash: ls: No such file or directory"
-
+---
 > [√] Ctrl+\ should not exit the msh.
-
+---
 > [√] Exit status case:
 	bash-3.2$ /bin/sleep 5   // for ctrl-c
 	^C
@@ -39,5 +49,13 @@
 	msh$ $?
 	msh: 1: command not found
 	msh$
-
+---
+> [√] env should always have `OLDPWD` `PATH` `PWD` `SHLVL`.
+---
+> [√] Ctrl+C Ctrl+D exit_status should be 1.
+---
+> [√] execve should work even with no PATH.
+---
+> [x] save a backup "PWD" that commands can fall on. 
+---
 > [x] Multiple pipes fork issue.

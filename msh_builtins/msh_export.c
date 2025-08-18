@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:30 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 16:00:37 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:05:05 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	msh_export(const char **arg, t_env **env, t_gc **gc)
 	int		row;
 	uint8_t	exit_status;
 
-	if (!arg || !*arg || !env || !gc || !*gc)
+	if (!arg || !*arg || !gc || !*gc)
 		return (dbg_nullarg(__func__));
+	if (!env || !*env)
+		return (EXIT_SUCCESS);
 	row = 1;
 	exit_status = EXIT_SUCCESS;
 	if (!arg[row])
@@ -82,7 +84,7 @@ static int	export_parse_arg(const char *arg, t_env **env, t_gc **gc)
 		value = msh_env_val_parse(arg, env, gc);
 	else
 		value = NULL;
-	msh_null_guard(env_node_set(env, variable, value), env, gc);
+	env_node_set(env, variable, value);
 	return (EXIT_SUCCESS);
 }
 

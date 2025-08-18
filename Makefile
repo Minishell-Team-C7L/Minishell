@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/18 08:26:00 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/18 17:52:08 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ F_GC		=	gc_env_dup.c			\
 
 F_MSH		=	msh_ctrl_line_off.c		\
 				msh_ctrl_line_on.c		\
+				msh_env_defaults.c		\
 				msh_env_sort.c			\
 				msh_env_to_array.c		\
 				msh_env_val_parse.c		\

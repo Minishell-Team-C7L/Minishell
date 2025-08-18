@@ -6,12 +6,12 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 17:03:23 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/18 18:57:08 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:48:20 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_gc.h"
-
+#include <stdio.h>
 static char	**static_array_fill(
 				char **array,
 				const char *str,
