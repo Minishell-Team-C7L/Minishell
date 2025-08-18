@@ -4,7 +4,7 @@
 
 > [√] handel expand without key and with key for value = "" or val = nothing
 > [√] bash-3.2$ <<1<<2
-> [√] `bash: syntax error near unexpected token `1'`
+> [√] bash: syntax error near unexpected token 1
 > [√] bash: sla: command not found
 > [√] bash-3.2$ cat << ls
 > [√] > $?
