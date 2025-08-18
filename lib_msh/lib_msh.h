@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_msh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 13:18:20 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 21:16:15 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,9 @@ typedef struct s_data
 	t_list			*heredoc_files;
 	t_env			*env;
 	t_gc			*gc;
-	int				hd_count;
+	int				phd_count;
+	bool			hd_firstdel_isnbr;
+	int				hd_spicial_casenbr;
 	int				hd_err;
 	struct termios	original_termios;
 }	t_data;

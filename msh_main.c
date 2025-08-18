@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 13:39:32 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:46:08 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	msh_handle_tree_herdocs(t_data *data, t_node *node)
 {
 	if (!node)
 		return ;
+	if (data->heredoc_count > 16)
+		msh_quit(data, 2);
 	if (node->type == CMD_N)
 	{
 		if (msh_handle_heredocs(data, node) != EXIT_SUCCESS)
@@ -83,7 +85,7 @@ int	main(int ac, char **av, char **envp)
 	msh_init_data(&data, envp);
 	while (true)
 	{
-		msh_signal(); //
+		msh_signal();
 		msh_ctrl_line_off(&data);
 		data.line = readline("msh$ ");
 		msh_ctrl_line_on(&data);

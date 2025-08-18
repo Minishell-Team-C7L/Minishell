@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
+#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/17 12:13:42 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/17 19:48:11 by lhchiban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,6 +134,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 F_PARSE		=	msh_create_and_clean.c	\
 				msh_parse_utils_1.c		\
 				msh_parse_utils_2.c		\
+				msh_parse_utils3.c		\
 				msh_parse.c
 
 F_TOKEN		=	msh_linemod.c			\

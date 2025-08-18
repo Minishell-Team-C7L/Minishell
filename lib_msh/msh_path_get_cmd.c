@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_path_get_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:11:33 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:46:27 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 22:21:17 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int	static_check_path_errors(
 	struct stat	stat_file;
 
 	if (stat(cmd, &stat_file) == -1)
-		return (msh_perror(cmd), 126);
+		return (msh_perror(cmd), 127); // i find her 126
 	if (S_ISDIR(stat_file.st_mode))
-		return (msh_puterr(cmd, "is a directory"), 126);
+		return (msh_puterr(cmd, "is a directory"), 127);  // and her
 	if (access(cmd, X_OK) == -1)
-		return (msh_perror(cmd), 126);
+		return (msh_perror(cmd), 127); // and her 
 	*cmd_path = (char *)msh_null_guard(gc_strdup(cmd, gc), env, gc);
 	if (!*cmd_path)
 		return (EXIT_FAILURE);

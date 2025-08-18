@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 08:18:13 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/15 22:59:19 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:43:22 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	static_unlink(void *file_name)
 
 void	msh_quit(t_data *data, int status)
 {
+	if (data->heredoc_count > 16)
+		ft_puterr("msh: maximum here-document count exceeded\n");
 	if (!data)
 		exit(status);
 	if (data->heredoc_files)
