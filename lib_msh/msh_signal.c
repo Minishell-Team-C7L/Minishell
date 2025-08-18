@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 08:32:31 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 07:46:28 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/18 07:03:24 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	msh_signal(void)
 	if (sigaction(SIGINT, &sa, NULL) == -1)
 		return (msh_perror("sigaction"));
 	sa.sa_handler = SIG_IGN;
-	if (sigaction(SIGTSTP, &sa, NULL) == -1)
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
 		return (msh_perror("sigaction"));
 	return (EXIT_SUCCESS);
 }
