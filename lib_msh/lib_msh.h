@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_msh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 21:16:15 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/18 08:23:48 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,6 @@ void	msh_quit(t_data *data, int status);
 int		msh_signal(void);
 int		msh_signal_child(void);
 int		msh_signal_off(void);
+int		msh_signal_status(int exit_status);
 
 #endif

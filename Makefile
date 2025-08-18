@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/17 19:48:11 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/18 08:26:00 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ F_MSH		=	msh_ctrl_line_off.c		\
 				msh_perror.c			\
 				msh_puterr.c			\
 				msh_quit.c				\
+				msh_signal_status.c		\
 				msh_signal.c			\
 				msh_signal_child.c		\
 				msh_signal_off.c
