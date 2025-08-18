@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_msh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 08:23:48 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/18 11:15:15 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct s_data
 	int				phd_count;
 	bool			hd_firstdel_isnbr;
 	int				hd_spicial_casenbr;
+	bool			heredoc_expand_inqts;
 	int				hd_err;
 	struct termios	original_termios;
 }	t_data;
