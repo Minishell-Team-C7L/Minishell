@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:20:47 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:10:24 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	static_expand_print_heredoc(
 	start = ++j;
 	if (read_line[j] == '?')
 	{
-		ft_putchar_fd(data->exit_status, fd);
+		ft_putnbr_fd(data->exit_status, fd);
 		return (2);
 	}
 	while (read_line[j] && read_line[j] != ' ' && read_line[j] != '$')

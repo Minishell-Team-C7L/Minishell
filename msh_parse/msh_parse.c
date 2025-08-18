@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:22:22 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 20:29:59 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_node	*to_parse(t_data *data)
 {
 	t_node	*cur_ast;
 
+	data->hd_spicial_casenbr = 0;
 	data->cur_tokens = data->token;
 	cur_ast = msh_tree(data);
 	if (data->cur_tokens)
@@ -84,7 +85,7 @@ t_node	*before_pip(t_data *cur_data)
 				return (cur_data->err_prs.perr_type = MEMO_E,
 					msh_clear_cmd(cmd_node), NULL);
 		}
-		else if (msh_is_red(cur_data->cur_tokens->type))
+		else if (msh_is_red(cur_data, cur_data->cur_tokens->type))
 		{
 			if (!msh_red_list(cur_data, &(cmd_node->red_l)))
 				return (free(cmd_node->args), free(cmd_node), NULL);

@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_execute.c                                      :+:      :+:    :+:   */
+/*   msh_parse_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 16:27:23 by lhchiban         ###   ########.fr       */
+/*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
+/*   Updated: 2025/08/17 19:43:11 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_execution.h"
-#include "msh_main.h"
+#include "msh_parse.h"
 
-int	msh_execute(t_data *data, t_node *ast_head)
+bool msh_herdocdel_isdigit(char *del_val)
 {
-	if (!ast_head)
-		return (data->exit_status);
-	if (ast_head->type == CMD_N)
-	{
-		data->abs = ast_head;
-		return (msh_execute_cmd(
-				data, data->exit_status, &data->env, &data->gc));
-	}
-	else if (ast_head->type == PIPE_N)
-		return (msh_execute_pipe(ast_head, data));
-	return (EXIT_SUCCESS);
+	int i;
+
+	i = -1;
+	while(del_val[++i])
+		if (!ft_isdigit(del_val[i]))
+			return (false);
+	return (true);
 }
