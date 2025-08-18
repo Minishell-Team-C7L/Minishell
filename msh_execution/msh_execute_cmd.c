@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 12:25:05 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/18 06:05:01 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 
 	if (!data || !env || !gc || !*gc)
 		return (dbg_nullarg(__func__), EXIT_SUCCESS);
-	if (!data->abs->arg)
-		return (EXIT_SUCCESS);
-	if (static_is_builtin_parent(data->abs->arg[0]))
-		return (static_execute_builtin(data, status, env, gc));
-
+	if (data->abs->arg && data->abs->arg[0])
+	{
+		if (static_is_builtin_parent(data->abs->arg[0]))
+			return (static_execute_builtin(data, status, env, gc));
+	}
 	if (msh_signal_off() == EXIT_FAILURE)
 		return (msh_perror("sigaction"));
 	pid = fork();
@@ -92,6 +92,8 @@ static void	static_execute_child(
 	if (msh_signal_child() == EXIT_FAILURE)
 		exit(msh_perror("sigaction"));
 	msh_handle_redir(data->abs->red_l);
+	if (!data->abs->arg || !data->abs->arg[0])
+		msh_quit(data, EXIT_SUCCESS);
 	exit_status = static_execute_builtin(data, status, env, gc);
 	if (exit_status != 127)
 		msh_quit(data, exit_status);

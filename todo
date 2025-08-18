@@ -4,7 +4,7 @@
 
 > [√] handel expand without key and with key for value = "" or val = nothing
 > [√] bash-3.2$ <<1<<2
-> [√] bash: syntax error near unexpected token `1'
+> [√] `bash: syntax error near unexpected token `1'`
 > [√] bash: sla: command not found
 > [√] bash-3.2$ cat << ls
 > [√] > $?
@@ -15,7 +15,7 @@
 
 # Execution:
 
->[x]check this:
+> [√]check this:
 bash-3.2$ <file.txt<file.txt if the file doest exist
 bash: ls: No such file or directory
 
