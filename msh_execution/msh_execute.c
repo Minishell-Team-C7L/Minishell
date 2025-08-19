@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 09:46:36 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:44:48 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int	msh_execute(t_data *data, t_node *ast_head)
 {
+	char	*last_cwd;
+
+	last_cwd = gc_getcwd(&data->gc);
+	if (last_cwd)
+		data->last_cwd = last_cwd;
 	if (!ast_head)
 		return (data->exit_status);
 	if (ast_head->type == CMD_N)

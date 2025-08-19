@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 12:46:23 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:30:16 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_data
 	int				hd_err;
 	struct termios	original_termios;
 	bool			is_ambiguous;
+	char			*last_cwd;
 }	t_data;
 
 void	msh_ctrl_line_off(t_data *data);

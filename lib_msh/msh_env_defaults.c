@@ -6,12 +6,11 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 17:47:12 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 18:20:43 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 22:00:44 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_msh.h"
-
 
 void	msh_env_defaults(t_env **env, t_gc **gc)
 {

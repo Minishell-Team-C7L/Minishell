@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 18:25:27 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:47:40 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static void	msh_init_data(t_data *data, char **envps)
 	msh_env_defaults(&data->env, &data->gc);
 	if (msh_signal() == EXIT_FAILURE)
 		msh_quit(data, EXIT_FAILURE);
-	// Initialize stdin/stdout/stderr if necessary
-	// Get terminal attributes if needed
 }
 
 static void	msh_handel_parse_error(t_data *data)
@@ -70,7 +68,6 @@ void	msh_handle_tree_herdocs(t_data *data, t_node *node)
 			data->exit_status = EXIT_FAILURE;
 			return ;
 		}
-			// msh_handel_exit(data, 1);
 	}
 	if (node->left)
 		msh_handle_tree_herdocs(data, node->left);

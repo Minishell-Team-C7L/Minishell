@@ -20,7 +20,7 @@
 ---
 > [x] Heredoc should not expand when the dilimter is in quotes.
 ---
-> [x] "exit | exit" should not print anything, should be handleded in pasring, then send me a flag through data.
+> [x] "exit | exit" should not print anything, should be handleded in pasring, then send execution a flag through data.
 ---
 
 # Execution:
@@ -56,8 +56,8 @@
 ---
 > [√] execve should work even with no PATH.
 ---
-> [x] Use printf for buffering instead of write
+> [√] Use printf for buffering instead of write
 ---
-> [x] Save a backup "PWD" that commands can fall on. 
+> [√] Save a backup "PWD" that commands can fall on. 
 ---
 > [x] Multiple pipes fork issue.

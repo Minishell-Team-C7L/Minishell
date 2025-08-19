@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 18:00:01 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:42:46 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	static_execute_builtin(
 		return (dbg_nullarg(__func__));
 	arg = (const char **)data->abs->arg;
 	if (ft_strcmp(arg[0], "cd") == 0)
-		return (msh_cd(arg, env, gc));
+		return (msh_cd(arg, &data->last_cwd, env, gc));
 	else if (ft_strcmp(arg[0], "echo") == 0)
 		return (msh_echo(arg));
 	else if (ft_strcmp(arg[0], "env") == 0)
@@ -74,7 +74,7 @@ static int	static_execute_builtin(
 	else if (ft_strcmp(arg[0], "export") == 0)
 		return (msh_export(arg, env, gc));
 	else if (ft_strcmp(arg[0], "pwd") == 0)
-		return (msh_pwd(gc));
+		return (msh_pwd(data->last_cwd, gc));
 	else if (ft_strcmp(arg[0], "unset") == 0)
 		return (msh_unset(arg, env));
 	return (127);
