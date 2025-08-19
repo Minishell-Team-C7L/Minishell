@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:17:27 by spi               #+#    #+#             */
-/*   Updated: 2025/08/18 00:45:49 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/19 13:44:25 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 	start = 0;
 	while (env_value[++start] == '\t')
 	{
-		if (!env_value[++start])
+		if (!env_value[start])
 			return (free(variable), ft_strdup(""));
 	}
 	return (free(variable), ft_strdup(env_value));

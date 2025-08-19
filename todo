@@ -41,3 +41,37 @@
 	msh$
 
 > [x] Multiple pipes fork issue.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+➜  main-mini git:(lhchiban) ✗ ./minishell
+msh$ export a="         " //tab
+msh$ ls$a-l
+msh: ls-l: command not found
+msh$
+
+declare -x la
+msh$ export a="ls la"
+msh$ export a+=$a+=$a+=$a
+msh: Undefined error: 0
+
+msh$ export a="'''''''''"
+msh$ $a
+[1]    19208 segmentation fault  ./minishell
+
+
+bash-3.2$ ls > $EMTY
+bash: $EMTY: ambiguous redirect
+msh$ ls > $EMTY
+msh: No such file or directory
+
+
+bash-3.2$ cat << $"d"
+> d
+bash-3.2$ cat << $$"d"
+> $$d
+bash-3.2$ cat << $$$"d"
+> $$d
+bash-3.2$ cat <<
+bash: syntax error near unexpected token `newline'
+bash-3.2$ echo $?

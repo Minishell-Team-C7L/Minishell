@@ -6,11 +6,12 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 11:04:24 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/18 09:24:58 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/19 14:38:10 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
+#include "msh_expand.h"
 
 t_node	*msh_new_node(t_node_type n_type)
 {
@@ -35,14 +36,17 @@ t_node	*msh_new_cmd_node(void)
 	return (new_node);
 }
 
-t_red_node	*msh_new_red_node(char *value, t_token_types t_type)
+t_red_node	*msh_new_red_node(char *value, t_token_types t_type, t_data *data)
 {
 	t_red_node	*red_n_node;
 
 	red_n_node = (t_red_node *)ft_calloc(1, sizeof(t_red_node));
 	if (!red_n_node)
 		return (NULL);
-	red_n_node->val = ft_strdup(value);
+	value = msh_handel_expand(value, data);
+	if (!value)
+		return (NULL);
+	red_n_node->val = msh_rm_quates(value);
 	if (!red_n_node->val)
 		return (free(red_n_node), NULL);
 	red_n_node->heredoc_sign = false;

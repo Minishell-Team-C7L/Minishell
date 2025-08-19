@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 17:46:08 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:42:24 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	msh_handel_parse_error(t_data *data)
 static void	msh_handel_exit(t_data *data, int i)
 {
 	msh_clear_tree(data, &data->abs);
-	rl_clear_history();
+	// rl_clear_history();
 	env_list_free(&data->env);
 	if (i == 1)
 	{

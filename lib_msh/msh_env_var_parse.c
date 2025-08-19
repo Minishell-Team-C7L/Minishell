@@ -18,7 +18,7 @@ char	*msh_env_var_parse(const char *variable, t_env **env, t_gc **gc)
 	char	*env_variable;
 	size_t	len;
 
-	if (!variable || !gc || !*gc)
+	if (!gc || !*gc)
 		return (dbg_nullarg(__func__), NULL);
 	var_end = ft_strchr(variable, '+');
 	if (!var_end)
