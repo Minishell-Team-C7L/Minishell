@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:04 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 18:03:30 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:35:48 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	msh_cd(const char **arg, t_env **env, t_gc **gc)
 	if (cd_change_dir(&cd, env, gc) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (cd.type == CD_OLDPWD)
-		ft_putstr_nl(cd.pwd);
+		printf("%s\n", cd.pwd);
 	return (EXIT_SUCCESS);
 }
 

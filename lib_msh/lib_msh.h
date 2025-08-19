@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 17:51:10 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 12:46:23 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,16 @@
 
 // For: errno
 # include <errno.h>
-
-// For: perror()
+// For: perror(), printf()
 # include <stdio.h>
-
 // For: readline()
 # include <readline/readline.h>
-
 // For: add_history()
 # include <readline/history.h>
-
 // For: stat(), S_ISDIR()
 # include <sys/stat.h>
-
 // For: sigaction()
 # include <signal.h>
-
 // For: termios
 # include <termios.h>
 
@@ -129,6 +123,7 @@ typedef struct s_data
 	bool			heredoc_expand_inqts;
 	int				hd_err;
 	struct termios	original_termios;
+	bool			is_ambiguous;
 }	t_data;
 
 void	msh_ctrl_line_off(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:08:58 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 19:43:53 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:45:20 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "lib_gc.h"
 # include "lib_msh.h"
 # include "msh_token.h"
+# include "msh_expand.h"
 
 t_node		*msh_head_combine(t_data *cur_data, t_node *left, t_node *right);
 t_node		*msh_new_node(t_node_type n_type);

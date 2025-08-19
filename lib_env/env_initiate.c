@@ -6,12 +6,11 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:09:54 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 17:47:07 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:40:14 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_env.h"
-#include "msh_main.h"
 
 static bool	static_str_to_env_node(t_env **env, const char *str_envp);
 static char	*static_get_variable(const char *str_envp);

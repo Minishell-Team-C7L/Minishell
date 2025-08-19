@@ -56,6 +56,8 @@
 ---
 > [√] execve should work even with no PATH.
 ---
-> [x] save a backup "PWD" that commands can fall on. 
+> [x] Use printf for buffering instead of write
+---
+> [x] Save a backup "PWD" that commands can fall on. 
 ---
 > [x] Multiple pipes fork issue.

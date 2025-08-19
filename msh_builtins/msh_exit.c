@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:28 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 20:42:32 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 11:21:45 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	msh_exit(t_data *data, int status)
 		return (dbg_nullarg(__func__));
 	if (!data->abs->arg[1])
 	{
-		ft_putstr_nl("exit");
+		printf("exit\n");
 		msh_quit(data, status);
 	}
 	return (exit_parse(data));
@@ -40,7 +40,7 @@ static int	exit_parse(t_data *data)
 	if (data->abs->arg[2])
 		return (ft_puterr("msh: exit: too many arguments\n"), EXIT_FAILURE);
 	status = (uint8_t)ft_atoi(data->abs->arg[1]);
-	ft_putstr_nl("exit");
+	printf("exit\n");
 	msh_quit(data, status);
 	return (EXIT_SUCCESS);
 }

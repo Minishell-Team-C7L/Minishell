@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:33 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/30 10:13:31 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 13:11:05 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	msh_pwd(t_gc **gc)
 	pwd = gc_getcwd(gc);
 	if (!pwd)
 		return (msh_perror("pwd"));
-	ft_putstr_nl(pwd);
+	printf("%s\n", pwd);
 	return (EXIT_SUCCESS);
 }
