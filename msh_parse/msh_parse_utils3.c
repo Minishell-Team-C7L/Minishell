@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/20 16:12:30 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:53:25 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,13 @@ char *msh_heredoc_chval(char *del)
 	i = del_dollar_count(del);
 	if (i % 2 == 0)
 		return (del);
-	res = malloc(sizeof(char) * ft_strlen(del) + 1);;
-	i = 0;
+	res = malloc(sizeof(char) * ft_strlen(del) + 1);
+	if (!res)
+		return (NULL);
+	i = 1;
 	while (del[i])
-	{
-		if (flag == 0 && del[i] == '$')
-		{
-			flag = 1;
-			i++;
-		}
-		else
 			res[j++] = del[i++];
-	}
-	res[i] = '\0';
-	free (del);
+	res[j] = '\0';
 	return (res);
 }
 
@@ -73,7 +66,7 @@ bool	msh_dollar_sign(char *delimeter)
 	while (delimeter[i] && delimeter[i] == '$')
 	{
 		i++;
-		if (delimeter[i] == '"')
+		if (delimeter[i] == '"' || delimeter[i] == '\'')
 			return (true);
 	}
 	return (false);

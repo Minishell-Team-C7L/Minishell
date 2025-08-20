@@ -193,6 +193,40 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 Abort trap: 6
 > [√] Use printf for buffering instead of write
 ---
-> [√] Save a backup "PWD" that commands can fall on. 
+> [√] Save a backup "PWD" that commands can fall on.
 ---
 > [x] Multiple pipes fork issue.
+******
+includes
+******
+istty()
+******
+msh$ ./
+msh: ./: is a directory
+msh$
+msh$ $?
+msh: 127: command not found
+******
+msh$ uyhgfcv
+msh: 127: command not found
+msh$
+msh$ $?
+msh: 0: command not found
+******
+leaks of heredoc after cntrl + c
+after cntrl + d, double_free
+******
+msh$ unset PATH
+msh$ ..
+msh: ..: command not found
+******
+msh$ $NO_EXIST ls
+[1]    69797 segmentation fault  ./minishell
+******
+msh$ $SPACE"ls"
+[1]    76715 segmentation fault  ./minishell
+******
+msh$ export q="'"
+msh$ echo $q$HOME$q
+/mnt/homes/lhchiban
+******
