@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
+#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/18 17:52:08 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/20 15:31:12 by lhchiban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -148,7 +148,7 @@ F_TOKEN		=	msh_linemod.c			\
 
 ## Shell Commands and Flags:
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g \
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address\
 				-MMD
 RL_LIB		=	$(shell brew --prefix readline)/lib
 RL_INC		=	$(shell brew --prefix readline)/include

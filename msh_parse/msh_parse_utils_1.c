@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/17 21:24:50 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:25:01 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
 						&& red_type == HERE_DOC_T))
 			return (msh_red_list_clear(red_list),
 				cur_data->err_prs.perr_type = SYN_E, false);
-		red_node = msh_new_red_node(cur_data->cur_tokens->val, red_type);
+		red_node = msh_new_red_node(cur_data->cur_tokens->val,
+					red_type, cur_data);
 		if (!red_node)
 			return (cur_data->err_prs.perr_type = MEMO_E, false);
 		msh_combine_rediractions(red_node, red_list);

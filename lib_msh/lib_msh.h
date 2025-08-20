@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 16:30:16 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 03:46:56 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,11 @@ typedef struct s_data
 	bool			hd_firstdel_isnbr;
 	int				hd_spicial_casenbr;
 	bool			heredoc_expand_inqts;
+	bool			dollar_exp_state;
 	int				hd_err;
 	struct termios	original_termios;
 	bool			is_ambiguous;
+	bool			qts_are_added;
 	char			*last_cwd;
 }	t_data;
 

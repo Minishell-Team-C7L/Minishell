@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 09:43:53 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:08:42 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ bool	msh_check_heredoc(char *delimiter)
 	char	*sign;
 
 	sign = delimiter;
+	if (!sign)
+		return (false);
 	while (*sign && *sign != '\'' && *sign != '"')
 		sign++;
 	if (!*sign)
