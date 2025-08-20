@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 08:47:13 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/18 19:49:21 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/19 20:48:32 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	msh_withoutq_len(char *str)
 	size_t	i;
 	size_t	lent;
 
-	qts = '\0';
+	qts = 0;
 	i = qts;
 	lent = i;
 	while (str[i])
@@ -29,15 +29,14 @@ size_t	msh_withoutq_len(char *str)
 		{
 			if (!qts)
 				qts = str[i++];
-			else if (qts != str[i])
-				lent += (i++ || 1);
-			else
+			else if (qts == str[i])
 				qts = (0 && (i++));
+			else
+				lent += (i++ || 1);
 		}
 	}
 	return (lent);
 }
-
 
 void	msh_skip_qts(char *res, size_t *i, char *s, size_t *j)
 {

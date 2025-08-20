@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:32 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 18:27:56 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:45:26 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
-#include "msh_expand.h"
 
 t_red_type	msh_red_type(t_token_types type)
 {

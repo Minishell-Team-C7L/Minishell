@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_node_update.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 09:32:40 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 11:34:29 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:45:47 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_env.h"
-#include <stdio.h>
+
 t_env	*env_node_update(t_env *env_node, const char *new_value)
 {
 	char	*old_value;

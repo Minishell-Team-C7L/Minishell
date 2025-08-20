@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:30 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 17:48:11 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/19 11:23:25 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	msh_export(const char **arg, t_env **env, t_gc **gc)
 	int		row;
 	uint8_t	exit_status;
 
-	if (!env || !gc || !*gc)
+	if (!arg || !*arg || !gc || !*gc)
 		return (dbg_nullarg(__func__));
+	if (!env || !*env)
+		return (EXIT_SUCCESS);
 	row = 1;
 	exit_status = EXIT_SUCCESS;
 	if (!arg[row])
@@ -47,15 +49,10 @@ static int	export_print(t_env **env, t_gc **gc)
 	{
 		if (ft_strcmp(env_node->variable, "_") != 0)
 		{
-			ft_putstr("declare -x ");
-			ft_putstr(env_node->variable);
+			printf("declare -x %s", env_node->variable);
 			if (env_node->value)
-			{
-				ft_putstr("=\"");
-				ft_putstr(env_node->value);
-				ft_putchar('\"');
-			}
-			ft_putchar('\n');
+				printf("=\"%s\"", env_node->value);
+			printf("\n");
 		}
 		env_node = env_node->next;
 	}

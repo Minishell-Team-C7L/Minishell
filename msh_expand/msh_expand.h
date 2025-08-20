@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:26:49 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 14:13:12 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:25:41 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ char	*msh_handel_expand(char *args, t_data *data);
 char	*msh_dquote_extra(size_t *i, char *args);
 bool	msh_variable_is_valid(char exp_c);
 void	msh_tree_init(t_data *data, t_node *tree_node);
-// char	*msh_skip_emtystr(char *args);
+char	*msh_skip_emtystr(char *args);
 char	*msh_strjoin_and_free(char *str_1, char *str_2);
 void	msh_skip_qts(char *res, size_t *i, char *s, size_t *j);
 size_t	msh_withoutq_len(char *str);
 char	*msh_rm_quates(char *s);
 void	msh_free_arr(char **free_arr);
+char *msh_add_dqts_to_expval(char *str);
 
 #endif

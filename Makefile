@@ -6,7 +6,7 @@
 #    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/18 18:02:25 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/20 15:31:12 by lhchiban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ F_GC		=	gc_env_dup.c			\
 
 F_MSH		=	msh_ctrl_line_off.c		\
 				msh_ctrl_line_on.c		\
+				msh_env_defaults.c		\
 				msh_env_sort.c			\
 				msh_env_to_array.c		\
 				msh_env_val_parse.c		\
@@ -147,7 +148,7 @@ F_TOKEN		=	msh_linemod.c			\
 
 ## Shell Commands and Flags:
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g \
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address\
 				-MMD
 RL_LIB		=	$(shell brew --prefix readline)/lib
 RL_INC		=	$(shell brew --prefix readline)/include

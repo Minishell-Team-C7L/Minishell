@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:48:50 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 05:25:52 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:18:38 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	free_token_list(t_token **token_list)
 	t_token	*next;
 
 	curr_node = *token_list;
-	if (!curr_node)
-		return ;
 	if (!curr_node)
 		return ;
 	while (curr_node)

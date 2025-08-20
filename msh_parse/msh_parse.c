@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 14:35:11 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:08:42 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_node	*before_pip(t_data *cur_data)
 		cur_data->err_prs.perr_type = SYN_E;
 	if (cur_data->err_prs.perr_type)
 		return (NULL);
-	cmd_node = msh_new_node(CMD_N); 
+	cmd_node = msh_new_node(CMD_N);
 	if (!cmd_node)
 		return (cur_data->err_prs.perr_type = MEMO_E, NULL);
 	while (cur_data->cur_tokens
@@ -99,6 +99,8 @@ bool	msh_check_heredoc(char *delimiter)
 	char	*sign;
 
 	sign = delimiter;
+	if (!sign)
+		return (false);
 	while (*sign && *sign != '\'' && *sign != '"')
 		sign++;
 	if (!*sign)

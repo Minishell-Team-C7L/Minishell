@@ -1,0 +1,20 @@
+Makefile
+a
+a.out
+l a
+lib_dbg
+lib_env
+lib_ft
+lib_gc
+lib_msh
+minishell
+msh_builtins
+msh_execution
+msh_expand
+msh_main.c
+msh_main.h
+msh_parse
+msh_token
+objs_and_deps
+todo
+txt

@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 11:15:15 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 03:46:56 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,16 @@
 
 // For: errno
 # include <errno.h>
-
-// For: perror()
+// For: perror(), printf()
 # include <stdio.h>
-
 // For: readline()
 # include <readline/readline.h>
-
 // For: add_history()
 # include <readline/history.h>
-
 // For: stat(), S_ISDIR()
 # include <sys/stat.h>
-
 // For: sigaction()
 # include <signal.h>
-
 // For: termios
 # include <termios.h>
 
@@ -127,12 +121,16 @@ typedef struct s_data
 	bool			hd_firstdel_isnbr;
 	int				hd_spicial_casenbr;
 	bool			heredoc_expand_inqts;
+	bool			dollar_exp_state;
 	int				hd_err;
 	struct termios	original_termios;
+	bool			is_ambiguous;
+	bool			qts_are_added;
 }	t_data;
 
 void	msh_ctrl_line_off(t_data *data);
 void	msh_ctrl_line_on(t_data *data);
+void	msh_env_defaults(t_env **env, t_gc **gc);
 t_env	*msh_env_sort(t_env **env, t_gc **gc);
 char	**msh_env_to_array(t_env **env, t_gc **gc);
 char	*msh_env_val_parse(const char *value, t_env **env, t_gc **gc);

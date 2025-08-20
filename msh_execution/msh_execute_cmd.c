@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 08:26:30 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:00:01 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 	pid_t	pid;
 	int		exit_status;
 
-	if (!data || !env || !gc || !*gc)
+	if (!data || !gc || !*gc)
 		return (dbg_nullarg(__func__), EXIT_SUCCESS);
 	if (data->abs->arg && data->abs->arg[0])
 	{
@@ -60,7 +60,7 @@ static int	static_execute_builtin(
 {
 	const char	**arg;
 
-	if (!data->abs->arg || !data->abs->arg[0] || !env || !gc || !*gc)
+	if (!data->abs->arg || !data->abs->arg[0] || !gc || !*gc)
 		return (dbg_nullarg(__func__));
 	arg = (const char **)data->abs->arg;
 	if (ft_strcmp(arg[0], "cd") == 0)

@@ -6,12 +6,11 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 11:04:24 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/19 14:38:10 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:21:49 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
-#include "msh_expand.h"
 
 t_node	*msh_new_node(t_node_type n_type)
 {
@@ -43,15 +42,24 @@ t_red_node	*msh_new_red_node(char *value, t_token_types t_type, t_data *data)
 	red_n_node = (t_red_node *)ft_calloc(1, sizeof(t_red_node));
 	if (!red_n_node)
 		return (NULL);
-	value = msh_handel_expand(value, data);
-	if (!value)
-		return (NULL);
-	red_n_node->val = msh_rm_quates(value);
-	if (!red_n_node->val)
+	if (t_type != HERE_DOC_T)
+	{
+		value = msh_handel_expand(value, data);
+		if (!value)
+			return(NULL);
+		red_n_node->val = msh_rm_quates(value);
+	}
+	if (!red_n_node->val && t_type != HERE_DOC_T)
 		return (free(red_n_node), NULL);
 	red_n_node->heredoc_sign = false;
 	if (t_type == HERE_DOC_T && msh_check_heredoc(red_n_node->val))
 		red_n_node->heredoc_sign = true;
+	if (t_type == HERE_DOC_T && msh_dollar_sign(value))
+		red_n_node->val = msh_heredoc_chval(value);
+	else if (t_type == HERE_DOC_T)
+		red_n_node->val = value;
+	if (!red_n_node->val)
+		return (free(red_n_node), NULL);
 	red_n_node->type = msh_red_type(t_type);
 	return (red_n_node);
 }
