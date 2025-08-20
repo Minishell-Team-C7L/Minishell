@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:11:33 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:46:27 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 22:00:12 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,21 @@ int	msh_path_get_cmd(const char *cmd, char **cmd_path, t_env **env, t_gc **gc)
 	char	**ary_dir;
 
 	*cmd_path = NULL;
-	if (!cmd || !env || !gc || !*gc)
+	if (!cmd || !gc || !*gc)
 		return (dbg_nullarg(__func__));
 	if (!*cmd)
 		return (msh_puterr(NULL, "command not found"), 127);
 	if (ft_strchr(cmd, '/'))
 		return (static_check_path_errors(cmd, cmd_path, env, gc));
 	env_path = env_get_node(env, "PATH");
-	if (!env_path || !env_path->value)
-		return (msh_puterr(cmd, "No such file or directory"), 127);
-	ary_dir = (char **)msh_null_guard(
-			gc_split(env_path->value, ':', gc), env, gc);
+	if ((!env_path || !env_path->value))
+	{
+		if (access(cmd, F_OK | X_OK) == 0)
+			return (static_check_path_errors(cmd, cmd_path, env, gc));
+		else
+			return (msh_puterr(cmd, "No such file or directory"), 127);
+	}
+	ary_dir = gc_split(env_path->value, ':', gc);
 	*cmd_path = static_get_path_from_dirs(cmd, ary_dir, env, gc);
 	if (!*cmd_path)
 		return (msh_puterr(cmd, "command not found"), 127);
@@ -46,11 +50,11 @@ static int	static_check_path_errors(
 	struct stat	stat_file;
 
 	if (stat(cmd, &stat_file) == -1)
-		return (msh_perror(cmd), 126);
+		return (msh_perror(cmd), 127);
 	if (S_ISDIR(stat_file.st_mode))
-		return (msh_puterr(cmd, "is a directory"), 126);
+		return (msh_puterr(cmd, "is a directory"), 127);
 	if (access(cmd, X_OK) == -1)
-		return (msh_perror(cmd), 126);
+		return (msh_perror(cmd), 127);
 	*cmd_path = (char *)msh_null_guard(gc_strdup(cmd, gc), env, gc);
 	if (!*cmd_path)
 		return (EXIT_FAILURE);

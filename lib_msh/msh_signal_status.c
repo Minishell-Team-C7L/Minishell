@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_execute.c                                      :+:      :+:    :+:   */
+/*   msh_signal_status.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 16:44:48 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/18 08:22:42 by aessaber          #+#    #+#             */
+/*   Updated: 2025/08/18 08:23:27 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_execution.h"
 
-int	msh_execute(t_data *data, t_node *ast_head)
+int	msh_signal_status(int exit_status)
 {
-	char	*last_cwd;
-
-	last_cwd = gc_getcwd(&data->gc);
-	if (last_cwd)
-		data->last_cwd = last_cwd;
-	if (!ast_head)
-		return (data->exit_status);
-	if (ast_head->type == CMD_N)
+	if (msh_signal() == EXIT_FAILURE)
+		return (msh_perror("sigaction"));
+	if (WIFSIGNALED(exit_status))
 	{
-		data->abs = ast_head;
-		return (msh_execute_cmd(
-				data, data->exit_status, &data->env, &data->gc));
+		if (WTERMSIG(exit_status) == SIGINT)
+			ft_putstr_nl("");
+		else if (WTERMSIG(exit_status) == SIGQUIT)
+			ft_putstr_nl("Quit: 3");
+		return (WTERMSIG(exit_status) + 128);
 	}
-	else if (ast_head->type == PIPE_N)
-		return (msh_execute_pipe(ast_head, data));
-	return (EXIT_SUCCESS);
+	if (WIFEXITED(exit_status))
+		return (WEXITSTATUS(exit_status));
+	return (EXIT_FAILURE);
 }

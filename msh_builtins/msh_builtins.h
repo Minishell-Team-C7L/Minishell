@@ -6,15 +6,15 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:03:25 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 15:53:17 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 20:01:02 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MSH_BUILTINS_H
 # define MSH_BUILTINS_H
 
-# include <stdint.h>
 // For: uint8_t
+# include <stdint.h>
 
 # include "lib_ft.h"
 # include "lib_dbg.h"
@@ -37,6 +37,7 @@ typedef struct s_cd
 	char		*oldpwd;
 	char		*pwd;
 	char		*path;
+	char		*joined_cwd;
 	t_cd_type	type;
 }	t_cd;
 
@@ -46,12 +47,12 @@ typedef struct s_echo
 	bool	flag_n_found;
 }	t_echo;
 
-int	msh_cd(const char **arg, t_env **env, t_gc **gc);
+int	msh_cd(const char **arg, char **last_cwd, t_env **env, t_gc **gc);
 int	msh_echo(const char **arg);
 int	msh_env(t_env *env);
 int	msh_exit(t_data *data, int status);
 int	msh_export(const char **arg, t_env **env, t_gc **gc);
-int	msh_pwd(t_gc **gc);
+int	msh_pwd(char *last_cwd, t_gc **gc);
 int	msh_unset(const char **arg, t_env **env);
 
 #endif

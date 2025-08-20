@@ -6,43 +6,50 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:04 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/31 10:52:05 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 13:22:07 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_builtins.h"
 
-static int	cd_change_dir(t_cd *cd, t_env **env, t_gc **gc);
+static int	cd_change_dir(t_cd *cd, char **last_cwd, t_env **env, t_gc **gc);
 static int	cd_get_path(t_cd *cd, const char **arg, t_env **env);
 
-int	msh_cd(const char **arg, t_env **env, t_gc **gc)
+int	msh_cd(const char **arg, char **last_cwd, t_env **env, t_gc **gc)
 {
 	t_cd		cd;
 
-	if (!arg || !arg[0] || !env || !gc || !*gc)
+	if (!arg || !arg[0] || !gc || !*gc)
 		return (dbg_nullarg(__func__));
 	cd.oldpwd = gc_getcwd(gc);
 	if (!cd.oldpwd)
-		return (msh_perror("cd"));
+		cd.oldpwd = *last_cwd;
 	cd.type = CD_ARG;
 	if (cd_get_path(&cd, arg, env) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (cd.type == CD_EMPTY)
 		return (EXIT_SUCCESS);
-	if (cd_change_dir(&cd, env, gc) == EXIT_FAILURE)
+	cd.joined_cwd = gc_strjoin(cd.oldpwd, "/", gc);
+	cd.joined_cwd = gc_strjoin(cd.joined_cwd, cd.path, gc);
+	if (cd_change_dir(&cd, last_cwd, env, gc) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (cd.type == CD_OLDPWD)
-		ft_putstr_nl(cd.pwd);
+		printf("%s\n", cd.pwd);
 	return (EXIT_SUCCESS);
 }
 
-static int	cd_change_dir(t_cd *cd, t_env **env, t_gc **gc)
+static int	cd_change_dir(t_cd *cd, char **last_cwd, t_env **env, t_gc **gc)
 {
 	if (chdir(cd->path) == -1)
 		return (msh_perror("cd"));
+	*last_cwd = cd->joined_cwd;
 	cd->pwd = gc_getcwd(gc);
 	if (!cd->pwd)
-		return (msh_perror("cd"));
+	{
+		printf("cd: error retrieving current directory: getcwd: cannot access parent\
+ directories: No such file or directory\n");
+		cd->pwd = *last_cwd;
+	}
 	msh_null_guard(env_node_set(env, "OLDPWD", cd->oldpwd), env, gc);
 	msh_null_guard(env_node_set(env, "PWD", cd->pwd), env, gc);
 	return (EXIT_SUCCESS);

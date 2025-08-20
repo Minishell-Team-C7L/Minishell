@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_node_update.c                                  :+:      :+:    :+:   */
+/*   msh_ctrl_line_off.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 09:32:40 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 17:45:47 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/17 12:04:28 by aessaber          #+#    #+#             */
+/*   Updated: 2025/08/17 12:09:32 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_env.h"
+#include "lib_msh.h"
 
-t_env	*env_node_update(t_env *env_node, const char *new_value)
+void	msh_ctrl_line_off(t_data *data)
 {
-	char	*old_value;
+	struct termios	new_termios;
 
-	if (!env_node)
-		return (dbg_nullarg(__func__), NULL);
-	old_value = env_node->value;
-	env_node->value = ft_strdup(new_value);
-	if (!env_node->value)
+	if (tcgetattr(STDIN_FILENO, &data->original_termios) == -1)
 	{
-		env_node->value = old_value;
-		return (NULL);
+		msh_perror("tcgetattr");
+		msh_quit(data, EXIT_FAILURE);
 	}
-	ft_free((void **)&old_value);
-	return (env_node);
+	new_termios = data->original_termios;
+	new_termios.c_lflag &= ~(ECHOCTL);
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &new_termios) == -1)
+	{
+		msh_perror("tcsetattr");
+		msh_quit(data, EXIT_FAILURE);
+	}
 }

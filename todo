@@ -2,10 +2,62 @@
 
 # Parsing:
 
-> [x] handel expand without key and with key for value = "" or val = nothing
+> [√] handel expand without key and with key for value = "" or val = nothing
+---
+> [√] "bash-3.2$ "
+---
+> [√] "bash: syntax error near unexpected token 1"
+---
+> [√] "bash: sla: command not found"
+---
+> [√] "bash-3.2$ cat << ls"
+---
+> [√] "> $?"
+---
+> [√] "> ls"
+---
+> [√] "127"
+---
+> [x] Heredoc should not expand when the dilimter is in quotes.
+---
+> [x] "exit | exit" should not print anything, should be handleded in pasring, then send execution a flag through data.
+---
 
 # Execution:
 
-> [x] Fork in heredoc.
-> [x] Ctrl+c in heredoc.
-
+> [√] NULL case:
+	"bash-3.2$ <file.txt<file.txt if the file doest exist"
+	"bash: ls: No such file or directory"
+---
+> [√] Ctrl+\ should not exit the msh.
+---
+> [√] Exit status case:
+	bash-3.2$ /bin/sleep 5   // for ctrl-c
+	^C
+	bash-3.2$ echo  $?
+	130
+	bash-3.2$
+	msh$ /bin/sleep 10
+	msh$ echo $?
+	1
+	and for ctrl-\
+	bash-3.2$ grep ls
+	^\Quit: 3
+	bash-3.2$ $?
+	bash: 131: command not found
+	msh$ grep lsa
+	msh$ $?
+	msh: 1: command not found
+	msh$
+---
+> [√] env should always have `OLDPWD` `PATH` `PWD` `SHLVL`.
+---
+> [√] Ctrl+C Ctrl+D exit_status should be 1.
+---
+> [√] execve should work even with no PATH.
+---
+> [√] Use printf for buffering instead of write
+---
+> [√] Save a backup "PWD" that commands can fall on. 
+---
+> [x] Multiple pipes fork issue.

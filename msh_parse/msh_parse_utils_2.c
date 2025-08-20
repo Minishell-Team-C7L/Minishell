@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:32 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/16 00:44:04 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:45:26 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
-#include "msh_expand.h"
 
 t_red_type	msh_red_type(t_token_types type)
 {
@@ -66,8 +65,10 @@ void	msh_red_list_clear(t_red_node **red_list)
 	*red_list = NULL;
 }
 
-int	msh_is_red(t_token_types t_type)
+int	msh_is_red(t_data *data, t_token_types t_type)
 {
+	if (t_type == HERE_DOC_T)
+		data->hd_spicial_casenbr++;
 	if (t_type == REDIR_APPEND_T
 		|| t_type == REDIR_IN_T
 		|| t_type == HERE_DOC_T

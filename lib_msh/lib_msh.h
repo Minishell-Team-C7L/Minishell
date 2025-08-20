@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:17:16 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:30:16 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,18 @@
 
 // For: errno
 # include <errno.h>
-
-// For: perror()
+// For: perror(), printf()
 # include <stdio.h>
-
 // For: readline()
 # include <readline/readline.h>
-
 // For: add_history()
 # include <readline/history.h>
-
 // For: stat(), S_ISDIR()
 # include <sys/stat.h>
-
 // For: sigaction()
 # include <signal.h>
+// For: termios
+# include <termios.h>
 
 // Dependencies:
 # include "lib_ft.h"
@@ -40,7 +37,7 @@
 // Macros:
 # define PROJECT_NAME "msh"
 # define FORK_FAILURE -1
-# define FORK_SUCCESS 0
+# define IS_CHILD 0
 
 // Enums and Structs:
 
@@ -109,20 +106,30 @@ typedef struct s_parserr
 
 typedef struct s_data
 {
-	char		*line;
-	t_token		*token;
-	t_node		*abs;
-	t_token		*cur_tokens;
-	t_parserr	err_prs;
-	int			exit_status;
-	char		**envps;
-	int			heredoc_count;
-	t_list		*heredoc_files;
-	t_env		*env;
-	t_gc		*gc;
-	int			hd_count;
+	char			*line;
+	t_token			*token;
+	t_node			*abs;
+	t_token			*cur_tokens;
+	t_parserr		err_prs;
+	int				exit_status;
+	char			**envps;
+	int				heredoc_count;
+	t_list			*heredoc_files;
+	t_env			*env;
+	t_gc			*gc;
+	int				phd_count;
+	bool			hd_firstdel_isnbr;
+	int				hd_spicial_casenbr;
+	bool			heredoc_expand_inqts;
+	int				hd_err;
+	struct termios	original_termios;
+	bool			is_ambiguous;
+	char			*last_cwd;
 }	t_data;
 
+void	msh_ctrl_line_off(t_data *data);
+void	msh_ctrl_line_on(t_data *data);
+void	msh_env_defaults(t_env **env, t_gc **gc);
 t_env	*msh_env_sort(t_env **env, t_gc **gc);
 char	**msh_env_to_array(t_env **env, t_gc **gc);
 char	*msh_env_val_parse(const char *value, t_env **env, t_gc **gc);
@@ -137,5 +144,6 @@ void	msh_quit(t_data *data, int status);
 int		msh_signal(void);
 int		msh_signal_child(void);
 int		msh_signal_off(void);
+int		msh_signal_status(int exit_status);
 
 #endif

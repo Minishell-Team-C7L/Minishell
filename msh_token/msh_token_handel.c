@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_token_handel.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:22:28 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/17 21:28:00 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_token	*to_tokens(t_data *data)
 	char	*f_line;
 
 	f_line = data->line;
+	data->hd_firstdel_isnbr = false;
+	data->heredoc_count = 0;
 	final_token_l = ft_fill_tokens(f_line, data);
 	free(f_line);
 	data->line = NULL;
@@ -80,6 +82,9 @@ int	msh_check_stoken_type(t_token **list_of_t, char **token_value, t_data *data)
 	else if (!ft_strncmp(*token_value, "<<", 2))
 	{
 		data->heredoc_count++;
+		if (data->heredoc_count == 1 && (token_value[0][3] == ' '
+			|| token_value[0][3] == '\t'))
+			data->hd_firstdel_isnbr = true;
 		return (1 && add_token_type(list_of_t, token_value, HERE_DOC_T));
 	}
 	else if (!ft_strncmp(*token_value, ">>", 2))

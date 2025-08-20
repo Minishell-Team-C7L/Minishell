@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tree_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 05:32:33 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/18 01:08:21 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static char	**static_set_up_exp_args(char *str, t_node *tree_node, t_data *data)
 	size_t	i;
 	char	**f_expand;
 
+	f_expand = NULL;
 	(void)tree_node;
 	str = msh_handel_expand(str, data);
 	if (!str)

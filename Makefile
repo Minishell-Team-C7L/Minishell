@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/16 12:25:19 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/18 17:52:08 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,10 @@ F_GC		=	gc_env_dup.c			\
 				gc_strjoin.c			\
 				gc_substr.c
 
-F_MSH		=	msh_env_sort.c			\
+F_MSH		=	msh_ctrl_line_off.c		\
+				msh_ctrl_line_on.c		\
+				msh_env_defaults.c		\
+				msh_env_sort.c			\
 				msh_env_to_array.c		\
 				msh_env_val_parse.c		\
 				msh_env_var_parse.c		\
@@ -104,6 +107,7 @@ F_MSH		=	msh_env_sort.c			\
 				msh_perror.c			\
 				msh_puterr.c			\
 				msh_quit.c				\
+				msh_signal_status.c		\
 				msh_signal.c			\
 				msh_signal_child.c		\
 				msh_signal_off.c
@@ -132,6 +136,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 F_PARSE		=	msh_create_and_clean.c	\
 				msh_parse_utils_1.c		\
 				msh_parse_utils_2.c		\
+				msh_parse_utils3.c		\
 				msh_parse.c
 
 F_TOKEN		=	msh_linemod.c			\

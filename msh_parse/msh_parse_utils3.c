@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_null_guard.c                                   :+:      :+:    :+:   */
+/*   msh_parse_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 11:18:56 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 21:59:43 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
+/*   Updated: 2025/08/17 19:43:11 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_msh.h"
+#include "msh_parse.h"
 
-void	*msh_null_guard(void *ptr, t_env **env, t_gc **gc)
+bool msh_herdocdel_isdigit(char *del_val)
 {
-	if (!ptr)
-	{
-		env_list_free(env);
-		gc_free(gc);
-		perror("msh");
-		exit(2);
-	}
-	return (ptr);
+	int i;
+
+	i = -1;
+	while(del_val[++i])
+		if (!ft_isdigit(del_val[i]))
+			return (false);
+	return (true);
 }
