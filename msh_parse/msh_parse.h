@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:08:58 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/20 15:33:39 by lhchiban         ###   ########.fr       */

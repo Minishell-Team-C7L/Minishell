@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   lib_msh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/20 03:46:56 by lhchiban         ###   ########.fr       */
@@ -126,6 +126,7 @@ typedef struct s_data
 	struct termios	original_termios;
 	bool			is_ambiguous;
 	bool			qts_are_added;
+	char			*last_cwd;
 }	t_data;
 
 void	msh_ctrl_line_off(t_data *data);

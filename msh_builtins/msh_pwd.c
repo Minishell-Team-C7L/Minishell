@@ -12,7 +12,7 @@
 
 #include "msh_builtins.h"
 
-int	msh_pwd(t_gc **gc)
+int	msh_pwd(char *last_cwd, t_gc **gc)
 {
 	char	*pwd;
 
@@ -20,7 +20,7 @@ int	msh_pwd(t_gc **gc)
 		return (dbg_nullarg(__func__));
 	pwd = gc_getcwd(gc);
 	if (!pwd)
-		return (msh_perror("pwd"));
+		pwd = last_cwd;
 	printf("%s\n", pwd);
 	return (EXIT_SUCCESS);
 }

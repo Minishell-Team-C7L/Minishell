@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   env_initiate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:09:54 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/20 05:46:45 by lhchiban         ###   ########.fr       */

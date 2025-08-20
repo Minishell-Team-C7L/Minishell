@@ -14,6 +14,11 @@
 
 int	msh_execute(t_data *data, t_node *ast_head)
 {
+	char	*last_cwd;
+
+	last_cwd = gc_getcwd(&data->gc);
+	if (last_cwd)
+		data->last_cwd = last_cwd;
 	if (!ast_head)
 		return (data->exit_status);
 	if (ast_head->type == CMD_N)

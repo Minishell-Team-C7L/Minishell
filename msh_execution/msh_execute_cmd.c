@@ -64,7 +64,7 @@ static int	static_execute_builtin(
 		return (dbg_nullarg(__func__));
 	arg = (const char **)data->abs->arg;
 	if (ft_strcmp(arg[0], "cd") == 0)
-		return (msh_cd(arg, env, gc));
+		return (msh_cd(arg, &data->last_cwd, env, gc));
 	else if (ft_strcmp(arg[0], "echo") == 0)
 		return (msh_echo(arg));
 	else if (ft_strcmp(arg[0], "env") == 0)
@@ -74,7 +74,7 @@ static int	static_execute_builtin(
 	else if (ft_strcmp(arg[0], "export") == 0)
 		return (msh_export(arg, env, gc));
 	else if (ft_strcmp(arg[0], "pwd") == 0)
-		return (msh_pwd(gc));
+		return (msh_pwd(data->last_cwd, gc));
 	else if (ft_strcmp(arg[0], "unset") == 0)
 		return (msh_unset(arg, env));
 	return (127);

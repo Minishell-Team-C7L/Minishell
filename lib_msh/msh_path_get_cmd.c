@@ -50,11 +50,11 @@ static int	static_check_path_errors(
 	struct stat	stat_file;
 
 	if (stat(cmd, &stat_file) == -1)
-		return (msh_perror(cmd), 127); // i find her 126
+		return (msh_perror(cmd), 127);
 	if (S_ISDIR(stat_file.st_mode))
-		return (msh_puterr(cmd, "is a directory"), 127);  // and her
+		return (msh_puterr(cmd, "is a directory"), 127);
 	if (access(cmd, X_OK) == -1)
-		return (msh_perror(cmd), 127); // and her 
+		return (msh_perror(cmd), 127);
 	*cmd_path = (char *)msh_null_guard(gc_strdup(cmd, gc), env, gc);
 	if (!*cmd_path)
 		return (EXIT_FAILURE);

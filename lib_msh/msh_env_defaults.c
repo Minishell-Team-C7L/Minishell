@@ -12,11 +12,11 @@
 
 #include "lib_msh.h"
 
-
 void	msh_env_defaults(t_env **env, t_gc **gc)
 {
 	t_env	*env_shlvl;
 	int		shlvl_value;
+	char	*shlvl_str;
 
 	env_node_set(env, "OLDPWD", NULL);
 	if (!env_get_node(env, "PATH"))
@@ -33,6 +33,8 @@ void	msh_env_defaults(t_env **env, t_gc **gc)
 			shlvl_value = 0;
 		else
 			shlvl_value++;
-		env_node_set(env, "SHLVL", ft_itoa(shlvl_value)); // you have to free itoi and toi
+		shlvl_str = ft_itoa(shlvl_value);
+		env_node_set(env, "SHLVL", shlvl_str);
+		ft_free((void **)&shlvl_str);
 	}
 }

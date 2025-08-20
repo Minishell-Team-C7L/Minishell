@@ -70,6 +70,7 @@ msh$ export a=$a
 msh$ export $a""
 msh$ export // makhtalf
 
+---
 
 # Execution:
 
@@ -190,3 +191,8 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Shadow gap:              cc
 ==39324==ABORTING
 Abort trap: 6
+> [√] Use printf for buffering instead of write
+---
+> [√] Save a backup "PWD" that commands can fall on. 
+---
+> [x] Multiple pipes fork issue.
