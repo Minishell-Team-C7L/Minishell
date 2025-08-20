@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:04 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 20:06:08 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 13:22:07 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	cd_change_dir(t_cd *cd, char **last_cwd, t_env **env, t_gc **gc)
 	if (!cd->pwd)
 	{
 		printf("cd: error retrieving current directory: getcwd: cannot access parent\
-		 directories: No such file or directory\n");
+ directories: No such file or directory\n");
 		cd->pwd = *last_cwd;
 	}
 	msh_null_guard(env_node_set(env, "OLDPWD", cd->oldpwd), env, gc);

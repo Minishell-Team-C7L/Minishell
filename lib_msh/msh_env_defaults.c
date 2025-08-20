@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 17:47:12 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 22:00:44 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 13:29:08 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	msh_env_defaults(t_env **env, t_gc **gc)
 {
 	t_env	*env_shlvl;
 	int		shlvl_value;
+	char	*shlvl_str;
 
 	env_node_set(env, "OLDPWD", NULL);
 	if (!env_get_node(env, "PATH"))
@@ -32,6 +33,8 @@ void	msh_env_defaults(t_env **env, t_gc **gc)
 			shlvl_value = 0;
 		else
 			shlvl_value++;
-		env_node_set(env, "SHLVL", ft_itoa(shlvl_value));
+		shlvl_str = ft_itoa(shlvl_value);
+		env_node_set(env, "SHLVL", shlvl_str);
+		ft_free((void **)&shlvl_str);
 	}
 }
