@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/20 17:53:25 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:39:31 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
 
-bool msh_herdocdel_isdigit(char *del_val)
+bool	msh_herdocdel_isdigit(char *del_val)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while(del_val[++i])
+	while (del_val[++i])
 		if (!ft_isdigit(del_val[i]))
 			return (false);
 	return (true);
 }
 
-static size_t del_dollar_count(char *del)
+static size_t	del_dollar_count(char *del)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!del)
@@ -35,7 +35,7 @@ static size_t del_dollar_count(char *del)
 	return (i);
 }
 
-char *msh_heredoc_chval(char *del)
+char	*msh_heredoc_chval(char *del)
 {
 	size_t	i;
 	size_t	j;
@@ -53,14 +53,14 @@ char *msh_heredoc_chval(char *del)
 		return (NULL);
 	i = 1;
 	while (del[i])
-			res[j++] = del[i++];
+		res[j++] = del[i++];
 	res[j] = '\0';
 	return (res);
 }
 
 bool	msh_dollar_sign(char *delimeter)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (delimeter[i] && delimeter[i] == '$')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_node_set.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 15:38:41 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/07 11:26:56 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:00:18 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_env	*env_node_set(
 {
 	t_env	*env_node;
 
-	if (!env || !target_var)
-		return (dbg_nullarg(__func__), NULL);
 	env_node = env_get_node(env, target_var);
 	if (env_node)
 		return (env_node_update(env_node, new_value));

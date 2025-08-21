@@ -17,11 +17,6 @@ void	env_node_del(t_env **env, const char *variable)
 	t_env	*env_cur;
 	t_env	*env_prev;
 
-	if (!env || !variable)
-	{
-		dbg_nullarg(__func__);
-		return ;
-	}
 	env_cur = *env;
 	env_prev = NULL;
 	while (env_cur)

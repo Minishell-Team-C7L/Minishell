@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:28 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 11:21:45 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:01:47 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static int	exit_parse(t_data *data);
 
 int	msh_exit(t_data *data, int status)
 {
-	if (!data || !data->abs->arg || !*data->abs->arg)
-		return (dbg_nullarg(__func__));
 	if (!data->abs->arg[1])
 	{
 		printf("exit\n");

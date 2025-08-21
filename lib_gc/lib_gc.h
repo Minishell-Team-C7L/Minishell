@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:07:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/10 04:32:03 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:04:47 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIB_GC_H
 
 # include "lib_ft.h"
-# include "lib_dbg.h"
 # include "lib_env.h"
 
 typedef struct s_alloc

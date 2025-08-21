@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:09 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 16:25:34 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:46:09 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ bool	msh_variable_is_valid(char exp_c)
 	return (false);
 }
 
-
 char	*msh_rm_quates(char *s)
 {
 	size_t	i;
@@ -51,41 +50,12 @@ char	*msh_rm_quates(char *s)
 	return (free(s), res);
 }
 
-// char	*msh_skip_emtystr(char *args)
-// {
-// 	char	*temp;
-// 	char	*res;
-// 	size_t	i;
-// 	size_t	j;
-
-// 	if (((args[0] == '"' && args[1] == '"')
-// 			|| (args[1] == '\'' && args[0] == '\'')) && !args[2])
-// 		return (args);
-// 	i = 0;
-// 	j = i;
-// 	temp = ft_calloc(ft_strlen(args) + 1, sizeof(char));
-// 	while (args[i])
-// 	{
-// 		if ((args[i] == '"' && args[i +1] == '"')
-// 			|| (args[i] == '\'' && args[i +1] == '\''))
-// 			i = i +2;
-// 		else
-// 			temp[j++] = args[i++];
-// 	}
-// 	free(args);
-// 	j = 1 + ft_strlen(temp);
-// 	res = ft_calloc(j, sizeof(char));
-// 	ft_strlcpy(res, temp, j);
-// 	free(temp);
-// 	return (res);
-// }
-
-char *msh_add_dqts_to_expval(char *str)
+char	*msh_add_dqts_to_expval(char *str)
 {
-	size_t i;
-	size_t j;
-	int    added;
-	char  *res;
+	size_t	i;
+	size_t	j;
+	int		added;
+	char	*res;
 
 	i = 0;
 	j = 0;
@@ -134,4 +104,3 @@ char	*msh_strjoin_and_free(char *str_1, char *str_2)
 		free(str_2);
 	return (str_join);
 }
-

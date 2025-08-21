@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_execute.c                                      :+:      :+:    :+:   */
+/*   msh_handle_tree_heredocs.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 22:49:44 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/20 22:31:46 by aessaber          #+#    #+#             */
+/*   Updated: 2025/08/20 22:32:49 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_execution.h"
 
-int	msh_execute(t_data *data, t_node *ast_head)
+void	msh_handle_tree_heredocs(t_data *data, t_node *node)
 {
-	char	*last_cwd;
-
-	last_cwd = gc_getcwd(&data->gc);
-	if (last_cwd)
-		data->last_cwd = last_cwd;
-	if (!ast_head)
-		return (data->exit_status);
-	if (ast_head->type == CMD_N)
+	if (!node)
+		return ;
+	if (data->heredoc_count > 16)
+		msh_quit(data, 2);
+	if (node->type == CMD_N)
 	{
-		data->abs = ast_head;
-		return (msh_execute_cmd(
-				data, data->exit_status, &data->env, &data->gc));
+		if (msh_handle_heredocs(data, node) != EXIT_SUCCESS)
+		{
+			data->hd_err = true;
+			data->exit_status = EXIT_FAILURE;
+			return ;
+		}
 	}
-	else if (ast_head->type == PIPE_N)
-		return (msh_execute_pipe(ast_head, data));
-	return (EXIT_SUCCESS);
+	if (node->left)
+		msh_handle_tree_heredocs(data, node->left);
+	if (node->right)
+		msh_handle_tree_heredocs(data, node->right);
 }

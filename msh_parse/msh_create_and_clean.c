@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_create_and_clean.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 11:04:24 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/20 16:21:49 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:40:20 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_red_node	*msh_new_red_node(char *value, t_token_types t_type, t_data *data)
 	{
 		value = msh_handel_expand(value, data);
 		if (!value)
-			return(NULL);
+			return (NULL);
 		red_n_node->val = msh_rm_quates(value);
 	}
 	if (!red_n_node->val && t_type != HERE_DOC_T)

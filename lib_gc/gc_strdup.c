@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:06:52 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/17 19:19:49 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:00:57 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*gc_strdup(const char *str, t_gc **gc)
 	size_t	str_len;
 	char	*dup;
 
-	if (!str || !gc || !*gc)
-		return (dbg_nullarg(__func__), NULL);
 	str_len = ft_strlen(str);
 	dup = (char *)gc_malloc(sizeof(char) * (str_len +1), gc);
 	if (!dup)

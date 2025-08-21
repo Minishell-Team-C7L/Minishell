@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/19 15:25:01 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:40:02 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,20 @@ bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
 
 	if (cur_data->err_prs.perr_type)
 		return (false);
-	while (cur_data->cur_tokens && msh_is_red(cur_data, cur_data->cur_tokens->type))
+	while (cur_data->cur_tokens
+		&& msh_is_red(cur_data, cur_data->cur_tokens->type))
 	{
 		red_type = cur_data->cur_tokens->type;
 		cur_data->cur_tokens = cur_data->cur_tokens->next;
 		if ((!cur_data->cur_tokens || cur_data->cur_tokens->type != WORD_T)
-				|| (msh_herdocdel_isdigit(cur_data->cur_tokens->val)
-					&& cur_data->hd_spicial_casenbr == 2
-						&& !cur_data->hd_firstdel_isnbr
-						&& red_type == HERE_DOC_T))
+			|| (msh_herdocdel_isdigit(cur_data->cur_tokens->val)
+				&& cur_data->hd_spicial_casenbr == 2
+				&& !cur_data->hd_firstdel_isnbr
+				&& red_type == HERE_DOC_T))
 			return (msh_red_list_clear(red_list),
 				cur_data->err_prs.perr_type = SYN_E, false);
 		red_node = msh_new_red_node(cur_data->cur_tokens->val,
-					red_type, cur_data);
+				red_type, cur_data);
 		if (!red_node)
 			return (cur_data->err_prs.perr_type = MEMO_E, false);
 		msh_combine_rediractions(red_node, red_list);

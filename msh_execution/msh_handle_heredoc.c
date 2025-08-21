@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:26:15 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 16:19:57 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:08:52 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	static_single_heredoc(t_data *data, t_red_node *redir)
 			ft_puterr("\n");
 		return (EXIT_FAILURE);
 	}
-	// ft_free((void **)&redir->val); remove it 
 	redir->type = IN_RED;
 	redir->val = tmp_filename;
 	return (EXIT_SUCCESS);

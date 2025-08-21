@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:11:33 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 20:28:10 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:09:48 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	msh_path_get_cmd(const char *cmd, char **cmd_path, t_env **env, t_gc **gc)
 	char	**ary_dir;
 
 	*cmd_path = NULL;
-	if (!cmd || !gc || !*gc)
-		return (dbg_nullarg(__func__));
 	if (!*cmd)
 		return (msh_puterr(NULL, "command not found"), 127);
 	if (ft_strchr(cmd, '/'))

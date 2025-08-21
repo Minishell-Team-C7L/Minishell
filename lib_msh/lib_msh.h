@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 03:46:56 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:04:47 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 
 // Dependencies:
 # include "lib_ft.h"
-# include "lib_dbg.h"
 # include "lib_env.h"
 # include "lib_gc.h"
 

@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 09:51:26 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/26 05:00:10 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:04:47 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIB_ENV_H
 
 # include "lib_ft.h"
-# include "lib_dbg.h"
 
 typedef struct s_env
 {

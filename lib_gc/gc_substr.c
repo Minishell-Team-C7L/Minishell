@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:06:52 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/17 19:20:53 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:01:06 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*gc_substr(char const *str, unsigned int start, size_t len, t_gc **gc)
 	size_t	s_len;
 	size_t	sub_len;
 
-	if (!str || !gc || !*gc)
-		return (dbg_nullarg(__func__), NULL);
 	s_len = ft_strlen(str);
 	if (start >= s_len)
 		return (gc_strdup("", gc));

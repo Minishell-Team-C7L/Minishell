@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 04:20:50 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/10 04:23:19 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:00:29 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	*gc_calloc(size_t count, size_t size, t_gc **gc)
 {
 	void	*ptr;
 
-	if (!gc || !*gc)
-		return (dbg_nullarg(__func__), NULL);
 	ptr = gc_malloc(count * size, gc);
 	if (!ptr)
 		return (NULL);

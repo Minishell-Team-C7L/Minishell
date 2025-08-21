@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:04 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 09:35:48 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:01:33 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	msh_cd(const char **arg, char **last_cwd, t_env **env, t_gc **gc)
 {
 	t_cd		cd;
 
-	if (!arg || !arg[0] || !gc || !*gc)
-		return (dbg_nullarg(__func__));
 	cd.oldpwd = gc_getcwd(gc);
 	if (!cd.oldpwd)
 		cd.oldpwd = *last_cwd;

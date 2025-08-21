@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 09:32:40 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 17:45:47 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:00:22 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ t_env	*env_node_update(t_env *env_node, const char *new_value)
 {
 	char	*old_value;
 
-	if (!env_node)
-		return (dbg_nullarg(__func__), NULL);
 	old_value = env_node->value;
 	env_node->value = ft_strdup(new_value);
 	if (!env_node->value)

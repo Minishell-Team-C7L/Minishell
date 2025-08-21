@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/20 15:31:12 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/20 22:34:10 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ NAME		=	minishell
 D_OBJS		=	objs_and_deps
 D_ROOT		=	.
 D_FT		=	lib_ft
-D_DBG		=	lib_dbg
 D_ENV		=	lib_env
 D_GC		=	lib_gc
 D_MSH		=	lib_msh
@@ -68,8 +67,6 @@ F_FT		=	ft_atoi.c				\
 				ft_strncmp.c			\
 				ft_substr.c				\
 				ft_wordcount.c
-
-F_DBG		=	dbg_nullarg.c
 
 F_ENV		=	env_get_node.c			\
 				env_get_node_prev.c		\
@@ -124,7 +121,8 @@ F_EXECUTION	=	msh_execute.c			\
 				msh_execute_cmd.c		\
 				msh_execute_pipe.c		\
 				msh_handle_heredoc.c	\
-				msh_handle_redir.c
+				msh_handle_redir.c		\
+				msh_handle_tree_heredocs.c
 
 F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_split_args.c	\
@@ -157,7 +155,6 @@ RM			=	rm -rf
 
 ## Source Directories (VPATH):
 VPATH		=	$(D_FT)					\
-				$(D_DBG)				\
 				$(D_ENV)				\
 				$(D_GC)					\
 				$(D_MSH)				\
@@ -173,7 +170,6 @@ LIB_RL		=	-L $(RL_LIB) -lreadline
 ## Includes:
 INCLUDES	=	-I $(D_ROOT)			\
 				-I $(D_FT)				\
-				-I $(D_DBG)				\
 				-I $(D_ENV)				\
 				-I $(D_GC)				\
 				-I $(D_MSH)				\
@@ -186,7 +182,6 @@ INCLUDES	=	-I $(D_ROOT)			\
 
 ## Sources & Objects:
 S_FT		=	$(addprefix $(D_FT)/, $(F_FT))
-S_DBG		=	$(addprefix $(D_DBG)/, $(F_DBG))
 S_ENV		=	$(addprefix $(D_ENV)/, $(F_ENV))
 S_GC		=	$(addprefix $(D_GC)/, $(F_GC))
 S_MSH		=	$(addprefix $(D_MSH)/, $(F_MSH))
@@ -198,7 +193,6 @@ S_TOKEN		=	$(addprefix $(D_TOKEN)/, $(F_TOKEN))
 
 SRCS		=	$(F_MAIN)				\
 				$(S_FT)					\
-				$(S_DBG)				\
 				$(S_ENV)				\
 				$(S_GC)					\
 				$(S_MSH)				\
