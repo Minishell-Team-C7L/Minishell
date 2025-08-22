@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tree_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/22 15:39:46 by lhchiban         ###   ########.fr       */
@@ -49,9 +49,7 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 		return (NULL);
 		printf("str {%s}\n", str);
 	f_expand = msh_expand_split_args(str);
-		printf("str {%s}\n", f_expand[0]);
-		printf("str {%s}\n", f_expand[1]);
- 	free(str);
+	free(str);
 	if (!f_expand)
 		return (NULL);
 	i = -1;
@@ -59,7 +57,5 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 			|| !data->qts_are_added || (data->qts_are_added
 				&& !ft_strcmp(f_expand[0], "export"))))
 		f_expand[i] = msh_rm_quates(f_expand[i]);
-		printf("str {%s}\n", f_expand[0]);
-		printf("str {%s}\n", f_expand[1]);
 	return (f_expand);
 }

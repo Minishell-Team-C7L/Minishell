@@ -17,7 +17,6 @@
 # include <stdint.h>
 
 # include "lib_ft.h"
-# include "lib_dbg.h"
 # include "lib_env.h"
 # include "lib_gc.h"
 # include "lib_msh.h"

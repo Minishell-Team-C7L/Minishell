@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:33 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 13:11:05 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:01:58 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	msh_pwd(char *last_cwd, t_gc **gc)
 {
 	char	*pwd;
 
-	if (!gc || !*gc)
-		return (dbg_nullarg(__func__));
 	pwd = gc_getcwd(gc);
 	if (!pwd)
 		pwd = last_cwd;

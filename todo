@@ -340,3 +340,49 @@ zsh: abort      ./minishell
 
 
 remove ft_calloc from makefile and header and the rm his file
+
+==39324==ABORTING
+Abort trap: 6
+******
+includes
+******
+istty()
+******
+msh$ ./
+msh: ./: is a directory
+msh$
+msh$ $?
+msh: 127: command not found
+******
+msh$ uyhgfcv
+msh: 127: command not found
+msh$
+msh$ $?
+msh: 0: command not found
+******
+leaks of heredoc after cntrl + c
+after cntrl + d, double_free
+******
+msh$ unset PATH
+msh$ ..
+msh: ..: command not found
+******
+msh$ $NO_EXIST ls
+[1]    69797 segmentation fault  ./minishell
+******
+msh$ $SPACE"ls"
+[1]    76715 segmentation fault  ./minishell
+******
+msh$ export q="'"
+msh$ echo $q$HOME$q
+/mnt/homes/lhchiban
+******
+msh$ cat << a
+> $HOME
+> 
+bash-3.2$ cat << a
+> echo $HOME
+> a
+echo /mnt/homes/aessaber
+******
+msh$ cat <<

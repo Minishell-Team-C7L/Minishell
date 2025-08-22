@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
 /*   Updated: 2025/08/21 18:04:07 by lhchiban         ###   ########.fr       */
@@ -93,7 +93,7 @@ bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
 			return (msh_red_list_clear(red_list),
 				cur_data->err_prs.perr_type = SYN_E, false);
 		red_node = msh_new_red_node(cur_data->cur_tokens->val,
-					red_type, cur_data);
+				red_type, cur_data);
 		if (!red_node)
 			return (cur_data->err_prs.perr_type = MEMO_E, false);
 		msh_combine_rediractions(red_node, red_list);

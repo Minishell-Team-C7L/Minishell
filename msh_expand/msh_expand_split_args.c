@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_split_args.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:05 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/21 13:45:48 by lhchiban         ###   ########.fr       */
@@ -117,7 +117,6 @@ static void	msh_fill_words(char **args, const char *str, size_t j, size_t *i)
 	char	quotes;
 
 	c = 0;
-
 	while (str[(*i)] && str[(*i)] != ' ' && str[*i] != '\t')
 	{
 		if (str[(*i)] != '\'' && str[(*i)] != '"')
@@ -134,4 +133,3 @@ static void	msh_fill_words(char **args, const char *str, size_t j, size_t *i)
 	}
 	args[j][c] = '\0';
 }
-

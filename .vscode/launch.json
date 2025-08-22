@@ -3,7 +3,7 @@
     "configurations": [
       {
         "name": "Debug Minishell (LLDB Mac)",
-        "type": "cppdbg",
+        "type": "cpp",
         "request": "launch",
         "program": "${workspaceFolder}/minishell",
         "args": [],

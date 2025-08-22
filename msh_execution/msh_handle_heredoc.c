@@ -70,7 +70,9 @@ int	static_single_heredoc(t_data *data, t_red_node *redir)
 		return (EXIT_FAILURE);
 	}
 	ft_free((void **)&redir->val);
-	return (redir->type = IN_RED, redir->val = tmp_filename, EXIT_SUCCESS);
+	redir->type = IN_RED;
+	redir->val = tmp_filename;
+	return (EXIT_SUCCESS);
 }
 
 static char	*static_temp_file(t_data *data)
@@ -80,7 +82,7 @@ static char	*static_temp_file(t_data *data)
 	char	*count_str;
 	t_list	*new_node;
 
-	pid_str = ft_itoa(getpid());
+	pid_str = ft_itoa((int)&filename);
 	count_str = ft_itoa(data->heredoc_count++);
 	if (!pid_str || !count_str)
 		return (ft_free((void **)&pid_str), ft_free((void **)&count_str), NULL);

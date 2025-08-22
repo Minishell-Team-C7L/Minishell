@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_list_dup.c                                      :+:      :+:    :+:   */
+/*   gc_env_dup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 08:49:35 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/19 18:48:07 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:00:42 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ t_env	*gc_env_dup(t_env **env, t_gc **gc)
 	t_env	*dup_head;
 	t_env	*dup_last;
 
-	if (!env || !*env || !gc || !*gc)
-		return (dbg_nullarg(__func__), NULL);
 	env_cur = *env;
 	dup_head = NULL;
 	dup_last = NULL;

@@ -23,14 +23,12 @@ int	msh_path_get_cmd(const char *cmd, char **cmd_path, t_env **env, t_gc **gc)
 	char	**ary_dir;
 
 	*cmd_path = NULL;
-	if (!cmd || !gc || !*gc)
-		return (dbg_nullarg(__func__));
 	if (!*cmd)
 		return (msh_puterr(NULL, "command not found"), 127);
 	if (ft_strchr(cmd, '/'))
 		return (static_check_path_errors(cmd, cmd_path, env, gc));
 	env_path = env_get_node(env, "PATH");
-	if ((!env_path || !env_path->value))
+	if ((!env_path || !env_path->value || !*env_path->value))
 	{
 		if (access(cmd, F_OK | X_OK) == 0)
 			return (static_check_path_errors(cmd, cmd_path, env, gc));
@@ -50,11 +48,23 @@ static int	static_check_path_errors(
 	struct stat	stat_file;
 
 	if (stat(cmd, &stat_file) == -1)
-		return (msh_perror(cmd), 127);
+	{
+		msh_perror(cmd);
+		if (errno == ENOTDIR || errno == EACCES)
+			return (126);
+		else
+			return (127);
+	}
 	if (S_ISDIR(stat_file.st_mode))
-		return (msh_puterr(cmd, "is a directory"), 127);
+		return (msh_puterr(cmd, "is a directory"), 126);
 	if (access(cmd, X_OK) == -1)
-		return (msh_perror(cmd), 127);
+	{
+		msh_perror(cmd);
+		if (errno == ENOTDIR || errno == EACCES)
+			return (126);
+		else
+			return (127);
+	}
 	*cmd_path = (char *)msh_null_guard(gc_strdup(cmd, gc), env, gc);
 	if (!*cmd_path)
 		return (EXIT_FAILURE);

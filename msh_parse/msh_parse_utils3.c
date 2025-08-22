@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
 /*   Updated: 2025/08/21 18:09:17 by lhchiban         ###   ########.fr       */
@@ -14,7 +14,7 @@
 
 static size_t del_dollar_count(char *del)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!del)
@@ -24,7 +24,7 @@ static size_t del_dollar_count(char *del)
 	return (i);
 }
 
-char *msh_heredoc_chval(char *del)
+char	*msh_heredoc_chval(char *del)
 {
 	size_t	i;
 	size_t	j;
@@ -42,14 +42,14 @@ char *msh_heredoc_chval(char *del)
 		return (NULL);
 	i = 1;
 	while (del[i])
-			res[j++] = del[i++];
+		res[j++] = del[i++];
 	res[j] = '\0';
 	return (res);
 }
 
 bool	msh_dollar_sign(char *delimeter)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (delimeter[i] && delimeter[i] == '$')

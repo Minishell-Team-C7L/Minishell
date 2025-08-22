@@ -21,8 +21,6 @@ int	msh_export(const char **arg, t_env **env, t_gc **gc)
 	int		row;
 	uint8_t	exit_status;
 
-	if (!arg || !*arg || !gc || !*gc)
-		return (dbg_nullarg(__func__));
 	if (!env || !*env)
 		return (EXIT_SUCCESS);
 	row = 1;

@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_quit.c                                         :+:      :+:    :+:   */
+/*   msh_handle_tree_heredocs.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 08:18:13 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 11:37:56 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/20 22:31:46 by aessaber          #+#    #+#             */
+/*   Updated: 2025/08/20 22:32:49 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_msh.h"
+#include "msh_execution.h"
 
-static void	static_unlink(void *file_name)
+void	msh_handle_tree_heredocs(t_data *data, t_node *node)
 {
-	if (file_name)
-		unlink((const char *)file_name);
-}
-
-void	msh_quit(t_data *data, int status)
-{
+	if (!node)
+		return ;
 	if (data->heredoc_count > 16)
-		ft_puterr("msh: maximum here-document count exceeded\n");
-	if (!data)
-		exit(status);
-	if (data->heredoc_files)
-		ft_lstiter(data->heredoc_files, &static_unlink);
-	if (data->env)
-		env_list_free(&data->env);
-	if (data->gc)
-		gc_free(&data->gc);
-	exit(status);
+		msh_quit(data, 2);
+	if (node->type == CMD_N)
+	{
+		if (msh_handle_heredocs(data, node) != EXIT_SUCCESS)
+		{
+			data->hd_err = true;
+			data->exit_status = EXIT_FAILURE;
+			return ;
+		}
+	}
+	if (node->left)
+		msh_handle_tree_heredocs(data, node->left);
+	if (node->right)
+		msh_handle_tree_heredocs(data, node->right);
 }

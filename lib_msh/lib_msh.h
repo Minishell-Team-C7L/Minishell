@@ -30,7 +30,6 @@
 
 // Dependencies:
 # include "lib_ft.h"
-# include "lib_dbg.h"
 # include "lib_env.h"
 # include "lib_gc.h"
 
@@ -88,6 +87,7 @@ typedef struct s_red_node
 	bool				is_ambiguous;
 	t_red_type			type;
 	struct s_red_node	*next;
+	int					fd;
 }	t_red_node;
 
 typedef struct s_node
@@ -126,6 +126,7 @@ typedef struct s_data
 	int				hd_err;
 	struct termios	original_termios;
 	char			*last_cwd;
+	t_list			*child_pids;
 }	t_data;
 
 void	msh_ctrl_line_off(t_data *data);
