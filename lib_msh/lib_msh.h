@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 22:04:47 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/22 11:39:10 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_red_node
 	bool				heredoc_sign;
 	t_red_type			type;
 	struct s_red_node	*next;
+	int					fd;
 }	t_red_node;
 
 typedef struct s_node
@@ -126,6 +127,7 @@ typedef struct s_data
 	bool			is_ambiguous;
 	bool			qts_are_added;
 	char			*last_cwd;
+	t_list			*child_pids;
 }	t_data;
 
 void	msh_ctrl_line_off(t_data *data);

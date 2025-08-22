@@ -105,9 +105,9 @@ msh$ export // makhtalf
 ---
 > [√] execve should work even with no PATH.
 ---
-> [x] Use printf for buffering instead of write
+> [√] Use printf for buffering instead of write
 ---
-> [x] Save a backup "PWD" that commands can fall on.
+> [√] Save a backup "PWD" that commands can fall on.
 ---
 > [x] Multiple pipes fork issue.
 
@@ -191,11 +191,6 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Shadow gap:              cc
 ==39324==ABORTING
 Abort trap: 6
-> [√] Use printf for buffering instead of write
----
-> [√] Save a backup "PWD" that commands can fall on.
----
-> [x] Multiple pipes fork issue.
 ******
 includes
 ******
@@ -230,3 +225,69 @@ msh$ export q="'"
 msh$ echo $q$HOME$q
 /mnt/homes/lhchiban
 ******
+msh$ cat << a
+> $HOME
+> 
+bash-3.2$ cat << a
+> echo $HOME
+> a
+echo /mnt/homes/aessaber
+******
+msh$ cat <<
+=================================================================
+==77575==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000060d7 at pc 0x000106ad28bf bp 0x7ffee914d100 sp 0x7ffee914d0f8
+READ of size 1 at 0x6020000060d7 thread T0
+    #0 0x106ad28be in msh_check_stoken_type+0x22e (minishell:x86_64+0x1000208be)
+    #1 0x106ad256d in ft_fill_tokens+0x2cd (minishell:x86_64+0x10002056d)
+    #2 0x106ad2242 in to_tokens+0x112 (minishell:x86_64+0x100020242)
+    #3 0x106ab6bd7 in static_minishell+0x17 (minishell:x86_64+0x100004bd7)
+    #4 0x106ab6879 in main+0x3a9 (minishell:x86_64+0x100004879)
+    #5 0x7fff6aa34cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+0x6020000060d7 is located 0 bytes to the right of 7-byte region [0x6020000060d0,0x6020000060d7)
+allocated by thread T0 here:
+    #0 0x106b8217d in wrap_malloc+0x9d (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x4917d)
+    #1 0x106b16b02 in xmalloc+0x8 (libreadline.8.dylib:x86_64+0x29b02)
+    #2 0x106af179c in readline_internal_teardown+0x6f (libreadline.8.dylib:x86_64+0x479c)
+    #3 0x106af129c in readline+0x5b (libreadline.8.dylib:x86_64+0x429c)
+    #4 0x106ab6611 in main+0x141 (minishell:x86_64+0x100004611)
+    #5 0x7fff6aa34cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (minishell:x86_64+0x1000208be) in msh_check_stoken_type+0x22e
+Shadow bytes around the buggy address:
+  0x1c0400000bc0: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fd
+  0x1c0400000bd0: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x1c0400000be0: fa fa 00 00 fa fa 00 00 fa fa 06 fa fa fa 06 fa
+  0x1c0400000bf0: fa fa 00 fa fa fa 00 fa fa fa 00 04 fa fa fd fa
+  0x1c0400000c00: fa fa 01 fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x1c0400000c10: fa fa 00 01 fa fa 01 fa fa fa[07]fa fa fa 00 04
+  0x1c0400000c20: fa fa 07 fa fa fa 04 fa fa fa fa fa fa fa fa fa
+  0x1c0400000c30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c0400000c40: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c0400000c50: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c0400000c60: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==77575==ABORTING
+zsh: abort      ./minishell
+------
+cmd not found - no such file ... => 127
+permisson denied - not a dir - is a dir => 126

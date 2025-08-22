@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:26:15 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 22:08:52 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/22 11:47:02 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static char	*static_temp_file(t_data *data)
 	char	*count_str;
 	t_list	*new_node;
 
-	pid_str = ft_itoa(getpid());
+	pid_str = ft_itoa((int)&filename);
 	count_str = ft_itoa(data->heredoc_count++);
 	if (!pid_str || !count_str)
 		return (ft_free((void **)&pid_str), ft_free((void **)&count_str), NULL);
