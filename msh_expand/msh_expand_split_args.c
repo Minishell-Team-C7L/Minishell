@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 22:10:13 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/21 13:45:48 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	**msh_args_allocat(char const *arg_str, char **dargs)
 	i = 0;
 	while (arg_str[i])
 	{
-		if (arg_str[i] != ' ' || arg_str[i])
+		if (arg_str[i] != ' ' && arg_str[i] != '\t' && arg_str[i])
 		{
 			start = i;
 			msh_skip_w(arg_str, &i);

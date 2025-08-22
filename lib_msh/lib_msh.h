@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_msh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 11:39:10 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/22 01:18:07 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_red_node
 {
 	char				*val;
 	bool				heredoc_sign;
+	bool				is_ambiguous;
 	t_red_type			type;
 	struct s_red_node	*next;
 	int					fd;
@@ -118,14 +119,12 @@ typedef struct s_data
 	t_env			*env;
 	t_gc			*gc;
 	int				phd_count;
-	bool			hd_firstdel_isnbr;
-	int				hd_spicial_casenbr;
 	bool			heredoc_expand_inqts;
 	bool			dollar_exp_state;
+	bool			dollar_noexp_state;
+	bool			qts_are_added;
 	int				hd_err;
 	struct termios	original_termios;
-	bool			is_ambiguous;
-	bool			qts_are_added;
 	char			*last_cwd;
 	t_list			*child_pids;
 }	t_data;
@@ -135,7 +134,7 @@ void	msh_ctrl_line_on(t_data *data);
 void	msh_env_defaults(t_env **env, t_gc **gc);
 t_env	*msh_env_sort(t_env **env, t_gc **gc);
 char	**msh_env_to_array(t_env **env, t_gc **gc);
-char	*msh_env_val_parse(const char *value, t_env **env, t_gc **gc);
+char	*msh_env_val_parse(const char *const_value, t_env **env, t_gc **gc);
 char	*msh_env_var_parse(const char *variable, t_env **env, t_gc **gc);
 void	msh_id_err(const char *arg, const char *cmd);
 void	*msh_null_guard(void *ptr, t_env **env, t_gc **gc);

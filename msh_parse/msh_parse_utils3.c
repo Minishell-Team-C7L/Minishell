@@ -6,24 +6,13 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/20 22:39:31 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/21 18:09:17 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
 
-bool	msh_herdocdel_isdigit(char *del_val)
-{
-	int	i;
-
-	i = -1;
-	while (del_val[++i])
-		if (!ft_isdigit(del_val[i]))
-			return (false);
-	return (true);
-}
-
-static size_t	del_dollar_count(char *del)
+static size_t del_dollar_count(char *del)
 {
 	size_t	i;
 
@@ -47,7 +36,7 @@ char	*msh_heredoc_chval(char *del)
 	flag = 0;
 	i = del_dollar_count(del);
 	if (i % 2 == 0)
-		return (del);
+		return (ft_strdup(del));
 	res = malloc(sizeof(char) * ft_strlen(del) + 1);
 	if (!res)
 		return (NULL);
