@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 17:04:33 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/21 16:29:43 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	main(int ac, char **av, char **envp)
 		if (data.hd_err)
 		{
 			data.hd_err = false;
+			msh_clear_tree(&data, &data.abs);
 			continue ;
 		}
 		data.exit_status = msh_execute(&data, data.abs);

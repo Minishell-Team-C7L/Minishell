@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 11:04:24 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/20 16:21:49 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/22 01:34:02 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,17 @@ t_red_node	*msh_new_red_node(char *value, t_token_types t_type, t_data *data)
 	{
 		value = msh_handel_expand(value, data);
 		if (!value)
-			return(NULL);
+			return(red_n_node->is_ambiguous = true, NULL);
 		red_n_node->val = msh_rm_quates(value);
 	}
 	if (!red_n_node->val && t_type != HERE_DOC_T)
 		return (free(red_n_node), NULL);
-	red_n_node->heredoc_sign = false;
-	if (t_type == HERE_DOC_T && msh_check_heredoc(red_n_node->val))
+	if (t_type == HERE_DOC_T && msh_check_heredoc(value))
 		red_n_node->heredoc_sign = true;
 	if (t_type == HERE_DOC_T && msh_dollar_sign(value))
 		red_n_node->val = msh_heredoc_chval(value);
 	else if (t_type == HERE_DOC_T)
-		red_n_node->val = value;
+		red_n_node->val = ft_strdup(value);
 	if (!red_n_node->val)
 		return (free(red_n_node), NULL);
 	red_n_node->type = msh_red_type(t_type);
@@ -72,18 +71,18 @@ void	msh_free_cmd_args(t_node *cmd_node)
 	cmd_node->args = NULL;
 }
 
-void	msh_clear_tree_rec(t_node *tree)
+void	msh_clear_tree_rec(t_node *tree, t_data *data)
 {
 	if (!tree)
 		return ;
 	if (tree->type == CMD_N)
-		msh_clear_cmd(tree);
+		msh_clear_cmd(tree, data);
 	else
 	{
 		if (tree -> left)
-			msh_clear_tree_rec(tree -> left);
+			msh_clear_tree_rec(tree -> left, data);
 		if (tree -> right)
-			msh_clear_tree_rec(tree -> right);
+			msh_clear_tree_rec(tree -> right, data);
 	}
 	free(tree);
 }
