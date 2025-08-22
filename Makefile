@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/22 00:37:08 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/22 17:04:26 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,6 @@ F_GC		=	gc_env_dup.c			\
 				gc_split.c				\
 				gc_strdup.c				\
 				gc_strjoin.c			\
-				gc_calloc.c				\
 				gc_substr.c
 
 F_MSH		=	msh_ctrl_line_off.c		\

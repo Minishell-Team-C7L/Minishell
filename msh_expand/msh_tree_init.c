@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 15:39:46 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/22 16:29:10 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	}
 	if (!str && data->dollar_exp_state)
 		return (NULL);
-		printf("str {%s}\n", str);
 	f_expand = msh_expand_split_args(str);
 	free(str);
 	if (!f_expand)

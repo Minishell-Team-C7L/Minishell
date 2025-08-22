@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 07:14:36 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 11:54:16 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:03:57 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	msh_handle_redir(const t_red_node *redir_list)
 	current = redir_list;
 	while (current)
 	{
-		// if (current->is_ambiguous)
-		// {
-		// 	msh_puterr(current->val, "ambiguous redirect");
-		// 	exit(EXIT_FAILURE);
-		// }
+		if (current->is_ambiguous)
+		{
+			msh_puterr(current->val, "ambiguous redirect");
+			exit(EXIT_FAILURE);
+		}
 		fd = static_open_file(current);
 		if (current->type == IN_RED)
 		{

@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 11:04:24 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/22 01:34:02 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/22 16:38:17 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_red_node	*msh_new_red_node(char *value, t_token_types t_type, t_data *data)
 	{
 		value = msh_handel_expand(value, data);
 		if (!value)
-			return(red_n_node->is_ambiguous = true, NULL);
+			return (NULL);
 		red_n_node->val = msh_rm_quates(value);
 	}
 	if (!red_n_node->val && t_type != HERE_DOC_T)

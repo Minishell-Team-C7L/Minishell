@@ -6,13 +6,13 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/21 18:09:17 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/22 16:30:48 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
 
-static size_t del_dollar_count(char *del)
+static size_t	del_dollar_count(char *del)
 {
 	size_t	i;
 
