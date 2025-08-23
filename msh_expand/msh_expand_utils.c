@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:09 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 01:46:38 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/22 21:00:59 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,26 @@ char	*msh_add_dqts_to_expval(char *str)
 	int		added;
 	char	*res;
 
-	i = -1;
+	i = 0;
 	j = 0;
 	added = 0;
 	res = malloc(sizeof(char) * (ft_strlen(str) + 3));
 	if (!res)
 		return (NULL);
-	while (str[++i])
+	while (str[i])
 	{
 		if (str[i] == '=' && !added)
 		{
 			res[j++] = str[i++];
 			res[j++] = '"';
 			added = 1;
+			continue;
 		}
-		res[j++] = str[i];
+		res[j++] = str[i++];
 	}
 	if (added)
 		res[j++] = '"';
-	res[j] = '\0';
-	return (free(str), res);
+	return (res[j] = '\0', free(str), res);
 }
 
 char	*msh_strjoin_and_free(char *str_1, char *str_2)

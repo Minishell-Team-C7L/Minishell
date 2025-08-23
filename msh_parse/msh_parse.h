@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:08:58 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/21 18:06:34 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/22 18:36:42 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ t_node		*before_pip(t_data *cur_data);
 
 char		*msh_heredoc_chval(char *del);
 bool		msh_dollar_sign(char *delimeter);
+bool		msh_is_ambiguous(char *value);
 
 #endif

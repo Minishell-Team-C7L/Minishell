@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/22 16:30:48 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/22 18:35:43 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,25 @@ bool	msh_dollar_sign(char *delimeter)
 		if (delimeter[i] == '"' || delimeter[i] == '\'')
 			return (true);
 	}
+	return (false);
+}
+
+bool	msh_is_ambiguous(char *value)
+{
+	size_t	i;
+
+	i = 0;
+	if (!value[i])
+		return (true);
+	while (value[i] == ' ' || value[i] == '\t')
+		i++;
+	if (!value[i])
+		return (true);
+	while (value[i] > 32 && value[i] < 127)
+		i++;
+	while (value[i] == ' ' || value[i] == '\t')
+		i++;
+	if (value[i])
+		return (true);
 	return (false);
 }

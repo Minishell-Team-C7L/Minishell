@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/21 16:29:43 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/22 23:14:08 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int	static_minishell(t_data *data)
 	if (data->hd_err)
 	{
 		data->hd_err = false;
+		msh_clear_tree(data, &data->abs);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

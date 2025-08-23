@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/22 17:03:38 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/22 18:34:53 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
 				cur_data->err_prs.perr_type = SYN_E, false);
 		red_node = msh_new_red_node(cur_data->cur_tokens->val,
 				red_type, cur_data);
-		if (!(red_node->val[0]))
-			red_node->is_ambiguous = true;
 		if (!red_node)
 			return (cur_data->err_prs.perr_type = MEMO_E, false);
+		if (msh_is_ambiguous(red_node->val))
+			red_node->is_ambiguous = true;
 		msh_combine_rediractions(red_node, red_list);
 		cur_data->cur_tokens = cur_data->cur_tokens->next;
 	}

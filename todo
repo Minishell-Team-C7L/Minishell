@@ -379,10 +379,27 @@ msh$ echo $q$HOME$q
 ******
 msh$ cat << a
 > $HOME
-> 
+>
 bash-3.2$ cat << a
 > echo $HOME
 > a
 echo /mnt/homes/aessaber
 ******
 msh$ cat <<
+
+
+
+
+***********sa
+msh$ .
+msh: .: command not found
+msh$ $?
+msh: 127: command not found
+msh$
+bash-3.2$ .
+bash: .: filename argument required
+.: usage: . filename [arguments]
+bash-3.2$ $?
+bash: 2: command not found
+bash-3.2$
+***********
