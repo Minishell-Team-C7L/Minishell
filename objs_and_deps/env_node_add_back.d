@@ -1,2 +1,0 @@
-objs_and_deps/env_node_add_back.o: lib_env/env_node_add_back.c \
-  lib_env/lib_env.h lib_ft/lib_ft.h
