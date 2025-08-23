@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 23:14:08 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/23 19:31:03 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ int	main(int ac, char **av, char **envp)
 	t_data	data;
 
 	((void)ac, (void)av);
+	if (!isatty(1) || !isatty(0))
+		return (2);
 	msh_init_data(&data, envp);
 	while (true)
 	{
-		msh_signal();
-		msh_ctrl_line_off(&data);
+		(msh_signal(), msh_ctrl_line_off(&data));
 		data.line = readline("msh$ ");
 		if (g_sig == SIGINT)
 		{
@@ -40,8 +41,7 @@ int	main(int ac, char **av, char **envp)
 		if (static_minishell(&data) == EXIT_FAILURE)
 			continue ;
 		data.exit_status = msh_execute(&data, data.abs);
-		msh_clear_tree(&data, &data.abs);
-		msh_ctrl_line_on(&data);
+		(msh_clear_tree(&data, &data.abs), msh_ctrl_line_on(&data));
 	}
 	return (msh_handel_exit(&data, 0), data.exit_status);
 }
