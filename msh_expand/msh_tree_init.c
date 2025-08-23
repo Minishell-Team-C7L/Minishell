@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tree_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/23 09:03:51 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:21:34 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	msh_tree_init(t_data *data, t_node *tree_node)
 	}
 	else
 	{
-		data->qts_are_added = false;
 		if (tree_node->args)
 			tree_node->arg = static_set_up_exp_args(tree_node->args, data);
 	}
@@ -41,19 +40,19 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	if (!str)
 		return (NULL);
 	if (data->dollar_exp_state)
-	{
 		str = msh_add_dqts_to_expval(str);
-		data->qts_are_added = true;
-	}
+	if (!str)
+		return (NULL);
 	f_expand = msh_expand_split_args(str);
 	free(str);
 	if (!f_expand)
 		return (NULL);
 	i = -1;
+	f_expand[0] = msh_rm_quates(f_expand[0]);
 	while (f_expand[++i])
 	{
-		if (!data->dollar_exp_state || !data->qts_are_added
-			|| (data->qts_are_added && !ft_strcmp(f_expand[0], "export")))
+		if ((data->dollar_exp_state && !ft_strcmp(f_expand[0], "export"))
+			|| !data->dollar_exp_state)
 			f_expand[i] = msh_rm_quates(f_expand[i]);
 	}
 	return (f_expand);

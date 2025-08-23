@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 01:18:07 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/23 12:53:26 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ typedef struct s_data
 	bool			heredoc_expand_inqts;
 	bool			dollar_exp_state;
 	bool			dollar_noexp_state;
-	bool			qts_are_added;
 	int				hd_err;
 	struct termios	original_termios;
 	char			*last_cwd;
