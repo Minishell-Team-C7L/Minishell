@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tree_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/23 02:48:25 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/23 09:03:51 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	i = -1;
 	while (f_expand[++i])
 	{
-		if ( !data->dollar_exp_state || !data->qts_are_added
-		|| (data->qts_are_added && !ft_strcmp(f_expand[0], "export")))
+		if (!data->dollar_exp_state || !data->qts_are_added
+			|| (data->qts_are_added && !ft_strcmp(f_expand[0], "export")))
 			f_expand[i] = msh_rm_quates(f_expand[i]);
 	}
 	return (f_expand);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:09 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 21:00:59 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/23 09:03:30 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*msh_add_dqts_to_expval(char *str)
 			res[j++] = str[i++];
 			res[j++] = '"';
 			added = 1;
-			continue;
+			continue ;
 		}
 		res[j++] = str[i++];
 	}
