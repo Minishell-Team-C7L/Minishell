@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_parse_utils_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:40:33 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/22 18:34:53 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/23 22:05:54 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ void	msh_clear_tree(t_data *cur_data, t_node **tree)
 {
 	msh_clear_tree_rec(*tree, cur_data);
 	*tree = NULL;
+	cur_data->is_in_pipe = false;
 	free_token_list(&cur_data->token);
 }

@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 09:51:26 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/14 15:36:06 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 00:01:09 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,9 @@ int		ft_lstlen(const t_list *lst);
 t_list	*ft_lstnew(void *content);
 void	*ft_memcpy(void *dst, const void *src, size_t len);
 void	*ft_memset(void *ptr, int c, size_t len);
-void	ft_putchar(char c);
-void	ft_putchar_err(char c);
 void	ft_putchar_fd(char c, int fd);
-void	ft_puterr(const char *str);
 void	ft_putnbr_fd(int nbr, int fd);
 void	ft_putstr_fd(char *str, int fd);
-void	ft_putstr(const char *str);
-void	ft_putstr_nl(const char *str);
 bool	ft_str_is_mono(const char *str, char constant, size_t start);
 bool	ft_str_is_num(const char *str);
 char	*ft_strchr(const char *str, int c);

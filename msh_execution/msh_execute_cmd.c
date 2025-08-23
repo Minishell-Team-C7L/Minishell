@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/21 16:58:55 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/23 22:51:57 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static int	static_execute_external(const char **arg, t_env **env, t_gc **gc)
 			&& env_path
 			&& env_path->value
 			&& *env_path->value != 0))
-		return (msh_puterr(arg[0], "command not found"), 127);
+		return (msh_print_error(arg[0], "command not found"), 127);
 	exit_status = msh_path_get_cmd(arg[0], &cmd_path, env, gc);
 	if (exit_status)
 		return (exit_status);

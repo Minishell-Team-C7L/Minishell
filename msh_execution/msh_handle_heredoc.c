@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_handle_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:26:15 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/21 17:59:51 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/23 23:23:50 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	static_single_heredoc(t_data *data, t_red_node *redir)
 	{
 		(unlink(tmp_filename), ft_free((void **)&tmp_filename));
 		if (WTERMSIG(status) == SIGINT)
-			ft_puterr("\n");
+			msh_puterr("\n");
 		return (EXIT_FAILURE);
 	}
 	ft_free((void **)&redir->val);

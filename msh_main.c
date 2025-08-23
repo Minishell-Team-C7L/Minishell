@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/23 19:31:03 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 00:19:20 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	msh_handel_parse_error(t_data *data)
 	perr_type = data->err_prs.perr_type;
 	if (perr_type == SYN_E)
 	{
-		ft_putstr_fd("msh: syntax error\n", 2);
+		msh_print_error("syntax error", NULL);
 		data->exit_status = 258;
 		msh_clear_tree(data, &data->abs);
 		ft_bzero(&data->err_prs, sizeof(t_parserr));
@@ -105,7 +105,7 @@ static void	msh_handel_exit(t_data *data, int i)
 	env_list_free(&data->env);
 	if (i == 1)
 	{
-		ft_putstr_fd("exit\n", 2);
+		msh_print_fd("exit", 2);
 		exit(data->exit_status);
 	}
 }

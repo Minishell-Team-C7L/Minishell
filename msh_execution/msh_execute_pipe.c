@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 13:39:14 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 11:11:05 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/23 22:01:14 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	msh_execute_pipe(t_node *node, t_data *data)
 	pid_t	left_pid;
 	pid_t	right_pid;
 
+	data->is_in_pipe = true;
 	if (!msh_is_forkable(node))
 		return (EXIT_FAILURE);
 	if (pipe(pipe_fd) == -1)
