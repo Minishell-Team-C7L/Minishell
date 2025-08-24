@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 12:23:42 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:08:45 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ typedef struct s_data
 	char			*last_cwd;
 	t_list			*child_pids;
 	bool			is_in_pipe;
+	int				stdin_backup;
+	int				stdout_backup;
 }	t_data;
 
 void	msh_ctrl_line_off(t_data *data);
