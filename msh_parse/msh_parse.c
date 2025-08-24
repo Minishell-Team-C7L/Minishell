@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:20 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 01:20:06 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 16:29:28 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_node	*before_pip(t_data *cur_data)
 	cmd_node = msh_new_node(CMD_N);
 	if (!cmd_node)
 		return (cur_data->err_prs.perr_type = MEMO_E, NULL);
+
 	while (cur_data->cur_tokens
 		&& cur_data->cur_tokens->type != PIPE_T)
 	{

@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/23 21:33:52 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 15:04:23 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_token	*ft_fill_tokens(char *line, t_data *data)
 			err = (1 && !msh_check_stoken_type(&list_of_t, &line, data));
 		else
 			err = (1 && !msh_check_ntoken_type(&list_of_t, &line, data));
+		skip_whitespace(&line);
 	}
 	return (list_of_t);
 }

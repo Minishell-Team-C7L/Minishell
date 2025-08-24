@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 05:10:29 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/24 14:13:26 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 16:18:44 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,6 @@ char	**expand_and_split(char **f_expand, t_data *data)
 		i++;
 	}
 	return (f_expand);
-}
-
-void	msh_go_remove_quotes(char **f_expand)
-{
-	size_t	i;
-
-	i = 0;
-	while (f_expand && f_expand[i])
-	{
-		f_expand[i] = msh_rm_quates(f_expand[i]);
-		i++;
-	}
 }
 
 char	**msh_clean_empty_strs(char **arr)

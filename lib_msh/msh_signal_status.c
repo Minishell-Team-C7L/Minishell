@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_signal_status.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 08:22:42 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/23 23:57:41 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 18:02:15 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	msh_signal_status(int exit_status)
 	if (WIFSIGNALED(exit_status))
 	{
 		if (WTERMSIG(exit_status) == SIGINT)
-			printf("\n");
+			printf("^C\n");
 		else if (WTERMSIG(exit_status) == SIGQUIT)
-			printf("Quit: 3\n");
+			printf("^\\Quit: 3\n");
 		return (WTERMSIG(exit_status) + 128);
 	}
 	if (WIFEXITED(exit_status))
