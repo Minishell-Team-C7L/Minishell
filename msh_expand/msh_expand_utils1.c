@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 05:10:29 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/24 16:18:44 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 19:43:22 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,20 @@ char	**msh_clean_empty_strs(char **arr)
 	new_arr[j] = NULL;
 	free(arr);
 	return (new_arr);
+}
+
+bool	is_only_quotes(const char *str)
+{
+	size_t	i;
+
+	if (!str || !*str)
+		return (false);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '"' && str[i] != '\'')
+			return (false);
+		i++;
+	}
+	return (true);
 }

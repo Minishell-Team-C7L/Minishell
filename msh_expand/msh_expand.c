@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:17:27 by spi               #+#    #+#             */
-/*   Updated: 2025/08/24 16:16:58 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 19:49:34 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*msh_handel_expand(char *args, t_data *data)
 		return (NULL);
 	return (after_expand);
 }
-
 
 static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 {

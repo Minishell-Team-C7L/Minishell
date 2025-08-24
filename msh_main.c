@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:32:51 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 14:56:50 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 19:35:07 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	msh_init_data(t_data *data, char **envps)
 static int	static_minishell(t_data *data)
 {
 	data->token = to_tokens(data);
-	if (!data->token)
+	if (!data->token || data->is_white)
 		return (EXIT_FAILURE);
 	data->abs = to_parse(data);
 	if (data->err_prs.perr_type)

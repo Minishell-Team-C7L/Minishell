@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 19:08:25 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 19:44:58 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	msh_go_remove_quotes(f_expand);
 	if (!f_expand)
 		return (NULL);
-	if (ft_strcmp(f_expand[0], "export"))
+	if (ft_strcmp(f_expand[0], "export") && is_only_quotes(f_expand[0]))
 		f_expand = msh_clean_empty_strs(f_expand);
 	return (f_expand);
 }
