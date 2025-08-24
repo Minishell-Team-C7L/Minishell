@@ -76,18 +76,6 @@ char	**expand_and_split(char **f_expand, t_data *data)
 	return (f_expand);
 }
 
-void	msh_go_remove_quotes(char **f_expand)
-{
-	size_t	i;
-
-	i = 0;
-	while (f_expand && f_expand[i])
-	{
-		f_expand[i] = msh_rm_quates(f_expand[i]);
-		i++;
-	}
-}
-
 char	**msh_clean_empty_strs(char **arr)
 {
 	size_t	len;
@@ -112,4 +100,20 @@ char	**msh_clean_empty_strs(char **arr)
 	new_arr[j] = NULL;
 	free(arr);
 	return (new_arr);
+}
+
+bool	is_only_quotes(const char *str)
+{
+	size_t	i;
+
+	if (!str || !*str)
+		return (false);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '"' && str[i] != '\'')
+			return (false);
+		i++;
+	}
+	return (true);
 }

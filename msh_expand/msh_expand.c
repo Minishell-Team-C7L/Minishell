@@ -66,6 +66,7 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 	env_value = msh_env_get_val(data->env, variable);
 	if (!env_value)
 		return (free(variable), ft_strdup(""));
+	hide_quotes(env_value);
 	j = 0;
 	return (free(variable), ft_strdup(env_value));
 }

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_handle_redir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 07:14:36 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/24 20:00:44 by aessaber         ###   ########.fr       */

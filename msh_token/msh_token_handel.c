@@ -19,6 +19,7 @@ t_token	*to_tokens(t_data *data)
 
 	f_line = data->line;
 	data->heredoc_count = 0;
+	data->is_white = false;
 	final_token_l = ft_fill_tokens(f_line, data);
 	free(f_line);
 	data->line = NULL;
@@ -32,6 +33,9 @@ t_token	*ft_fill_tokens(char *line, t_data *data)
 
 	list_of_t = NULL;
 	err = 0;
+	skip_whitespace(&line);
+	if (*line == '\0')
+		data->is_white = true;
 	while (*line != '\0')
 	{
 		if (0 != err)
@@ -41,6 +45,7 @@ t_token	*ft_fill_tokens(char *line, t_data *data)
 			err = (1 && !msh_check_stoken_type(&list_of_t, &line, data));
 		else
 			err = (1 && !msh_check_ntoken_type(&list_of_t, &line, data));
+		skip_whitespace(&line);
 	}
 	return (list_of_t);
 }

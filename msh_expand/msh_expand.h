@@ -35,5 +35,7 @@ size_t	arr_len(char **arr);
 char	**expand_and_split(char **f_expand, t_data *data);
 void	msh_go_remove_quotes(char **f_expand);
 char	**msh_clean_empty_strs(char **arr);
+void	hide_quotes(char *value);
+bool	is_only_quotes(const char *str);
 
 #endif

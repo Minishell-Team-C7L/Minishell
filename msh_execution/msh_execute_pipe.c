@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_pipe.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 13:39:14 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/23 22:01:14 by aessaber         ###   ########.fr       */

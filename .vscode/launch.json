@@ -1,15 +1,23 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Debug Minishell (LLDB Mac)",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/minishell",
-        "args": [],
-        "cwd": "${workspaceFolder}",
-        "externalConsole": true,
-        "MIMode": "lldb",
-      }
-    ]
-  }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Minishell (LLDB Mac)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/minishell",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "externalConsole": true,
+      "MIMode": "lldb"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/mnt/homes/lhchiban/Desktop/Minishell",
+      "program": "/mnt/homes/lhchiban/Desktop/Minishell/build/Debug/outDebug"
+    }
+  ]
+}

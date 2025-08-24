@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
 /*   Updated: 2025/08/24 19:45:03 by aessaber         ###   ########.fr       */
@@ -26,6 +26,7 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 
 	if (data->abs->arg && data->abs->arg[0])
 	{
+		msh_handle_redir(data->abs->red_l);
 		if (static_is_builtin_parent(data->abs->arg[0]))
 		{
 			if (msh_handle_redir(data->abs->red_l, false) == EXIT_FAILURE)

@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
+#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
 #    Updated: 2025/08/24 13:17:29 by aessaber         ###   ########.fr        #
@@ -126,6 +126,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand.c			\
 				msh_rm_quates.c			\
 				msh_expand_utils1.c		\
+				msh_expand_qts_utils.c	\
 				msh_tree_init.c
 
 F_PARSE		=	msh_create_and_clean.c	\

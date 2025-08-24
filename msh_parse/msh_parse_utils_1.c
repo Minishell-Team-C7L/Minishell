@@ -16,8 +16,6 @@ t_node	*msh_head_combine(t_data *cur_data, t_node *left, t_node *right)
 {
 	t_node	*head_node;
 
-	if (cur_data->err_prs.perr_type)
-		return (NULL);
 	head_node = msh_new_node(PIPE_N);
 	if (!head_node)
 		return (cur_data->err_prs.perr_type = MEMO_E, NULL);
@@ -97,7 +95,7 @@ bool	msh_red_list(t_data *cur_data, t_red_node **red_list)
 				red_type, cur_data);
 		if (!red_node)
 			return (cur_data->err_prs.perr_type = MEMO_E, false);
-		if (msh_is_ambiguous(red_node->val))
+		if (msh_is_ambiguous(red_node->val) && cur_data->dollar_exp_state)
 			red_node->is_ambiguous = true;
 		msh_combine_rediractions(red_node, red_list);
 		cur_data->cur_tokens = cur_data->cur_tokens->next;
