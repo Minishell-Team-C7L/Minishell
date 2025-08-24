@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:05 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 21:53:35 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 01:16:52 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ char	**msh_expand_split_args(char const *arg)
 	char		**args;
 	char		**free_arg;
 
-	args = NULL;
-	free_arg = NULL;
 	if (!arg)
 		return (NULL);
 	j = 0;
 	i = j;
 	while (arg[i])
 	{
+
 		if ((arg[i] != ' ' && arg[i] != '\t') && ++j)
 			msh_skip_w(arg, &i);
 		while (arg[i] && (arg[i] == ' ' || arg[i] == '\t'))

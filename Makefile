@@ -6,7 +6,7 @@
 #    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/23 16:25:48 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/24 05:20:11 by lhchiban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,6 +129,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_utils.c		\
 				msh_expand.c			\
 				msh_rm_quates.c			\
+				msh_expand_utils1.c		\
 				msh_tree_init.c
 
 F_PARSE		=	msh_create_and_clean.c	\
@@ -146,7 +147,7 @@ F_TOKEN		=	msh_linemod.c			\
 
 ## Shell Commands and Flags:
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror \
+CFLAGS		=	-Wall -Wextra -Werror -g \
 				-MMD
 RL_LIB		=	$(shell brew --prefix readline)/lib
 RL_INC		=	$(shell brew --prefix readline)/include

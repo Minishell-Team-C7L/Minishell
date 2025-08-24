@@ -16,8 +16,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/mnt/homes/lhchiban/Desktop/last",
-      "program": "/mnt/homes/lhchiban/Desktop/last/build/Debug/outDebug"
+      "cwd": "/mnt/homes/lhchiban/Desktop/Minishell",
+      "program": "/mnt/homes/lhchiban/Desktop/Minishell/build/Debug/outDebug"
     }
   ]
 }
