@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puterr.c                                        :+:      :+:    :+:   */
+/*   msh_print_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 22:07:31 by aessaber          #+#    #+#             */
-/*   Updated: 2025/06/21 11:31:02 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/04 15:02:05 by aessaber          #+#    #+#             */
+/*   Updated: 2025/08/23 23:48:33 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_ft.h"
+#include "lib_msh.h"
 
-void	ft_puterr(const char *str)
+void	msh_print_error(const char *part1, const char *part2)
 {
-	size_t	len;
+	int	fd_stdout;
 
-	if (!str)
+	fd_stdout = dup(STDOUT_FILENO);
+	if (fd_stdout == -1)
 		return ;
-	len = 0;
-	while (str[len])
-		len++;
-	write(STDERR_FILENO, str, len);
+	if (dup2(STDERR_FILENO, STDOUT_FILENO) == -1)
+	{
+		close(fd_stdout);
+		return ;
+	}
+	printf("%s: ", PROJECT_NAME);
+	if (part1)
+		printf("%s", part1);
+	if (part2)
+		printf(": %s", part2);
+	printf("\n");
+	dup2(fd_stdout, STDOUT_FILENO);
+	close(fd_stdout);
 }

@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
 #    Updated: 2025/08/24 12:04:37 by lhchiban         ###   ########.fr        #
@@ -47,14 +47,9 @@ F_FT		=	ft_atoi.c				\
 				ft_lstnew.c				\
 				ft_memcpy.c				\
 				ft_memset.c				\
-				ft_putchar_err.c		\
 				ft_putchar_fd.c			\
-				ft_putchar.c			\
-				ft_puterr.c				\
 				ft_putnbr_fd.c			\
 				ft_putstr_fd.c			\
-				ft_putstr_nl.c			\
-				ft_putstr.c				\
 				ft_str_is_mono.c		\
 				ft_str_is_num.c			\
 				ft_strchr.c				\
@@ -102,6 +97,8 @@ F_MSH		=	msh_ctrl_line_off.c		\
 				msh_null_guard.c		\
 				msh_path_get_cmd.c		\
 				msh_perror.c			\
+				msh_print_error.c		\
+				msh_print_fd.c			\
 				msh_puterr.c			\
 				msh_quit.c				\
 				msh_signal_status.c		\
@@ -121,8 +118,7 @@ F_EXECUTION	=	msh_execute.c			\
 				msh_execute_cmd.c		\
 				msh_execute_pipe.c		\
 				msh_handle_heredoc.c	\
-				msh_handle_redir.c		\
-				msh_handle_tree_heredocs.c
+				msh_handle_redir.c
 
 F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_split_args.c	\

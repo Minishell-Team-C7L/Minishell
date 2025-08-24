@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:28 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 22:01:47 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/23 23:18:26 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	msh_exit(t_data *data, int status)
 {
 	if (!data->abs->arg[1])
 	{
-		printf("exit\n");
+		if (!data->is_in_pipe)
+			printf("exit\n");
 		msh_quit(data, status);
 	}
 	return (exit_parse(data));
@@ -30,15 +31,16 @@ static int	exit_parse(t_data *data)
 
 	if (!ft_str_is_num(data->abs->arg[1]))
 	{
-		ft_puterr("msh: exit: ");
-		ft_puterr(data->abs->arg[1]);
-		ft_puterr(": numeric argument required\n");
+		msh_puterr("msh: exit: ");
+		msh_puterr(data->abs->arg[1]);
+		msh_puterr(": numeric argument required\n");
 		msh_quit(data, UINT8_MAX);
 	}
 	if (data->abs->arg[2])
-		return (ft_puterr("msh: exit: too many arguments\n"), EXIT_FAILURE);
+		return (msh_puterr("msh: exit: too many arguments\n"));
 	status = (uint8_t)ft_atoi(data->abs->arg[1]);
-	printf("exit\n");
+	if (!data->is_in_pipe)
+		printf("exit\n");
 	msh_quit(data, status);
 	return (EXIT_SUCCESS);
 }

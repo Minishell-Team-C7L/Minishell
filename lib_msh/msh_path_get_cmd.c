@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_path_get_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:11:33 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/21 13:53:33 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/23 23:49:44 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	msh_path_get_cmd(const char *cmd, char **cmd_path, t_env **env, t_gc **gc)
 
 	*cmd_path = NULL;
 	if (!*cmd)
-		return (msh_puterr(NULL, "command not found"), 127);
+		return (msh_print_error("command not found", NULL), 127);
 	if (ft_strchr(cmd, '/'))
 		return (static_check_path_errors(cmd, cmd_path, env, gc));
 	env_path = env_get_node(env, "PATH");
@@ -33,12 +33,12 @@ int	msh_path_get_cmd(const char *cmd, char **cmd_path, t_env **env, t_gc **gc)
 		if (access(cmd, F_OK | X_OK) == 0)
 			return (static_check_path_errors(cmd, cmd_path, env, gc));
 		else
-			return (msh_puterr(cmd, "No such file or directory"), 127);
+			return (msh_print_error(cmd, "No such file or directory"), 127);
 	}
 	ary_dir = gc_split(env_path->value, ':', gc);
 	*cmd_path = static_get_path_from_dirs(cmd, ary_dir, env, gc);
 	if (!*cmd_path)
-		return (msh_puterr(cmd, "command not found"), 127);
+		return (msh_print_error(cmd, "command not found"), 127);
 	return (EXIT_SUCCESS);
 }
 
@@ -56,7 +56,7 @@ static int	static_check_path_errors(
 			return (127);
 	}
 	if (S_ISDIR(stat_file.st_mode))
-		return (msh_puterr(cmd, "is a directory"), 126);
+		return (msh_print_error(cmd, "is a directory"), 126);
 	if (access(cmd, X_OK) == -1)
 	{
 		msh_perror(cmd);

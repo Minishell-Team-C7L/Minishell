@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 21:54:45 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/24 21:59:38 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 00:23:51 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	ft_putnbr_fd(int nbr, int fd)
 {
+	char	c;
+
 	if (nbr == -2147483648)
 	{
-		ft_putstr_fd("-2147483648", fd);
+		write(fd, "-2147483648", 11);
 		return ;
 	}
 	if (nbr < 0)
 	{
-		ft_putchar_fd('-', fd);
+		write(fd, "-", 1);
 		nbr = -nbr;
 	}
 	if (nbr > 9)
@@ -30,5 +32,8 @@ void	ft_putnbr_fd(int nbr, int fd)
 		ft_putnbr_fd(nbr % 10, fd);
 	}
 	else
-		ft_putchar_fd(nbr + '0', fd);
+	{
+		c = nbr + '0';
+		write(fd, &c, 1);
+	}
 }
