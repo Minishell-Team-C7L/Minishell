@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/18 17:52:08 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/24 13:17:29 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ NAME		=	minishell
 D_OBJS		=	objs_and_deps
 D_ROOT		=	.
 D_FT		=	lib_ft
-D_DBG		=	lib_dbg
 D_ENV		=	lib_env
 D_GC		=	lib_gc
 D_MSH		=	lib_msh
@@ -48,14 +47,9 @@ F_FT		=	ft_atoi.c				\
 				ft_lstnew.c				\
 				ft_memcpy.c				\
 				ft_memset.c				\
-				ft_putchar_err.c		\
 				ft_putchar_fd.c			\
-				ft_putchar.c			\
-				ft_puterr.c				\
 				ft_putnbr_fd.c			\
 				ft_putstr_fd.c			\
-				ft_putstr_nl.c			\
-				ft_putstr.c				\
 				ft_str_is_mono.c		\
 				ft_str_is_num.c			\
 				ft_strchr.c				\
@@ -68,8 +62,6 @@ F_FT		=	ft_atoi.c				\
 				ft_strncmp.c			\
 				ft_substr.c				\
 				ft_wordcount.c
-
-F_DBG		=	dbg_nullarg.c
 
 F_ENV		=	env_get_node.c			\
 				env_get_node_prev.c		\
@@ -105,6 +97,8 @@ F_MSH		=	msh_ctrl_line_off.c		\
 				msh_null_guard.c		\
 				msh_path_get_cmd.c		\
 				msh_perror.c			\
+				msh_print_error.c		\
+				msh_print_fd.c			\
 				msh_puterr.c			\
 				msh_quit.c				\
 				msh_signal_status.c		\
@@ -131,6 +125,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_utils.c		\
 				msh_expand.c			\
 				msh_rm_quates.c			\
+				msh_expand_utils1.c		\
 				msh_tree_init.c
 
 F_PARSE		=	msh_create_and_clean.c	\
@@ -148,7 +143,7 @@ F_TOKEN		=	msh_linemod.c			\
 
 ## Shell Commands and Flags:
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g \
+CFLAGS		=	-Wall -Wextra -Werror\
 				-MMD
 RL_LIB		=	$(shell brew --prefix readline)/lib
 RL_INC		=	$(shell brew --prefix readline)/include
@@ -157,7 +152,6 @@ RM			=	rm -rf
 
 ## Source Directories (VPATH):
 VPATH		=	$(D_FT)					\
-				$(D_DBG)				\
 				$(D_ENV)				\
 				$(D_GC)					\
 				$(D_MSH)				\
@@ -173,7 +167,6 @@ LIB_RL		=	-L $(RL_LIB) -lreadline
 ## Includes:
 INCLUDES	=	-I $(D_ROOT)			\
 				-I $(D_FT)				\
-				-I $(D_DBG)				\
 				-I $(D_ENV)				\
 				-I $(D_GC)				\
 				-I $(D_MSH)				\
@@ -186,7 +179,6 @@ INCLUDES	=	-I $(D_ROOT)			\
 
 ## Sources & Objects:
 S_FT		=	$(addprefix $(D_FT)/, $(F_FT))
-S_DBG		=	$(addprefix $(D_DBG)/, $(F_DBG))
 S_ENV		=	$(addprefix $(D_ENV)/, $(F_ENV))
 S_GC		=	$(addprefix $(D_GC)/, $(F_GC))
 S_MSH		=	$(addprefix $(D_MSH)/, $(F_MSH))
@@ -198,7 +190,6 @@ S_TOKEN		=	$(addprefix $(D_TOKEN)/, $(F_TOKEN))
 
 SRCS		=	$(F_MAIN)				\
 				$(S_FT)					\
-				$(S_DBG)				\
 				$(S_ENV)				\
 				$(S_GC)					\
 				$(S_MSH)				\

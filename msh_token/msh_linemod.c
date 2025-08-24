@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_linemod.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:44:58 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/06 06:41:31 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 00:18:30 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	msh_quates_err(t_data *data)
 {
-	ft_putstr_fd("minishell: syntax error\n", 2);
+	msh_print_fd("msh: syntax error", 2);
 	data->exit_status = 258;
 }
 

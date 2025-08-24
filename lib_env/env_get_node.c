@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 15:38:41 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/17 04:56:34 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 21:59:39 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ t_env	*env_get_node(t_env **env, const char *target_variable)
 {
 	t_env	*env_current;
 
-	if (!env || !target_variable)
-		return (dbg_nullarg(__func__), NULL);
 	env_current = *env;
 	while (env_current)
 	{

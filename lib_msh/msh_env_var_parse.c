@@ -17,10 +17,12 @@ char	*msh_env_var_parse(const char *variable, t_env **env, t_gc **gc)
 	char	*var_end;
 	char	*env_variable;
 	size_t	len;
+	int		col;
 
-	if (!variable || !gc || !*gc)
-		return (dbg_nullarg(__func__), NULL);
-	var_end = ft_strchr(variable, '+');
+	col = 0;
+	while (variable[col] && (ft_isalnum(variable[col]) || variable[col] == '_'))
+		col++;
+	var_end = (char *)(variable + col);
 	if (!var_end)
 		var_end = ft_strchr(variable, '=');
 	if (var_end)

@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:09 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 01:07:40 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 02:53:33 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,60 +24,9 @@ char	*msh_dquote_extra(size_t *i, char *args)
 
 bool	msh_variable_is_valid(char exp_c)
 {
-	return (exp_c == '_' || ft_isalnum(exp_c));
-	return (true);
+	if (exp_c == '_' || ft_isalnum(exp_c))
+		return (true);
 	return (false);
-}
-
-// char	*msh_skip_emtystr(char *args)
-// {
-// 	char	*temp;
-// 	char	*res;
-// 	size_t	i;
-// 	size_t	j;
-
-// 	if (((args[0] == '"' && args[1] == '"')
-// 			|| (args[1] == '\'' && args[0] == '\'')) && !args[2])
-// 		return (args);
-// 	i = 0;
-// 	j = i;
-// 	temp = ft_calloc(ft_strlen(args) + 1, sizeof(char));
-// 	while (args[i])
-// 	{
-// 		if ((args[i] == '"' && args[i +1] == '"')
-// 			|| (args[i] == '\'' && args[i +1] == '\''))
-// 			i = i +2;
-// 		else
-// 			temp[j++] = args[i++];
-// 	}
-// 	free(args);
-// 	j = 1 + ft_strlen(temp);
-// 	res = ft_calloc(j, sizeof(char));
-// 	ft_strlcpy(res, temp, j);
-// 	free(temp);
-// 	return (res);
-// }
-
-char	*msh_strjoin_and_free(char *str_1, char *str_2)
-{
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*str_join;
-
-	if (!str_1 && !str_2)
-		return (NULL);
-	if (!str_1)
-		return (ft_strdup(str_2));
-	if (!str_2)
-		return (ft_strdup(str_1));
-	s1_len = ft_strlen(str_1);
-	s2_len = ft_strlen(str_2);
-	str_join = (char *)malloc(sizeof(char) * (s1_len + s2_len +1));
-	if (!str_join)
-		return (NULL);
-	ft_strcpy(str_join, str_1);
-	ft_strcpy(str_join + s1_len, str_2);
-	return (free(str_2), free(str_1), str_join);
 }
 
 char	*msh_rm_quates(char *s)
@@ -99,4 +48,59 @@ char	*msh_rm_quates(char *s)
 			msh_skip_qts(res, &i, s, &j);
 	}
 	return (free(s), res);
+}
+
+char	*msh_add_dqts_to_expval(char *str)
+{
+	size_t	i;
+	size_t	j;
+	int		added;
+	char	*res;
+
+	i = 0;
+	j = 0;
+	added = 0;
+	res = malloc(sizeof(char) * (ft_strlen(str) + 3));
+	if (!res)
+		return (NULL);
+	while (str[i])
+	{
+		if (str[i] == '=' && !added)
+		{
+			res[j++] = str[i++];
+			res[j++] = '"';
+			added = 1;
+			continue ;
+		}
+		res[j++] = str[i++];
+	}
+	if (added)
+		res[j++] = '"';
+	return (res[j] = '\0', free(str), res);
+}
+
+char	*msh_strjoin_and_free(char *str_1, char *str_2)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*str_join;
+
+	if (!str_1 && !str_2)
+		return (NULL);
+	if (!str_1)
+		return (ft_strdup(str_2));
+	if (!str_2)
+		return (ft_strdup(str_1));
+	s1_len = ft_strlen(str_1);
+	s2_len = ft_strlen(str_2);
+	str_join = (char *)malloc(sizeof(char) * (s1_len + s2_len +1));
+	if (!str_join)
+		return (NULL);
+	ft_strcpy(str_join, str_1);
+	ft_strcpy(str_join + s1_len, str_2);
+	if (str_1)
+		free(str_1);
+	if (str_2)
+		free(str_2);
+	return (str_join);
 }

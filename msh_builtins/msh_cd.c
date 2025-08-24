@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:04 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 13:22:07 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:34:00 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	msh_cd(const char **arg, char **last_cwd, t_env **env, t_gc **gc)
 {
 	t_cd		cd;
 
-	if (!arg || !arg[0] || !gc || !*gc)
-		return (dbg_nullarg(__func__));
 	cd.oldpwd = gc_getcwd(gc);
 	if (!cd.oldpwd)
 		cd.oldpwd = *last_cwd;
@@ -62,8 +60,11 @@ static int	cd_get_path(t_cd *cd, const char **arg, t_env **env)
 		cd->type = CD_HOME;
 		cd->env_home = env_get_node(env, "HOME");
 		if (!cd->env_home || !cd->env_home->value)
-			return (ft_puterr("msh: cd: HOME not set\n"), EXIT_FAILURE);
-		cd->path = cd->env_home->value;
+			return (msh_puterr("msh: cd: HOME not set\n"));
+		if (cd->env_home->value[0] == '\0')
+			cd->path = ".";
+		else
+			cd->path = cd->env_home->value;
 		return (EXIT_SUCCESS);
 	}
 	if (ft_strcmp(arg[1], "-") == 0)
@@ -71,7 +72,7 @@ static int	cd_get_path(t_cd *cd, const char **arg, t_env **env)
 		cd->type = CD_OLDPWD;
 		cd->env_oldpwd = env_get_node(env, "OLDPWD");
 		if (!cd->env_oldpwd || !cd->env_oldpwd->value)
-			return (ft_puterr("msh: cd: OLDPWD not set\n"), EXIT_FAILURE);
+			return (msh_puterr("msh: cd: OLDPWD not set\n"));
 		cd->path = cd->env_oldpwd->value;
 		return (EXIT_SUCCESS);
 	}

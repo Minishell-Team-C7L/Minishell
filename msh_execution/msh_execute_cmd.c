@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 19:42:46 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:54:57 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 	pid_t	pid;
 	int		exit_status;
 
-	if (!data || !gc || !*gc)
-		return (dbg_nullarg(__func__), EXIT_SUCCESS);
 	if (data->abs->arg && data->abs->arg[0])
 	{
 		if (static_is_builtin_parent(data->abs->arg[0]))
@@ -60,8 +58,6 @@ static int	static_execute_builtin(
 {
 	const char	**arg;
 
-	if (!data->abs->arg || !data->abs->arg[0] || !gc || !*gc)
-		return (dbg_nullarg(__func__));
 	arg = (const char **)data->abs->arg;
 	if (ft_strcmp(arg[0], "cd") == 0)
 		return (msh_cd(arg, &data->last_cwd, env, gc));
@@ -103,10 +99,15 @@ static int	static_execute_external(const char **arg, t_env **env, t_gc **gc)
 	char	*cmd_path;
 	int		exit_status;
 	char	**envp;
+	t_env	*env_path;
 
+	env_path = env_get_node(env, "PATH");
 	if (!ft_strcmp(arg[0], ".")
-		|| !ft_strcmp(arg[0], ".."))
-		return (msh_puterr(arg[0], "command not found"), 127);
+		|| (!ft_strcmp(arg[0], "..")
+			&& env_path
+			&& env_path->value
+			&& *env_path->value != 0))
+		return (msh_print_error(arg[0], "command not found"), 127);
 	exit_status = msh_path_get_cmd(arg[0], &cmd_path, env, gc);
 	if (exit_status)
 		return (exit_status);
