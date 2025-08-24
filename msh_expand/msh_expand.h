@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:26:49 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 05:18:14 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 12:58:48 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ char	*msh_add_dqts_to_expval(char *str);
 size_t	arr_len(char **arr);
 char	**expand_and_split(char **f_expand, t_data *data);
 void	msh_go_remove_quotes(char **f_expand);
-char	**msh_clean_empty_strs(char **arr);;
+char	**msh_clean_empty_strs(char **arr);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 05:10:29 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/24 05:19:38 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 12:57:57 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_expand.h"
 
-static char **replace_with_split(char **arr, size_t i, char **split)
+static char	**replace_with_split(char **arr, size_t i, char **split)
 {
 	size_t	len_arr;
 	size_t	len_split;
@@ -39,26 +39,38 @@ static char **replace_with_split(char **arr, size_t i, char **split)
 	return (free(arr[i]), free(arr), free(split), new_arr);
 }
 
+static char	**handle_dollar_expand(char **f_expand, size_t *i)
+{
+	char	**extra_exp;
+
+	extra_exp = msh_expand_split_args(f_expand[*i]);
+	if (extra_exp && extra_exp[1])
+	{
+		f_expand = replace_with_split(f_expand, *i, extra_exp);
+		(*i)--;
+	}
+	else if (extra_exp)
+		msh_free_arr(extra_exp);
+	return (f_expand);
+}
+
 char	**expand_and_split(char **f_expand, t_data *data)
 {
 	size_t	i;
-	char	**extra_exp;
+	char	*old_str;
+	char	*new_str;
 
 	i = 0;
 	while (f_expand && f_expand[i])
 	{
-		f_expand[i] = msh_handel_expand(f_expand[i], data);
+		old_str = f_expand[i];
+		new_str = msh_handel_expand(old_str, data);
+		if (!new_str)
+			return (free(old_str), msh_free_arr(f_expand), NULL);
+		f_expand[i] = new_str;
+		free(old_str);
 		if (data->dollar_exp_state)
-		{
-			extra_exp = msh_expand_split_args(f_expand[i]);
-			if (extra_exp && extra_exp[1])
-			{
-				f_expand = replace_with_split(f_expand, i, extra_exp);
-				i--;
-			}
-			else if (extra_exp)
-				msh_free_arr(extra_exp);
-		}
+			f_expand = handle_dollar_expand(f_expand, &i);
 		i++;
 	}
 	return (f_expand);
