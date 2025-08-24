@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 22:32:42 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:34:01 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 
 	if (data->abs->arg && data->abs->arg[0])
 	{
-		msh_handle_redir(data->abs->red_l, false);
 		if (static_is_builtin_parent(data->abs->arg[0]))
 		{
 			if (msh_handle_redir(data->abs->red_l, false) == EXIT_FAILURE)
