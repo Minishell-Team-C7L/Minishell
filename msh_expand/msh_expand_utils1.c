@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 05:10:29 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/24 12:57:57 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 14:13:26 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**expand_and_split(char **f_expand, t_data *data)
 			return (free(old_str), msh_free_arr(f_expand), NULL);
 		f_expand[i] = new_str;
 		free(old_str);
-		if (data->dollar_exp_state)
+		if (data->dollar_exp_state && ft_strcmp(f_expand[0], "export"))
 			f_expand = handle_dollar_expand(f_expand, &i);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 12:24:46 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 14:08:28 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	f_expand = msh_expand_split_args(str);
 	if (!f_expand)
 		return (NULL);
-	msh_handle_export_args(f_expand);
 	f_expand = expand_and_split(f_expand, data);
+	msh_handle_export_args(f_expand);
 	if (!f_expand)
 		return (NULL);
 	msh_go_remove_quotes(f_expand);
