@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:42 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/20 22:03:29 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 14:36:47 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,3 @@
 # include "msh_token.h"
 
 #endif
-/* Rules:
-- Funcitons made specifically for minishell should start with "msh_"
-- Garbage collector functions should start "gc_"
-- Other functions that are useful outside minishell should start with "ft_"
-*/

@@ -6,7 +6,7 @@
 #    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/24 16:17:51 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/24 13:17:29 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -144,7 +144,7 @@ F_TOKEN		=	msh_linemod.c			\
 
 ## Shell Commands and Flags:
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g\
+CFLAGS		=	-Wall -Wextra -Werror\
 				-MMD
 RL_LIB		=	$(shell brew --prefix readline)/lib
 RL_INC		=	$(shell brew --prefix readline)/include

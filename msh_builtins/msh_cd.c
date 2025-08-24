@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:42:04 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/23 23:23:31 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:34:00 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ static int	cd_get_path(t_cd *cd, const char **arg, t_env **env)
 		cd->env_home = env_get_node(env, "HOME");
 		if (!cd->env_home || !cd->env_home->value)
 			return (msh_puterr("msh: cd: HOME not set\n"));
-		cd->path = cd->env_home->value;
+		if (cd->env_home->value[0] == '\0')
+			cd->path = ".";
+		else
+			cd->path = cd->env_home->value;
 		return (EXIT_SUCCESS);
 	}
 	if (ft_strcmp(arg[1], "-") == 0)
