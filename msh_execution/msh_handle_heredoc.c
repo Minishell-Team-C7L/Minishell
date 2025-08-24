@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:26:15 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/23 23:23:50 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 02:26:45 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ int	msh_handle_heredocs(t_data *data, t_node *node)
 
 	if (!node)
 		return (EXIT_SUCCESS);
+	if (node->type == PIPE_N)
+	{
+		if (msh_handle_heredocs(data, node->left) != EXIT_SUCCESS)
+			return (EXIT_FAILURE);
+		if (msh_handle_heredocs(data, node->right) != EXIT_SUCCESS)
+			return (EXIT_FAILURE);
+	}
 	if (node->type == CMD_N)
 	{
 		current_redir = node->red_l;
@@ -37,12 +44,6 @@ int	msh_handle_heredocs(t_data *data, t_node *node)
 			current_redir = current_redir->next;
 		}
 	}
-	if (node->left)
-		if (msh_handle_heredocs(data, node->left) != EXIT_SUCCESS)
-			return (EXIT_FAILURE);
-	if (node->right)
-		if (msh_handle_heredocs(data, node->right) != EXIT_SUCCESS)
-			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

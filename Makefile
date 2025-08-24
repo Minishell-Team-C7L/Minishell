@@ -6,7 +6,7 @@
 #    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/24 00:29:15 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/24 02:37:55 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,8 +118,7 @@ F_EXECUTION	=	msh_execute.c			\
 				msh_execute_cmd.c		\
 				msh_execute_pipe.c		\
 				msh_handle_heredoc.c	\
-				msh_handle_redir.c		\
-				msh_handle_tree_heredocs.c
+				msh_handle_redir.c
 
 F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_split_args.c	\

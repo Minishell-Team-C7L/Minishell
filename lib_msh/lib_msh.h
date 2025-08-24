@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 00:18:20 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 02:37:35 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ typedef struct s_data
 	bool			heredoc_expand_inqts;
 	bool			dollar_exp_state;
 	bool			dollar_noexp_state;
-	int				hd_err;
 	struct termios	original_termios;
 	char			*last_cwd;
 	t_list			*child_pids;
