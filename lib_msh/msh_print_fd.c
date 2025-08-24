@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_calloc.c                                        :+:      :+:    :+:   */
+/*   msh_printf_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/10 04:20:50 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/10 04:23:19 by aessaber         ###   ########.fr       */
+/*   Created: 2025/08/24 00:05:20 by aessaber          #+#    #+#             */
+/*   Updated: 2025/08/24 00:17:41 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_gc.h"
+#include "lib_msh.h"
 
-void	*gc_calloc(size_t count, size_t size, t_gc **gc)
+void	msh_print_fd(const char *str, int fd)
 {
-	void	*ptr;
+	int	fd_stdout;
 
-	if (!gc || !*gc)
-		return (dbg_nullarg(__func__), NULL);
-	ptr = gc_malloc(count * size, gc);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	fd_stdout = dup(STDOUT_FILENO);
+	if (fd_stdout == -1)
+		return ;
+	if (dup2(fd, STDOUT_FILENO) == -1)
+	{
+		close(fd_stdout);
+		return ;
+	}
+	printf("%s\n", str);
+	dup2(fd_stdout, STDOUT_FILENO);
+	close(fd_stdout);
 }

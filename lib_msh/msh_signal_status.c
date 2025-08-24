@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 08:22:42 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 08:23:27 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/23 23:57:41 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	msh_signal_status(int exit_status)
 	if (WIFSIGNALED(exit_status))
 	{
 		if (WTERMSIG(exit_status) == SIGINT)
-			ft_putstr_nl("");
+			printf("\n");
 		else if (WTERMSIG(exit_status) == SIGQUIT)
-			ft_putstr_nl("Quit: 3");
+			printf("Quit: 3\n");
 		return (WTERMSIG(exit_status) + 128);
 	}
 	if (WIFEXITED(exit_status))

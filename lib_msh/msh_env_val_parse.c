@@ -16,8 +16,6 @@ char	*msh_env_val_parse(const char *value, t_env **env, t_gc **gc)
 {
 	const char	*val_start;
 
-	if (!value || !gc || !*gc)
-		return (dbg_nullarg(__func__), NULL);
 	val_start = ft_strchr(value, '=');
 	if (!val_start)
 		return ((char *)msh_null_guard(gc_strdup("", gc), env, gc));

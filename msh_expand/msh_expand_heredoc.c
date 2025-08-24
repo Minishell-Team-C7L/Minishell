@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/18 13:48:00 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 12:59:41 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,16 @@ static int	msh_expand_w_hd(
 		ft_putstr_fd(value, fd);
 	free(read_line);
 	return (0);
+}
+
+size_t	arr_len(char **arr)
+{
+	size_t	len;
+
+	len = 0;
+	if (!arr)
+		return (0);
+	while (arr[len])
+		len++;
+	return (len);
 }

@@ -6,31 +6,32 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/19 16:30:16 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/24 12:23:42 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIB_MSH_H
 # define LIB_MSH_H
 
-// For: errno
 # include <errno.h>
-// For: perror(), printf()
+// For: errno
+# include <string.h>
+// For: strerror()
 # include <stdio.h>
-// For: readline()
+// For: perror(), printf()
 # include <readline/readline.h>
-// For: add_history()
+// For: readline()
 # include <readline/history.h>
-// For: stat(), S_ISDIR()
+// For: add_history()
 # include <sys/stat.h>
-// For: sigaction()
+// For: stat(), S_ISDIR()
 # include <signal.h>
-// For: termios
+// For: sigaction()
 # include <termios.h>
+// For: termios
 
 // Dependencies:
 # include "lib_ft.h"
-# include "lib_dbg.h"
 # include "lib_env.h"
 # include "lib_gc.h"
 
@@ -85,8 +86,10 @@ typedef struct s_red_node
 {
 	char				*val;
 	bool				heredoc_sign;
+	bool				is_ambiguous;
 	t_red_type			type;
 	struct s_red_node	*next;
+	int					fd;
 }	t_red_node;
 
 typedef struct s_node
@@ -118,13 +121,13 @@ typedef struct s_data
 	t_env			*env;
 	t_gc			*gc;
 	int				phd_count;
-	bool			hd_firstdel_isnbr;
-	int				hd_spicial_casenbr;
 	bool			heredoc_expand_inqts;
-	int				hd_err;
+	bool			dollar_exp_state;
+	bool			dollar_noexp_state;
 	struct termios	original_termios;
-	bool			is_ambiguous;
 	char			*last_cwd;
+	t_list			*child_pids;
+	bool			is_in_pipe;
 }	t_data;
 
 void	msh_ctrl_line_off(t_data *data);
@@ -132,14 +135,16 @@ void	msh_ctrl_line_on(t_data *data);
 void	msh_env_defaults(t_env **env, t_gc **gc);
 t_env	*msh_env_sort(t_env **env, t_gc **gc);
 char	**msh_env_to_array(t_env **env, t_gc **gc);
-char	*msh_env_val_parse(const char *value, t_env **env, t_gc **gc);
+char	*msh_env_val_parse(const char *const_value, t_env **env, t_gc **gc);
 char	*msh_env_var_parse(const char *variable, t_env **env, t_gc **gc);
 void	msh_id_err(const char *arg, const char *cmd);
 void	*msh_null_guard(void *ptr, t_env **env, t_gc **gc);
 int		msh_path_get_cmd(
 			const char *cmd, char **cmd_path, t_env **env, t_gc **gc);
-void	msh_puterr(const char *cmd_name, const char *msg);
 int		msh_perror(const char *cmd_name);
+void	msh_print_error(const char *part1, const char *part2);
+void	msh_print_fd(const char *str, int fd);
+int		msh_puterr(const char *str);
 void	msh_quit(t_data *data, int status);
 int		msh_signal(void);
 int		msh_signal_child(void);

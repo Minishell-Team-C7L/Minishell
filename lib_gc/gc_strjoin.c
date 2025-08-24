@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:26:26 by aessaber          #+#    #+#             */
-/*   Updated: 2025/07/19 15:34:24 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:01:02 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*gc_strjoin(char const *str_1, char const *str_2, t_gc **gc)
 	size_t	str_2_len;
 	char	*str_joined;
 
-	if (!gc || !*gc)
-		return (dbg_nullarg(__func__), NULL);
 	if (!str_1 && !str_2)
 		return (gc_strdup("", gc));
 	if (!str_1)

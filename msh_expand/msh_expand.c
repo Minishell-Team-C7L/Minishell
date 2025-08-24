@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:17:27 by spi               #+#    #+#             */
-/*   Updated: 2025/08/18 00:45:49 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/24 12:29:45 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*msh_handel_expand(char *args, t_data *data)
 
 	i = 0;
 	after_expand = ft_strdup("");
+	data->dollar_exp_state = false;
 	while (args[i])
 	{
 		if (args[i] == '$')
@@ -49,6 +50,7 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 	char	*variable;
 	char	*env_value;
 	size_t	start;
+	size_t	j;
 
 	(*i)++;
 	if (args[*i] == '?')
@@ -57,18 +59,14 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 		return (ft_strdup("$"));
 	else
 		start = *i;
+	data->dollar_exp_state = true;
 	while (msh_variable_is_valid(args[*i]))
 		(*i)++;
 	variable = ft_substr(args, start, *i - start);
 	env_value = msh_env_get_val(data->env, variable);
 	if (!env_value)
 		return (free(variable), ft_strdup(""));
-	start = 0;
-	while (env_value[++start] == '\t')
-	{
-		if (!env_value[++start])
-			return (free(variable), ft_strdup(""));
-	}
+	j = 0;
 	return (free(variable), ft_strdup(env_value));
 }
 
