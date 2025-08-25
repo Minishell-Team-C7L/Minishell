@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 23:34:01 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:15:51 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 	}
 	if (msh_signal_off() == EXIT_FAILURE)
 		return (msh_perror("sigaction"));
+	if (data->is_onlyqts)
+	{
+		data->is_onlyqts = false;
+		if (msh_handle_redir(data->abs->red_l, false) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+		return (msh_print_error("command not found", NULL), 127);
+	}
 	pid = fork();
 	if (pid == FORK_FAILURE)
 		return (msh_perror("fork"));

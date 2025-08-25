@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 10:24:33 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:08:03 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	msh_execute(t_data *data, t_node *ast_head)
 		data->last_cwd = last_cwd;
 	if (!ast_head)
 		return (data->exit_status);
-	if (!*ast_head->arg[0])
-		return (EXIT_SUCCESS);
 	if (ast_head->type == CMD_N)
 	{
 		1 && (data->abs = ast_head, data->stdin_backup = dup(STDIN_FILENO));

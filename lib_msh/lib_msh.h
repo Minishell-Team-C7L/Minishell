@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 10:24:49 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:01:56 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_data
 	char			*last_cwd;
 	bool			is_in_pipe;
 	bool			is_white;
+	bool			is_onlyqts;
 	int				stdin_backup;
 	int				stdout_backup;
 }	t_data;
