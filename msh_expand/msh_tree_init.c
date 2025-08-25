@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 12:20:59 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:56:18 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	int		i;
 
 	i = -1;
+	while (is_only_quotes(str))
+		data->is_onlyqts = true;
 	f_expand = msh_expand_split_args(str);
 	if (!f_expand)
 		return (NULL);
@@ -46,9 +48,6 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	msh_handle_export_args(f_expand);
 	if (!f_expand)
 		return (NULL);
-	while (f_expand[++i])
-		if (is_only_quotes(f_expand[i]))
-			data->is_onlyqts = true;
 	msh_go_remove_quotes(f_expand);
 	if (!f_expand)
 		return (NULL);
