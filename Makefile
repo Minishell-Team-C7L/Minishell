@@ -6,7 +6,7 @@
 #    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/24 13:17:29 by aessaber         ###   ########.fr        #
+#    Updated: 2025/08/25 10:22:32 by lhchiban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,14 +38,10 @@ F_FT		=	ft_atoi.c				\
 				ft_free.c				\
 				ft_isalnum.c			\
 				ft_isalpha.c			\
-				ft_isdigit.c			\
 				ft_itoa.c				\
 				ft_lstadd_back.c		\
-				ft_lstclear.c			\
 				ft_lstiter.c			\
-				ft_lstlen.c				\
 				ft_lstnew.c				\
-				ft_memcpy.c				\
 				ft_memset.c				\
 				ft_putchar_fd.c			\
 				ft_putnbr_fd.c			\
@@ -64,7 +60,6 @@ F_FT		=	ft_atoi.c				\
 				ft_wordcount.c
 
 F_ENV		=	env_get_node.c			\
-				env_get_node_prev.c		\
 				env_initiate.c			\
 				env_list_free.c			\
 				env_node_add_back.c		\
@@ -124,7 +119,7 @@ F_EXPAND	=	msh_expand_heredoc.c	\
 				msh_expand_split_args.c	\
 				msh_expand_utils.c		\
 				msh_expand.c			\
-				msh_rm_quates.c			\
+				msh_rm_quotes.c			\
 				msh_expand_utils1.c		\
 				msh_expand_qts_utils.c	\
 				msh_tree_init.c

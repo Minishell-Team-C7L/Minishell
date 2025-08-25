@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_handle_heredoc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:26:15 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 02:26:45 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:14:20 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static void	static_heredoc_child(
 			break ;
 		if (msh_heredoc_delimiter_check(line, redir->val))
 			break ;
-		msh_expand_heredoc(tmp_fd, line, data, redir->heredoc_sign);
+		msh_expand_heredoc(tmp_fd, line, data, redir->heredoc_exp);
 		ft_putchar_fd('\n', tmp_fd);
 		free(line);
 	}

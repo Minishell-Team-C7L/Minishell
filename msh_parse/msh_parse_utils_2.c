@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:49:32 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/21 17:46:47 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:34:46 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ void	msh_combine_rediractions(t_red_node *n_red, t_red_node **red_list)
 	cur_red->next = n_red;
 }
 
-void	msh_clear_cmd(t_node *cmd_node, t_data *data)
+void	msh_clear_cmd(t_node *cmd_node)
 {
 	if (!cmd_node)
 		return ;
-	if (!data->dollar_noexp_state)
-		msh_red_list_clear(&(cmd_node->red_l));
+	msh_red_list_clear(&(cmd_node->red_l));
 	msh_free_arr(cmd_node->arg);
 	msh_free_cmd_args(cmd_node);
 }

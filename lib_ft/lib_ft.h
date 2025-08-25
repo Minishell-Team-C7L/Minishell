@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_ft.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 09:51:26 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 00:01:09 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:22:41 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,15 @@ typedef struct s_list
 }	t_list;
 
 int		ft_atoi(const char *str);
-
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t nm);
 void	ft_free(void **ptr);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
-int		ft_isdigit(int c);
 char	*ft_itoa(int n);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
-int		ft_lstlen(const t_list *lst);
 t_list	*ft_lstnew(void *content);
-void	*ft_memcpy(void *dst, const void *src, size_t len);
 void	*ft_memset(void *ptr, int c, size_t len);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int nbr, int fd);

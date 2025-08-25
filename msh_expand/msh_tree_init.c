@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 14:08:28 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 09:42:17 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	**static_set_up_exp_args(char *str, t_data *data);
 static int	msh_keyval_valid(const char *variable);
+static void	msh_handle_export_args(char **f_expand);
 
 void	msh_tree_init(t_data *data, t_node *tree_node)
 {
@@ -28,23 +29,6 @@ void	msh_tree_init(t_data *data, t_node *tree_node)
 	{
 		if (tree_node->args)
 			tree_node->arg = static_set_up_exp_args(tree_node->args, data);
-	}
-}
-
-static void	msh_handle_export_args(char **f_expand)
-{
-	size_t	i;
-
-	if (!ft_strncmp(f_expand[0], "export", 7))
-	{
-		i = 1;
-		while (f_expand[i])
-		{
-			if (msh_keyval_valid(f_expand[i]))
-				f_expand[i] = msh_add_dqts_to_expval(f_expand[i]);
-			else
-				i++;
-		}
 	}
 }
 
@@ -65,6 +49,23 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	if (ft_strcmp(f_expand[0], "export") && is_only_quotes(f_expand[0]))
 		f_expand = msh_clean_empty_strs(f_expand);
 	return (f_expand);
+}
+
+static void	msh_handle_export_args(char **f_expand)
+{
+	size_t	i;
+
+	if (!ft_strncmp(f_expand[0], "export", 7))
+	{
+		i = 1;
+		while (f_expand[i])
+		{
+			if (msh_keyval_valid(f_expand[i]))
+				f_expand[i] = msh_add_dqts_to_expval(f_expand[i]);
+			else
+				i++;
+		}
+	}
 }
 
 static int	msh_keyval_valid(const char *variable)

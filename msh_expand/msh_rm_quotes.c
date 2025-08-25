@@ -6,11 +6,11 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 08:47:13 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/19 20:48:32 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 09:40:31 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh_main.h"
+#include "msh_expand.h"
 
 size_t	msh_withoutq_len(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 09:51:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 08:27:55 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:24:33 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	msh_execute(t_data *data, t_node *ast_head)
 		return (data->exit_status);
 	if (!*ast_head->arg[0])
 		return (EXIT_SUCCESS);
-	data->child_pids = NULL;
 	if (ast_head->type == CMD_N)
 	{
 		1 && (data->abs = ast_head, data->stdin_backup = dup(STDIN_FILENO));
@@ -39,7 +38,6 @@ int	msh_execute(t_data *data, t_node *ast_head)
 		exit_status = msh_execute_pipe(ast_head, data);
 	else
 		exit_status = EXIT_SUCCESS;
-	ft_lstclear(&data->child_pids, free);
 	return (exit_status);
 }
 

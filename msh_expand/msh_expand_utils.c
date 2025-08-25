@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:09 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 02:53:33 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 09:38:03 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	msh_variable_is_valid(char exp_c)
 	return (false);
 }
 
-char	*msh_rm_quates(char *s)
+char	*msh_rm_quotes(char *s)
 {
 	size_t	i;
 	size_t	j;

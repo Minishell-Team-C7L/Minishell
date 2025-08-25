@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:08:58 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/22 18:36:42 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:35:36 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,10 @@
 
 t_node		*msh_head_combine(t_data *cur_data, t_node *left, t_node *right);
 t_node		*msh_new_node(t_node_type n_type);
-t_node		*msh_new_cmd_node(void);
 t_red_node	*msh_new_red_node(char *value, t_token_types t_type, t_data *data);
-int			msh_add_arg_to_string(char **args, char *value);
-int			msh_build_args_string(char **args, t_data *cur_data);
 int			msh_build_cmd_with_args(t_data *cur_data, char **args);
-void		msh_clear_cmd(t_node *cmd_node, t_data *data);
+void		msh_clear_cmd(t_node *cmd_node);
 void		msh_free_cmd_args(t_node *cmd_node);
-void		msh_free_args_string(char **args);
 bool		msh_red_list(t_data *cur_data, t_red_node **red_list);
 void		msh_clear_tree_rec(t_node *tree, t_data *data);
 

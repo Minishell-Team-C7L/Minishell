@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 12:09:59 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 20:08:45 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:24:49 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef enum e_red_type
 typedef struct s_red_node
 {
 	char				*val;
-	bool				heredoc_sign;
+	bool				heredoc_exp;
 	bool				is_ambiguous;
 	t_red_type			type;
 	struct s_red_node	*next;
@@ -120,13 +120,9 @@ typedef struct s_data
 	t_list			*heredoc_files;
 	t_env			*env;
 	t_gc			*gc;
-	int				phd_count;
-	bool			heredoc_expand_inqts;
 	bool			dollar_exp_state;
-	bool			dollar_noexp_state;
 	struct termios	original_termios;
 	char			*last_cwd;
-	t_list			*child_pids;
 	bool			is_in_pipe;
 	bool			is_white;
 	int				stdin_backup;

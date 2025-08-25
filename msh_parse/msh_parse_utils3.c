@@ -6,13 +6,13 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:36:06 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/22 18:35:43 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 09:52:51 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_parse.h"
 
-static size_t	del_dollar_count(char *del)
+static size_t	msh_del_dollar_count(char *del)
 {
 	size_t	i;
 
@@ -34,7 +34,7 @@ char	*msh_heredoc_chval(char *del)
 	i = 0;
 	j = 0;
 	flag = 0;
-	i = del_dollar_count(del);
+	i = msh_del_dollar_count(del);
 	if (i % 2 == 0)
 		return (ft_strdup(del));
 	res = malloc(sizeof(char) * ft_strlen(del) + 1);

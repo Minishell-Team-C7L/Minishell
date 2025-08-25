@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:15:46 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/08/24 19:51:45 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 09:38:03 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	msh_go_remove_quotes(char **f_expand)
 	i = 0;
 	while (f_expand && f_expand[i])
 	{
-		f_expand[i] = msh_rm_quates(f_expand[i]);
+		f_expand[i] = msh_rm_quotes(f_expand[i]);
 		show_quotes(f_expand[i]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:17:27 by spi               #+#    #+#             */
-/*   Updated: 2025/08/25 08:17:15 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 08:31:08 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 	char	*variable;
 	char	*env_value;
 	size_t	start;
-	size_t	j;
 
 	(*i)++;
 	if (args[*i] == '?')
@@ -67,7 +66,6 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 	if (!env_value)
 		return (free(variable), ft_strdup(""));
 	hide_quotes(env_value);
-	j = 0;
 	return (free(variable), ft_strdup(env_value));
 }
 

@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:00 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/24 12:59:41 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 10:18:39 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	msh_expand_heredoc(int fd, char *str, t_data *data, bool sign)
 
 	start = 0;
 	j = 0;
-	data->heredoc_expand_inqts = false;
 	if (sign == true)
 	{
 		while (str[j])
