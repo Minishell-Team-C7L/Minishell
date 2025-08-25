@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:17:27 by spi               #+#    #+#             */
-/*   Updated: 2025/08/25 08:31:08 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:58:41 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 	char	*variable;
 	char	*env_value;
 	size_t	start;
+	char	*temp;
 
 	(*i)++;
 	if (args[*i] == '?')
@@ -63,7 +64,9 @@ static char	*msh_dollar_expand(size_t *i, char *args, t_data *data)
 		(*i)++;
 	variable = ft_substr(args, start, *i - start);
 	env_value = msh_env_get_val(data->env, variable);
-	if (!env_value)
+	temp = variable;
+	skip_whitespace(&temp);
+	if (!env_value || !*temp)
 		return (free(variable), ft_strdup(""));
 	hide_quotes(env_value);
 	return (free(variable), ft_strdup(env_value));

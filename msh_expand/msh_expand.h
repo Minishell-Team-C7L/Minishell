@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_expand.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:26:49 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 09:38:03 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:57:11 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "lib_env.h"
 # include "lib_gc.h"
 # include "lib_msh.h"
+# include "msh_token.h"
 
 char	*msh_env_get_val(t_env *env, const char *key);
 void	msh_expand_heredoc(int fd, char *read_line, t_data *data, bool sign);
