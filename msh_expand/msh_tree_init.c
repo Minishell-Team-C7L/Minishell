@@ -6,7 +6,7 @@
 /*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 12:09:58 by aessaber         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:20:59 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	msh_tree_init(t_data *data, t_node *tree_node)
 	}
 	else
 	{
+		data->is_onlyqts = false;
 		if (tree_node->args)
 			tree_node->arg = static_set_up_exp_args(tree_node->args, data);
 	}
@@ -35,7 +36,9 @@ void	msh_tree_init(t_data *data, t_node *tree_node)
 static char	**static_set_up_exp_args(char *str, t_data *data)
 {
 	char	**f_expand;
+	int		i;
 
+	i = -1;
 	f_expand = msh_expand_split_args(str);
 	if (!f_expand)
 		return (NULL);
@@ -43,8 +46,9 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	msh_handle_export_args(f_expand);
 	if (!f_expand)
 		return (NULL);
-	if (is_only_quotes(f_expand[0]))
-		data->is_onlyqts = true;
+	while (f_expand[++i])
+		if (is_only_quotes(f_expand[i]))
+			data->is_onlyqts = true;
 	msh_go_remove_quotes(f_expand);
 	if (!f_expand)
 		return (NULL);
