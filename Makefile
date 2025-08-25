@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+         #
+#    By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/25 19:56:32 by aessaber          #+#    #+#              #
-#    Updated: 2025/08/25 10:40:35 by lhchiban         ###   ########.fr        #
+#    Updated: 2025/08/25 11:45:13 by aessaber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,8 @@ F_BUILTINS	=	msh_cd.c				\
 				msh_pwd.c				\
 				msh_unset.c
 
-F_EXECUTION	=	msh_execute.c			\
+F_EXECUTION	=	msh_execute_builtin.c	\
+				msh_execute.c			\
 				msh_execute_cmd.c		\
 				msh_execute_pipe.c		\
 				msh_handle_heredoc.c	\

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execute_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:26:10 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 11:15:51 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:59:59 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_execution.h"
 
-static bool	static_is_builtin_parent(const char *cmd);
-static int	static_execute_builtin(
+static int	msh_execute_special_case(
 				t_data *data, int status, t_env **env, t_gc **gc);
+static bool	static_is_builtin_parent(const char *cmd);
 static void	static_execute_child(
 				t_data *data, int status, t_env **env, t_gc **gc);
 static int	static_execute_external(const char **arg, t_env **env, t_gc **gc);
@@ -24,24 +24,11 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 	pid_t	pid;
 	int		exit_status;
 
-	if (data->abs->arg && data->abs->arg[0])
-	{
-		if (static_is_builtin_parent(data->abs->arg[0]))
-		{
-			if (msh_handle_redir(data->abs->red_l, false) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
-			return (static_execute_builtin(data, status, env, gc));
-		}
-	}
+	exit_status = msh_execute_special_case(data, status, env, gc);
+	if (exit_status != NOT_A_SPECIAL_CASE)
+		return (exit_status);
 	if (msh_signal_off() == EXIT_FAILURE)
 		return (msh_perror("sigaction"));
-	if (data->is_onlyqts)
-	{
-		data->is_onlyqts = false;
-		if (msh_handle_redir(data->abs->red_l, false) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		return (msh_print_error("command not found", NULL), 127);
-	}
 	pid = fork();
 	if (pid == FORK_FAILURE)
 		return (msh_perror("fork"));
@@ -50,6 +37,28 @@ int	msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc)
 	if (waitpid(pid, &exit_status, 0) == -1)
 		return (msh_perror("waitpid"));
 	return (msh_signal_status(exit_status));
+}
+
+static int	msh_execute_special_case(
+	t_data *data, int status, t_env **env, t_gc **gc)
+{
+	if (data->abs->arg && data->abs->arg[0])
+	{
+		if (static_is_builtin_parent(data->abs->arg[0]))
+		{
+			if (msh_handle_redir(data->abs->red_l, false) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
+			return (msh_execute_builtin(data, status, env, gc));
+		}
+	}
+	if (data->is_onlyqts)
+	{
+		data->is_onlyqts = false;
+		if (msh_handle_redir(data->abs->red_l, false) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+		return (msh_print_error("command not found", NULL), 127);
+	}
+	return (NOT_A_SPECIAL_CASE);
 }
 
 static bool	static_is_builtin_parent(const char *cmd)
@@ -64,29 +73,6 @@ static bool	static_is_builtin_parent(const char *cmd)
 	return (false);
 }
 
-static int	static_execute_builtin(
-	t_data *data, int status, t_env **env, t_gc **gc)
-{
-	const char	**arg;
-
-	arg = (const char **)data->abs->arg;
-	if (ft_strcmp(arg[0], "cd") == 0)
-		return (msh_cd(arg, &data->last_cwd, env, gc));
-	else if (ft_strcmp(arg[0], "echo") == 0)
-		return (msh_echo(arg));
-	else if (ft_strcmp(arg[0], "env") == 0)
-		return (msh_env(*env));
-	else if (ft_strcmp(arg[0], "exit") == 0)
-		return (msh_exit(data, status));
-	else if (ft_strcmp(arg[0], "export") == 0)
-		return (msh_export(arg, env, gc));
-	else if (ft_strcmp(arg[0], "pwd") == 0)
-		return (msh_pwd(data->last_cwd, gc));
-	else if (ft_strcmp(arg[0], "unset") == 0)
-		return (msh_unset(arg, env));
-	return (127);
-}
-
 static void	static_execute_child(
 	t_data *data, int status, t_env **env, t_gc **gc)
 {
@@ -97,7 +83,7 @@ static void	static_execute_child(
 	msh_handle_redir(data->abs->red_l, true);
 	if (!data->abs->arg || !data->abs->arg[0])
 		msh_quit(data, EXIT_SUCCESS);
-	exit_status = static_execute_builtin(data, status, env, gc);
+	exit_status = msh_execute_builtin(data, status, env, gc);
 	if (exit_status != 127)
 		msh_quit(data, exit_status);
 	exit_status = static_execute_external(

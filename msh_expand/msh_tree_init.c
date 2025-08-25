@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_tree_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:44:16 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 11:18:34 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:09:58 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	msh_tree_init(t_data *data, t_node *tree_node)
 	}
 	else
 	{
-		if (is_only_quotes(tree_node->args))
-			data->is_onlyqts = true;
 		if (tree_node->args)
 			tree_node->arg = static_set_up_exp_args(tree_node->args, data);
 	}
@@ -45,6 +43,8 @@ static char	**static_set_up_exp_args(char *str, t_data *data)
 	msh_handle_export_args(f_expand);
 	if (!f_expand)
 		return (NULL);
+	if (is_only_quotes(f_expand[0]))
+		data->is_onlyqts = true;
 	msh_go_remove_quotes(f_expand);
 	if (!f_expand)
 		return (NULL);

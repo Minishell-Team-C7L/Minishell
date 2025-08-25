@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_execution.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aessaber <aessaber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:08:43 by aessaber          #+#    #+#             */
-/*   Updated: 2025/08/25 09:22:17 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:58:39 by aessaber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include "msh_builtins.h"
 # include "msh_expand.h"
 
+# define NOT_A_SPECIAL_CASE -2
+
+int		msh_execute_builtin(t_data *data, int status, t_env **env, t_gc **gc);
 int		msh_execute(t_data *data, t_node *ast_head);
 int		msh_execute_cmd(t_data *data, int status, t_env **env, t_gc **gc);
 int		msh_execute_pipe(t_node *node, t_data *data);
